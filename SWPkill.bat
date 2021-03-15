@@ -1,0 +1,1 @@
+del /f /s /q /a *.SWP

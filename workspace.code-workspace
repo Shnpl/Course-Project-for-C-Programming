@@ -1,0 +1,41 @@
+{
+	"folders": [
+		{
+			"path": "."
+			
+		
+		},
+		{
+		"path": "../BORLANDC"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"string": "c",
+			"MOUSE.C": "cpp",
+			"MAIN.C": "cpp",
+			"BFL_MOUSE.C": "cpp",
+			"BFL_BUTTON.C": "cpp",
+			"INITIAL.C": "cpp",
+			"BUTTON.C": "cpp",
+			"INPUT.C": "cpp",
+			"TEXTBOX.C": "cpp",
+			"temp.C": "cpp",
+			"istream": "cpp",
+			"ostream": "cpp",
+			"CHN.C": "cpp",
+			"SIGN_IN.C": "cpp",
+			"SHUBIAO.C": "cpp",
+			"FWRITE.C": "cpp",
+			"LABEL.C": "cpp",
+			"LOGIN.C": "cpp",
+			"MAIN_PAGE.C": "cpp",
+			"functional": "cpp",
+			"MY_INFO.C": "cpp",
+			"MY_PAGE.C": "cpp"
+		},
+		"files.encoding": "gb2312"
+	}
+	
+
+}
