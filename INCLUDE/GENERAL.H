@@ -9,11 +9,12 @@
 #define REST 0
 #define HOVER 1
 #define PRESS 2
-/* µÇÂ¼Óë×¢²á USER */
+/* µÇÂ¼Óë×¢²á user ½á¹¹ */
 typedef struct user_struct
 {
     char name[30]; 
     char code[30];
     char codeRepeat[30];
-} user_handler;
+} user;
+
 #endif

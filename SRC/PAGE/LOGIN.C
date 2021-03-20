@@ -25,7 +25,7 @@ void login_textbox_user_name_init(BFL_textbox* );
 void login_textbox_user_code_init(BFL_textbox* );
 void login_button_confirm_init(BFL_button* );
 void login_button_exit_init(BFL_button* );
-void login_user_init(user_handler*);
+void login_user_init(user*);
 void login_label_1_init(BFL_label*);
 
 /* INTERNAL FUNCTION DEFINITION END */
@@ -35,8 +35,8 @@ int LOGIN()
 {
     /*DEFINITION START*/
     int page = 2;
-    user_handler user;
-    user_handler temp_user;//查询是否对应的临时用户结构体
+    user login_user;
+    user temp_user;//查询是否对应的临时用户结构体
 
     FILE* user_file = NULL;
     int user_OK = RESET;//用户是否对应标志位
@@ -67,7 +67,7 @@ int LOGIN()
 
     login_label_1_init(&label_1);
 
-    login_user_init(&user);
+    login_user_init(&login_user);
     /* COMPONENTS INIT END */
 
     /* DRAW START */
@@ -120,8 +120,8 @@ int LOGIN()
         if(button_confirm.status == PRESS)
         {//输入完成
 
-            strcpy(user.name,textbox_user_name.true_text);
-            strcpy(user.code,textbox_user_code.true_text);
+            strcpy(login_user.name,textbox_user_name.true_text);
+            strcpy(login_user.code,textbox_user_code.true_text);
   
             if( (user_file = fopen("./FILE/USERFILE.TXT","rt")) == NULL)
             {
@@ -132,7 +132,7 @@ int LOGIN()
                 while(!feof(user_file))
                 {
                     fread(&temp_user,sizeof(temp_user),1,user_file);
-                    if(strcmp(temp_user.name,user.name) == 0 && strcmp(temp_user.name,user.name) == 0 )
+                    if(strcmp(temp_user.name,login_user.name) == 0 && strcmp(temp_user.name,login_user.name) == 0 )
                     {
                         fclose(user_file);
                         user_OK = SET;
@@ -302,7 +302,7 @@ void login_button_exit_init(BFL_button* buttonPtr)
     buttonPtr->status = REST;
 }
 
-void login_user_init(user_handler* userPtr)
+void login_user_init(user* userPtr)
 {
     memset(userPtr->name,0,30);
     memset(userPtr->code,0,30);

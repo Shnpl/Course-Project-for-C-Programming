@@ -25,7 +25,7 @@ void textbox_user_code_init(BFL_textbox* );
 void textbox_user_code_repeat_init(BFL_textbox* );
 void button_confirm_init(BFL_button* );
 void button_exit_sign_in_init(BFL_button* );
-void user_init(user_handler*);
+void user_init(user*);
 void label_1_init(BFL_label*);
 //void button_login_init(BFL_button* buttonPtr);
 /* INTERNAL FUNCTION DEFINITION END */
@@ -35,8 +35,8 @@ int SIGN_IN()
 {
     /*DEFINITION START*/
     int page = 1;
-    user_handler user;
-    user_handler temp_user;//查询是否重复的临时用户结构体
+    user sign_in_user;
+    user temp_user;//查询是否重复的临时用户结构体
 
     FILE* user_file = NULL;
     int file_write_OK = RESET;
@@ -74,7 +74,7 @@ int SIGN_IN()
 
     label_1_init(&label_1);
 
-    user_init(&user);
+    user_init(&sign_in_user);
 
     //button_login_init(&button_login);
     /* COMPONENTS INIT END */
@@ -120,11 +120,11 @@ int SIGN_IN()
         if(button_confirm.status == PRESS && file_write_OK == RESET)
         {//输入完成
 
-            strcpy(user.name,textbox_user_name.true_text);
-            strcpy(user.code,textbox_user_code.true_text);
-            strcpy(user.codeRepeat,textbox_user_code_repeat.true_text);
+            strcpy(sign_in_user.name,textbox_user_name.true_text);
+            strcpy(sign_in_user.code,textbox_user_code.true_text);
+            strcpy(sign_in_user.codeRepeat,textbox_user_code_repeat.true_text);
             
-            if(strcmp(user.code,user.codeRepeat) != 0 )
+            if(strcmp(sign_in_user.code,sign_in_user.codeRepeat) != 0 )
             {
                 strcpy(label_1.display_text,"两次密码不一致，请重新输入！");
                 label_1.word_length = 14;
@@ -146,7 +146,7 @@ int SIGN_IN()
                     {
                         break;
                     }
-                    if(strcmp(temp_user.name,user.name) == 0)
+                    if(strcmp(temp_user.name,sign_in_user.name) == 0)
                     {
                         fclose(user_file);
                         strcpy(label_1.display_text,"用户名已被注册！");
@@ -159,9 +159,9 @@ int SIGN_IN()
                 if(user_OK == SET)
                 {
 
-                    //outtextxy(0,0,user.name);
-                    //outtextxy(0,50,user.code);
-                    fwrite(&user,sizeof(user),1,user_file);
+                    //outtextxy(0,0,sign_in_user.name);
+                    //outtextxy(0,50,sign_in_user.code);
+                    fwrite(&sign_in_user,sizeof(sign_in_user),1,user_file);
                     fclose(user_file);
                     file_write_OK = SET;
                     
@@ -350,7 +350,7 @@ void button_exit_sign_in_init(BFL_button* buttonPtr)
     buttonPtr->status = REST;
 }
 
-void user_init(user_handler* userPtr)
+void user_init(user* userPtr)
 {
     memset(userPtr->name,0,30);
     memset(userPtr->code,0,30);
