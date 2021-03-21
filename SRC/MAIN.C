@@ -17,10 +17,12 @@ void main()
     int page = 0;
     int graphdriver = VGA;
     int graphmode = VGAHI;
+     char user_ID[100];
     initgraph(&graphdriver,&graphmode,"../BORLANDC/BGI");
     setviewport(0,0,640,480,0);
     BFL_mouse_init();
-    
+
+
 
     while(1)
     {
@@ -33,13 +35,13 @@ void main()
             page = SIGN_IN();
             break;
         case 2:
-            page = LOGIN();
+            page = LOGIN(user_ID);
             break; 
         case 3:
-            page = MAIN_PAGE();
+            page = MAIN_PAGE(user_ID);
             break; 
         case 4:
-            page = MY_INFO();  
+            page = MY_INFO(user_ID);  
             break;
         default:
             break;

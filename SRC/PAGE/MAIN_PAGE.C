@@ -29,7 +29,7 @@ void main_page_button_my_info_init(BFL_button* );
 /* INTERNAL FUNCTION DEFINITION END */
 
 /*MAIN FUNCTION*/
-int MAIN_PAGE()
+int MAIN_PAGE(char* user_ID)
 {
     /* DEFINITION START */
 

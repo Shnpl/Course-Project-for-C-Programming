@@ -168,6 +168,8 @@ int SIGN_IN()
                     strcpy(label_1.display_text,"Íê³É×¢²á£¡");
                     label_1.word_length = 5;
                     label_1.reDraw = SET;
+                    page = 0;
+                    break;
 
                 }
             }

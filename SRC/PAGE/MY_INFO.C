@@ -27,7 +27,7 @@ void my_info_button_exit_init(BFL_button* );
 /* INTERNAL FUNCTION DEFINITION END */
 
 /*MAIN FUNCTION*/
-int MY_INFO()
+int MY_INFO(char* user_ID)
 {
     /*DEFINITION START*/
 

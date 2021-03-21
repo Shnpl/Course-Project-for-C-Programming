@@ -31,7 +31,7 @@ void login_label_1_init(BFL_label*);
 /* INTERNAL FUNCTION DEFINITION END */
 
 /*MAIN FUNCTION*/
-int LOGIN()
+int LOGIN(char* user_ID)
 {
     /*DEFINITION START*/
     int page = 2;
@@ -140,6 +140,7 @@ int LOGIN()
                         label_1.word_length = 5;
                         label_1.reDraw = 1;
                         page = 3;
+                        strcpy(user_ID,login_user.name);
                         break;
                     }
                 }
