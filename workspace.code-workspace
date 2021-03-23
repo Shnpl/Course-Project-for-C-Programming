@@ -32,7 +32,8 @@
 			"MAIN_PAGE.C": "cpp",
 			"functional": "cpp",
 			"MY_INFO.C": "cpp",
-			"MY_PAGE.C": "cpp"
+			"MY_PAGE.C": "cpp",
+			"PINYIN.C": "cpp"
 		},
 		"files.encoding": "gb2312"
 	}
