@@ -3,123 +3,141 @@
 #include <dos.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "./INCLUDE/TEXTBOX.H"
+#include "./INCLUDE/pinyin.H"
 #include "./INCLUDE/MOUSE.H"
 #include "./INCLUDE/BUTTON.H"
-#include"./INCLUDE/GENERAL.H"
+#include "./INCLUDE/GENERAL.H"
+#include "./INCLUDE/PINYIN.H"
+//临时注释：输入法框放在左下角，左边位置0，上360，右边300，下480
 
-void BFL_textbox_action(BFL_textbox* textboxPtr)
+void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
 {
     char get_char;
-    if (MouseX > textboxPtr->position_left &&
-        MouseX < textboxPtr->position_right &&
-        MouseY > textboxPtr->position_top &&
-	    MouseY < textboxPtr->position_bottom &&
-        press == 1
-        )
+    if (MouseX > pinyinPtr->position_textbox_left &&
+	MouseX < pinyinPtr->position_textbox_right &&
+	MouseY > pinyinPtr->position_textbox_top &&
+	MouseY < pinyinPtr->position_textbox_bottom &&
+	press == 1)
     {
-        textboxPtr->is_in_the_box = 1;
+	pinyinPtr->is_in_the_box = 1;
     }
-    if (textboxPtr->is_in_the_box == 1)
+    if (pinyinPtr->is_in_the_box == 1)
     {
-        mouse_enable = 0;
-        get_char=get_ch();
-        textboxPtr->reDraw = RESET;
-	// textboxPtr->cursor_count++;
+	mouse_enable = 0;
+	get_char = get_ch();
+	pinyinPtr->reDraw = RESET;
+	// pinyinPtr->cursor_count++;
 	/*
-        if(textboxPtr->cursor_count == 60000)
-        {
-            textboxPtr->cursor_count = 0;
-        }
-        if(textboxPtr->cursor_count == 0||textboxPtr->cursor_count == 30000)
-        {
-            textboxPtr->reDraw = 1;
-        }
-        */
-        if(get_char != -1)
-        {
-            if(get_char == 0x0D)//CR
-            {
-                textboxPtr->is_in_the_box = 0;
-                mouse_enable = 1;
-            }
-            else if(get_char == 0x08)//Backspace
-            {
-                if(textboxPtr->current_length >= 0)
-                {
-                    textboxPtr->display_text[textboxPtr->current_length] = '\0';
-                    textboxPtr->current_length--;
-                    textboxPtr->reDraw = SET;
-                }
-                else
-                {
-                    ;
-                }  
-            }
-            else
-            {
-                if(textboxPtr->current_length > textboxPtr->word_length - 2)//from -1
-                {
-                    ;
-                }
-                else
-                {
-                    (textboxPtr->current_length)++;
-                    
-                    textboxPtr->true_text[textboxPtr->current_length] = get_char;
-                    textboxPtr->true_text[textboxPtr->current_length+1] = '\0';
-                    if(textboxPtr->is_secret == RESET)
-                    {
-                        textboxPtr->display_text[textboxPtr->current_length] = get_char;
-                        textboxPtr->display_text[textboxPtr->current_length+1] = '\0';
-                    }
-                    else
-                    {
-                        textboxPtr->display_text[textboxPtr->current_length] = '*';
-                        textboxPtr->display_text[textboxPtr->current_length+1] = '\0';
-                    }
-                    textboxPtr->reDraw = SET;
-                }
-            }
-        }
+	if(pinyinPtr->cursor_count == 60000)
+	{
+	    pinyinPtr->cursor_count = 0;
+	}
+	if(pinyinPtr->cursor_count == 0||pinyinPtr->cursor_count == 30000)
+	{
+	    pinyinPtr->reDraw = 1;
+	}
+	*/
+	if (get_char != -1)
+	{
+	    if (get_char == 0x0D) //CR
+	    {
+		pinyinPtr->is_in_the_box = 0;
+		mouse_enable = 1;
+	    }
+        
+	    else
+	    {
+            *(pinyinPtr->input_text_ptr) = get_char;
+            *((pinyinPtr->input_text_ptr)+1) = '\0';
+            (pinyinPtr->input_text_ptr)++;
+            pinyinPtr->reDraw = SET;
+	    }
+
+	    /*
+	    else if(get_char == 0x08)//Backspace
+	    {
+		if(pinyinPtr->current_length >= 0)
+		{
+		    pinyinPtr->display_text[pinyinPtr->current_length] = '\0';
+		    pinyinPtr->current_length--;
+		    pinyinPtr->reDraw = SET;
+		}
+		else
+		{
+		    ;
+		}
+	    }
+	    else
+	    {
+		if(pinyinPtr->current_length > pinyinPtr->word_length - 2)//from -1
+		{
+		    ;
+		}
+		else
+		{
+		    (pinyinPtr->current_length)++;
+
+		    pinyinPtr->true_text[pinyinPtr->current_length] = get_char;
+		    pinyinPtr->true_text[pinyinPtr->current_length+1] = '\0';
+		    if(pinyinPtr->is_secret == RESET)
+		    {
+			pinyinPtr->display_text[pinyinPtr->current_length] = get_char;
+			pinyinPtr->display_text[pinyinPtr->current_length+1] = '\0';
+		    }
+		    else
+		    {
+			pinyinPtr->display_text[pinyinPtr->current_length] = '*';
+			pinyinPtr->display_text[pinyinPtr->current_length+1] = '\0';
+		    }
+		    pinyinPtr->reDraw = SET;
+		}
+	    }
+	    */
+	}
     }
 }
-void BFL_textbox_draw(BFL_textbox* textboxPtr)
+void BFL_pinyin_draw(BFL_pinyin *pinyinPtr)
 {
-    if(textboxPtr->reDraw == SET)
+    if (pinyinPtr->reDraw == SET)
     {
-        settextstyle(SANS_SERIF_FONT,0,4);
-        settextjustify(5,18);
+	settextstyle(SANS_SERIF_FONT, 0, 4);
+	settextjustify(5, 18);
+	/*
+	if (pinyinPtr->is_shadow_enable == SET)
+	{
+	    setfillstyle(SOLID_FILL, pinyinPtr->color_shadow);
+	    bar(pinyinPtr->position_shadow_left, pinyinPtr->position_shadow_top, pinyinPtr->position_shadow_right, pinyinPtr->position_shadow_bottom);
+	}
+	*/
+	setfillstyle(SOLID_FILL, pinyinPtr->color_textbox);
+	bar(pinyinPtr->position_textbox_left,
+	    pinyinPtr->position_textbox_top,
+	    pinyinPtr->position_textbox_right,
+	    pinyinPtr->position_textbox_bottom);
+	//settextstyle(3,HORIZ_DIR,5);
 
-        if(textboxPtr->is_shadow_enable == SET)
-        {
-            setfillstyle(SOLID_FILL,textboxPtr->color_shadow);
-            bar(textboxPtr->position_shadow_left,textboxPtr->position_shadow_top,textboxPtr->position_shadow_right,textboxPtr->position_shadow_bottom);
-        }
-        setfillstyle(SOLID_FILL,textboxPtr->color_box);
-        bar(textboxPtr->position_left,
-            textboxPtr->position_top,
-            textboxPtr->position_right,
-            textboxPtr->position_bottom);
-        //settextstyle(3,HORIZ_DIR,5);
-        setcolor(textboxPtr->color_text);
-        outtextxy(textboxPtr->position_left+5,textboxPtr->position_top,textboxPtr->display_text);
-        //outtextxy(0,0,textboxPtr->true_text);
+	setfillstyle(SOLID_FILL,pinyinPtr->color_select_box);
+	bar(0,360,300,480);
+    
 
-        /*
-        if(textboxPtr->cursor_count < 30000)
-        {
-            setlinestyle(0,0,1);
-            line(
-                textboxPtr->position_left+(textboxPtr->current_length+1)*22,
-            textboxPtr->position_top,
-	        textboxPtr->position_left+(textboxPtr->current_length+1)*22,
-	        textboxPtr->position_bottom);
-        }
-        */
+	setcolor(pinyinPtr->color_text);
+	outtextxy(0+5, 360, pinyinPtr->input_text);
+	//outtextxy(0,0,pinyinPtr->true_text);
+
+	/*
+	if(pinyinPtr->cursor_count < 30000)
+	{
+	    setlinestyle(0,0,1);
+	    line(
+		pinyinPtr->position_left+(pinyinPtr->current_length+1)*22,
+	    pinyinPtr->position_top,
+		pinyinPtr->position_left+(pinyinPtr->current_length+1)*22,
+		pinyinPtr->position_bottom);
+	}
+	*/
     }
 }
-char get_ch()
+char get_ch_pinyin()
 {
     int get_char = -1;
     char return_char = -1;
@@ -129,10 +147,10 @@ char get_ch()
         switch (get_char)
         {
         case 0x0E08:
-            return_char = 0x08;//backspace
+            return_char = 0x08; //backspace
             break;
         case 0x1C0D:
-            return_char = 0x0D;//CR
+            return_char = 0x0D; //CR
             break;
         case 0x0231:
             return_char = '1';
@@ -276,7 +294,36 @@ char get_ch()
         case 0x5230:
             return_char = '0';
             break;
+        case 0x0F09:
+            return_char = 0x09;
         }
     }
     return return_char;
 }
+//后面的是范例
+/*
+void init(BFL_pinyin* pinyinPtr)
+{
+    pinyinPtr->color_textbox = LIGHTGRAY;
+    pinyinPtr->color_select_box = LIGHTGRAY;
+    pinyinPtr->color_text = BROWN;
+    pinyinPtr->reDraw = SET;
+
+    pinyinPtr->position_textbox_left = 250;//可修改
+    pinyinPtr->position_textbox_top = 190;//可修改
+    pinyinPtr->position_textbox_right = 460;//可修改
+    pinyinPtr->position_textbox_bottom = pinyinPtr->position_textbox_top + 40;
+
+    pinyinPtr->CHN_length_counter = 0;
+    memset((pinyinPtr->CHN_text),0,50);
+    CHN_text_ptr = (pinyinPtr->CHN_text);
+    
+    pinyinPtr->input_length_counter = 0;
+    memset((pinyinPtr->input_text),0,50);
+    pinyinPtr->input_text_ptr = (pinyinPtr->input_text)
+    
+    BFL_pinyin_draw(pinyinPtr);
+    
+    pinyinPtr->reDraw = RESET;
+}
+*/
