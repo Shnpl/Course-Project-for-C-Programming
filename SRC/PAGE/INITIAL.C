@@ -14,7 +14,7 @@
 void button_sign_in_init(BFL_button* buttonPtr);
 void button_login_init(BFL_button* buttonPtr);
 void button_exit_init(BFL_button* buttonPtr);
-
+void button_test_init(BFL_button* buttonPtr);
 int INITIAL()
 {
     /* DEFINITION START */
@@ -22,7 +22,7 @@ int INITIAL()
     BFL_button button_sign_in;
     BFL_button button_login;
     BFL_button button_exit;
-
+    BFL_button button_test;
     //BFL_textbox textbox_1;
     
     int poly_1[]={0,160,290,160,350,100,640,100,640,160,640,170,0,170};
@@ -40,6 +40,7 @@ int INITIAL()
     button_sign_in_init(&button_sign_in);
     button_login_init(&button_login);
     button_exit_init(&button_exit);
+    button_test_init(&button_test);
     // textbox_1_init(&textbox_1);
     /*COMPONENTS INIT END*/
 
@@ -70,6 +71,7 @@ int INITIAL()
         BFL_button_action(&button_sign_in);
         BFL_button_action(&button_login);
         BFL_button_action(&button_exit);
+        BFL_button_action(&button_test);
         //BFL_textbox_action(&textbox_1);
         /* ACTION END */
 
@@ -88,12 +90,18 @@ int INITIAL()
         {
             exit(0);
         }
+        if(button_test.status == PRESS)
+        {
+            page = -1;
+        }
         /* CODE END */
 
         /* REDRAW START */
         BFL_button_draw(&button_sign_in);
         BFL_button_draw(&button_login);
         BFL_button_draw(&button_exit);
+        BFL_button_draw(&button_test);
+
         //BFL_textbox_draw(&textbox_1);
         BFL_mouse_draw();
         /* REDRAW END */
@@ -207,6 +215,36 @@ void button_exit_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"ÍË³ö");
+    buttonPtr->text_length = 2;
+
+    buttonPtr->status = REST;
+}
+
+void button_test_init(BFL_button* buttonPtr)
+{
+    buttonPtr->color_rest=RED;
+    buttonPtr->color_hover=LIGHTRED;
+    buttonPtr->color_text=YELLOW; 
+    buttonPtr->color_shadow=LIGHTGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=175;
+    buttonPtr->position_top =390;
+    buttonPtr->position_right = 300;
+    buttonPtr->position_bottom = 440;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +5;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
+
+    buttonPtr->position_text_left =buttonPtr->position_left + 10;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text,"²âÊÔ");
     buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;

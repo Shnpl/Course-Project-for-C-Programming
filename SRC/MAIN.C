@@ -11,6 +11,7 @@
 #include"./INCLUDE/LOGIN.H"
 #include"./INCLUDE/MAIN_PAGE.H"
 #include"./INCLUDE/MY_INFO.H"
+#include"./INCLUDE/TEST.H"
 
 void main()
 {
@@ -28,6 +29,9 @@ void main()
     {
         switch (page)
         {
+        case -1:
+            page = TEST(user_ID);
+            break;
         case 0:
             page = INITIAL();
             break;
