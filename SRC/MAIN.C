@@ -3,15 +3,15 @@
 #include<STDLIB.H>
 #include<DOS.H>
 
-#include"./INCLUDE/MOUSE.H"
-#include"./INCLUDE/BUTTON.H"
+#include"INCLUDE/MOUSE.H"
+#include"INCLUDE/BUTTON.H"
 
-#include"./INCLUDE/INITIAL.H"
-#include"./INCLUDE/SIGN_IN.H"
-#include"./INCLUDE/LOGIN.H"
-#include"./INCLUDE/MAIN_PAGE.H"
-#include"./INCLUDE/MY_INFO.H"
-#include"./INCLUDE/TEST.H"
+#include"INCLUDE/INITIAL.H"
+#include"INCLUDE/SIGN_IN.H"
+#include"INCLUDE/LOGIN.H"
+#include"INCLUDE/MAIN_PAGE.H"
+#include"INCLUDE/MY_INFO.H"
+#include"INCLUDE/TEST.H"
 
 void main()
 {

@@ -100,41 +100,41 @@ void BFL_pinyin_draw(BFL_pinyin *pinyinPtr)
 {
     if (pinyinPtr->reDraw == SET)
     {
-	settextstyle(SANS_SERIF_FONT, 0, 4);
-	settextjustify(5, 18);
-	/*
-	if (pinyinPtr->is_shadow_enable == SET)
-	{
-	    setfillstyle(SOLID_FILL, pinyinPtr->color_shadow);
-	    bar(pinyinPtr->position_shadow_left, pinyinPtr->position_shadow_top, pinyinPtr->position_shadow_right, pinyinPtr->position_shadow_bottom);
-	}
-	*/
-	setfillstyle(SOLID_FILL, pinyinPtr->color_textbox);
-	bar(pinyinPtr->position_textbox_left,
-	    pinyinPtr->position_textbox_top,
-	    pinyinPtr->position_textbox_right,
-	    pinyinPtr->position_textbox_bottom);
-	//settextstyle(3,HORIZ_DIR,5);
+        settextstyle(SANS_SERIF_FONT, 0, 4);
+        settextjustify(5, 18);
+        /*
+        if (pinyinPtr->is_shadow_enable == SET)
+        {
+            setfillstyle(SOLID_FILL, pinyinPtr->color_shadow);
+            bar(pinyinPtr->position_shadow_left, pinyinPtr->position_shadow_top, pinyinPtr->position_shadow_right, pinyinPtr->position_shadow_bottom);
+        }
+        */
+        setfillstyle(SOLID_FILL, pinyinPtr->color_textbox);
+        bar(pinyinPtr->position_textbox_left,
+            pinyinPtr->position_textbox_top,
+            pinyinPtr->position_textbox_right,
+            pinyinPtr->position_textbox_bottom);
+        //settextstyle(3,HORIZ_DIR,5);
 
-	setfillstyle(SOLID_FILL,pinyinPtr->color_select_box);
-	bar(0,360,300,480);
-    
+        setfillstyle(SOLID_FILL,pinyinPtr->color_select_box);
+        bar(0,360,300,480);
+        
 
-	setcolor(pinyinPtr->color_text);
-	outtextxy(0+5, 360, pinyinPtr->input_text);
-	//outtextxy(0,0,pinyinPtr->true_text);
+        setcolor(pinyinPtr->color_text);
+        outtextxy(0+5, 360, pinyinPtr->input_text);
+        //outtextxy(0,0,pinyinPtr->true_text);
 
-	/*
-	if(pinyinPtr->cursor_count < 30000)
-	{
-	    setlinestyle(0,0,1);
-	    line(
-		pinyinPtr->position_left+(pinyinPtr->current_length+1)*22,
-	    pinyinPtr->position_top,
-		pinyinPtr->position_left+(pinyinPtr->current_length+1)*22,
-		pinyinPtr->position_bottom);
-	}
-	*/
+        /*
+        if(pinyinPtr->cursor_count < 30000)
+        {
+            setlinestyle(0,0,1);
+            line(
+            pinyinPtr->position_left+(pinyinPtr->current_length+1)*22,
+            pinyinPtr->position_top,
+            pinyinPtr->position_left+(pinyinPtr->current_length+1)*22,
+            pinyinPtr->position_bottom);
+        }
+        */
     }
 }
 char get_ch_pinyin()

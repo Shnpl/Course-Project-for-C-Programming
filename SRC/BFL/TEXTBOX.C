@@ -3,10 +3,13 @@
 #include <dos.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include<bios.h>
+
 #include "./INCLUDE/TEXTBOX.H"
 #include "./INCLUDE/MOUSE.H"
 #include "./INCLUDE/BUTTON.H"
 #include"./INCLUDE/GENERAL.H"
+char get_ch(void);
 
 void BFL_textbox_action(BFL_textbox* textboxPtr)
 {
@@ -25,7 +28,7 @@ void BFL_textbox_action(BFL_textbox* textboxPtr)
         mouse_enable = 0;
         get_char=get_ch();
         textboxPtr->reDraw = RESET;
-	// textboxPtr->cursor_count++;
+	// textboxP/tr->cursor_count++;
 	/*
         if(textboxPtr->cursor_count == 60000)
         {

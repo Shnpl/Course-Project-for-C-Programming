@@ -7,12 +7,12 @@
 /* SYSTEM INCLUDE END */
 
 /* BFL INCLUDES START */
-#include"./INCLUDE/GENERAL.H"
-#include"./INCLUDE/MOUSE.H"
-#include"./INCLUDE/BUTTON.H"
-#include"./INCLUDE/TEXTBOX.H"
-#include"./INCLUDE/CHN.H"
-#include"./INCLUDE/LABEL.H"
+#include"INCLUDE/GENERAL.H"
+#include"INCLUDE/MOUSE.H"
+#include"INCLUDE/BUTTON.H"
+#include"INCLUDE/TEXTBOX.H"
+#include"INCLUDE/CHN.H"
+#include"INCLUDE/LABEL.H"
 /*BFL INCLUDES END*/
 
 /*OTHER INCLUDES START*/

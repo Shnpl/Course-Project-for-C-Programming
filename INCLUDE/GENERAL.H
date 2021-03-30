@@ -9,6 +9,17 @@
 #define REST 0
 #define HOVER 1
 #define PRESS 2
+
+#define _TEST -1
+
+#define _INITIAL 0
+#define _SIGN_IN 1
+#define _LOGIN 2
+
+#define _MAIN_PAGE 3
+
+#define _MY_INFO 4
+#define _CAR_SERV 5
 /* µÇÂ¼Óë×¢²á user ½á¹¹ */
 typedef struct user_struct
 {

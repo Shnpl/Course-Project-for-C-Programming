@@ -1,9 +1,4 @@
-{
-    "files.associations": {
-        "string": "c",
-        "MOUSE.C": "cpp",
-        "MAIN.C": "cpp",
-        "BFL_MOUSE.C": "cpp",
-        "BFL_BUTTON.C": "cpp"
+
+    {
+        "C_Cpp.errorSquiggles": "Enabled"
     }
-}

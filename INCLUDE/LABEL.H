@@ -20,7 +20,7 @@ typedef struct BFL_label_struct{
     //int letter_distance;
 
     int reDraw;
-
+    
 }BFL_label;
 
 /*LABEL响应函数 响应某LABEL的各个操作，并存储在相应的位置

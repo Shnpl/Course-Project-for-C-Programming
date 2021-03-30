@@ -4,11 +4,11 @@
 #include<DOS.H>
 #include<STRING.H>
 
-#include"./INCLUDE/GENERAL.H"
-#include"./INCLUDE/MOUSE.H"
-#include"./INCLUDE/BUTTON.H"
-#include"./INCLUDE/TEXTBOX.H"
-#include"./INCLUDE/CHN.H"
+#include"INCLUDE/GENERAL.H"
+#include"INCLUDE/MOUSE.H"
+#include"INCLUDE/BUTTON.H"
+#include"INCLUDE/TEXTBOX.H"
+#include"INCLUDE/CHN.H"
 
 //void textbox_1_init(BFL_textbox* textbox_1);
 void button_sign_in_init(BFL_button* buttonPtr);
@@ -63,7 +63,7 @@ int INITIAL()
     /* DRAW END */
 
     /*WHILE*/
-    while (page == 0)
+    while (page == _INITIAL)
     {
         /* ACTION START */
         BFL_mouse_action();

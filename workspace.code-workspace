@@ -2,41 +2,43 @@
 	"folders": [
 		{
 			"path": "."
-			
-		
 		},
 		{
-		"path": "../BORLANDC"
+			"path": "../BORLANDC"
 		}
 	],
 	"settings": {
 		"files.associations": {
 			"string": "c",
-			"MOUSE.C": "cpp",
-			"MAIN.C": "cpp",
-			"BFL_MOUSE.C": "cpp",
-			"BFL_BUTTON.C": "cpp",
-			"INITIAL.C": "cpp",
-			"BUTTON.C": "cpp",
-			"INPUT.C": "cpp",
-			"TEXTBOX.C": "cpp",
-			"temp.C": "cpp",
-			"istream": "cpp",
-			"ostream": "cpp",
-			"CHN.C": "cpp",
-			"SIGN_IN.C": "cpp",
-			"SHUBIAO.C": "cpp",
-			"FWRITE.C": "cpp",
-			"LABEL.C": "cpp",
-			"LOGIN.C": "cpp",
-			"MAIN_PAGE.C": "cpp",
-			"functional": "cpp",
-			"MY_INFO.C": "cpp",
-			"MY_PAGE.C": "cpp",
-			"PINYIN.C": "cpp",
-			"TEST.C": "cpp"
+			"MOUSE.C": "c",
+			"MAIN.C": "c",
+			"BFL_MOUSE.C": "c",
+			"BFL_BUTTON.C": "c",
+			"INITIAL.C": "c",
+			"BUTTON.C": "c",
+			"INPUT.C": "c",
+			"TEXTBOX.C": "c",
+			"temp.C": "c",
+			"istream": "c",
+			"ostream": "c",
+			"CHN.C": "c",
+			"SIGN_IN.C": "c",
+			"SHUBIAO.C": "c",
+			"FWRITE.C": "c",
+			"LABEL.C": "c",
+			"LOGIN.C": "c",
+			"MAIN_PAGE.C": "c",
+			"functional": "c",
+			"MY_INFO.C": "c",
+			"MY_PAGE.C": "c",
+			"PINYIN.C": "c",
+			"TEST.C": "c",
+			"CAR_SERV.C": "c",
+			"INSUR_SE.C": "c"
 		},
-		"files.encoding": "gb2312"
+		"files.encoding": "gb2312",
+		"diffEditor.codeLens": true,
+		"files.autoSave": "afterDelay"
 	}
 	
 
