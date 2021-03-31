@@ -43,9 +43,9 @@ int CAR_SERV(char* user_ID)
     BFL_button button_my_info;
     
     BFL_button button_car_insurance_page;
-    BFL_button button_car_maintenance;
-    BFL_button button_car_roadside_assistance;
-    BFL_button button_car_vehicle_administration;
+    BFL_button button_car_maintenance_page;
+    BFL_button button_car_roadside_assistance_page;
+    BFL_button button_car_vehicle_administration_page;
     /* DEFINITION END */
 
     /* DEVICE AND MOUSE INIT START */
@@ -62,8 +62,8 @@ int CAR_SERV(char* user_ID)
     car_serv_button_my_info_init(&button_my_info);
 
     car_serv_button_car_insurance_page_init(&button_car_insurance_page);
-    car_serv_button_car_maintenance_page_init(&button_car_maintenance);
-    car_serv_button_car_roadside_assistance_page_init(&button_car_roadside_assistance);
+    car_serv_button_car_maintenance_page_init(&button_car_maintenance_page);
+    car_serv_button_car_roadside_assistance_page_init(&button_car_roadside_assistance_page);
     car_serv_button_car_vehicle_administration_page_init(&button_car_vehicle_administration);
     
 
@@ -78,10 +78,16 @@ int CAR_SERV(char* user_ID)
     setfillstyle(1,RED);
     bar(595,400,640,460);//按钮的边
 
-    
-    
+    CHN_print(22,21,"汽车",48,48,DARKGRAY,2);
+    CHN_print(22,71,"服务",48,48,DARKGRAY,2);
 
+    CHN_print(20,20,"汽车",48,48,RED,2);
+    CHN_print(20,70,"服务",48,48,RED,2);
 
+    setfillstyle(SOLID_FILL,DARKGRAY);
+    bar(170+5,400+5,315+5,460+5);
+    setfillstyle(SOLID_FILL,RED);
+    bar(170,400,315,460);
    
 
 
@@ -97,17 +103,21 @@ int CAR_SERV(char* user_ID)
         BFL_button_action(&button_exit);
         BFL_button_action(&button_my_info);
 
+        BFL_button_action(&button_car_insurance_page);
+        BFL_button_action(&button_car_maintenance_page);
+        BFL_button_action(&button_car_roadside_assistance_page);
+        BFL_button_action(&button_car_vehicle_administration_page);
         /* ACTION END */
 
 	    /*CODE START*/
         if(button_exit.status == PRESS)
         {
-            page = 0;
+            page = _INITIAL;
             break;
         }
         if(button_my_info.status == PRESS)
         {
-            page = 4;
+            page = _MY_INFO;
             break;
         }
 	    /*CODE END*/
@@ -116,6 +126,10 @@ int CAR_SERV(char* user_ID)
         BFL_button_draw(&button_other_insurance);
         BFL_button_draw(&button_exit);
         BFL_button_draw(&button_my_info);
+        BFL_button_draw(&button_car_insurance_page);
+        BFL_button_draw(&button_car_maintenance_page);
+        BFL_button_draw(&button_car_roadside_assistance_page);
+        BFL_button_draw(&button_car_vehicle_administration_page);
 
         BFL_mouse_draw();
         /* REDRAW  END */
@@ -211,6 +225,122 @@ void car_serv_button_my_info_init(BFL_button* buttonPtr )
 
     strcpy(buttonPtr->display_text,"我的");
     buttonPtr->text_length = 2;
+
+    buttonPtr->status = REST;
+}
+
+void car_serv_button_car_insurance_page_init(BFL_button* buttonPtr)
+{
+    buttonPtr->color_rest=BROWN;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=YELLOW;
+    buttonPtr->color_shadow=DARKGRAY;
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=180;
+    buttonPtr->position_top =50;
+    buttonPtr->position_right = 360;
+    buttonPtr->position_bottom = 120;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +5;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
+
+    buttonPtr->position_text_left =buttonPtr->position_left + 20;
+    buttonPtr->position_text_top = buttonPtr->position_top + 20;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text,"车险服务");
+    buttonPtr->text_length = 4;
+
+    buttonPtr->status = REST;
+}
+
+void car_serv_button_car_maintenance_page_init(BFL_button* buttonPtr)
+{
+    buttonPtr->color_rest=BROWN;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=YELLOW;
+    buttonPtr->color_shadow=DARKGRAY;
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=420;
+    buttonPtr->position_top =50;
+    buttonPtr->position_right = 600;
+    buttonPtr->position_bottom = 120;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +5;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
+
+    buttonPtr->position_text_left =buttonPtr->position_left + 20;
+    buttonPtr->position_text_top = buttonPtr->position_top + 20;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text,"用车养车");
+    buttonPtr->text_length = 4;
+
+    buttonPtr->status = REST;
+}
+
+void car_serv_button_car_roadside_assistance_page_init(BFL_button* buttonPtr)
+{
+    buttonPtr->color_rest=BROWN;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=YELLOW;
+    buttonPtr->color_shadow=DARKGRAY;
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=180;
+    buttonPtr->position_top =210;
+    buttonPtr->position_right = 360;
+    buttonPtr->position_bottom = 280;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +5;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
+
+    buttonPtr->position_text_left =buttonPtr->position_left + 20;
+    buttonPtr->position_text_top = buttonPtr->position_top + 20;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text,"道路帮助");
+    buttonPtr->text_length = 4;
+
+    buttonPtr->status = REST;
+}
+
+void car_serv_button_car_vehicle_administration_page_init(BFL_button* buttonPtr)
+{
+    buttonPtr->color_rest=BROWN;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=YELLOW;
+    buttonPtr->color_shadow=DARKGRAY;
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=420;
+    buttonPtr->position_top =210;
+    buttonPtr->position_right = 600;
+    buttonPtr->position_bottom = 280;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +5;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
+
+    buttonPtr->position_text_left =buttonPtr->position_left + 20;
+    buttonPtr->position_text_top = buttonPtr->position_top + 20;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text,"交管服务");
+    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }

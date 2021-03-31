@@ -12,6 +12,8 @@
 #include"INCLUDE/MAIN_PAGE.H"
 #include"INCLUDE/MY_INFO.H"
 #include"INCLUDE/TEST.H"
+#include"INCLUDE/CAR_SERV.H"
+#include"INCLUDE/GENERAL.H"
 
 void main()
 {
@@ -46,6 +48,9 @@ void main()
             break; 
         case 4:
             page = MY_INFO(user_ID);  
+            break;
+        case _CAR_SERV:
+            page = CAR_SERV(user_ID);
             break;
         default:
             break;

@@ -91,6 +91,10 @@ int MY_INFO(char* user_ID)
             page = 0;
             break;
         }
+        if(button_car_service.status == PRESS)
+        {
+            page = _CAR_SERV;
+        }
 	    /*CODE END*/
 
         /* REDRAW START */
