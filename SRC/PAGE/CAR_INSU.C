@@ -4,6 +4,7 @@
 #include<STDLIB.H>
 #include<DOS.H>
 #include<STRING.H>
+#include<BIOS.H>
 /* SYSTEM INCLUDE END */
 
 /* BFL INCLUDES START */
@@ -20,32 +21,31 @@
 /*OTHER INCLUDES END*/
 
 /* INTERNAL FUNCTION DEFINITION START */
-void car_serv_button_other_insurance_init(BFL_button* );
-void car_serv_button_exit_init(BFL_button* );
-void car_serv_button_my_info_init(BFL_button* );
+void car_insu_button_other_insurance_init(BFL_button* );
+void car_insu_button_exit_init(BFL_button* );
+void car_insu_button_my_info_init(BFL_button* );
 
-void car_serv_button_car_insurance_page_init(BFL_button*);
-void car_serv_button_car_maintenance_page_init(BFL_button*);
-void car_serv_button_car_roadside_assistance_page_init(BFL_button*);
-void car_serv_button_car_vehicle_administration_page_init(BFL_button*);
+void car_insu_button_car_insurance_purchase_page_init(BFL_button* );
+void car_insu_button_claim_settlement_page_init(BFL_button* );
+
+
 
 /* INTERNAL FUNCTION DEFINITION END */
 
 /*MAIN FUNCTION*/
-int CAR_SERV(char* user_ID)
+int CAR_INSU(char* user_ID)
 {
     /* DEFINITION START */
 
-    int page = _CAR_SERV;
+    int page = _CAR_INSU;
     
     BFL_button button_other_insurance;
     BFL_button button_exit;
     BFL_button button_my_info;
+
+    BFL_button button_car_insurance_purchase_page;
+    BFL_button button_claim_settlement_page;
     
-    BFL_button button_car_insurance_page;
-    BFL_button button_car_maintenance_page;
-    BFL_button button_car_roadside_assistance_page;
-    BFL_button button_car_vehicle_administration_page;
     /* DEFINITION END */
 
     /* DEVICE AND MOUSE INIT START */
@@ -57,16 +57,12 @@ int CAR_SERV(char* user_ID)
 
     /* COMPONENTS INIT START */
 
-    car_serv_button_other_insurance_init(&button_other_insurance );
-    car_serv_button_exit_init(&button_exit);
-    car_serv_button_my_info_init(&button_my_info);
+    car_insu_button_other_insurance_init(&button_other_insurance );
+    car_insu_button_exit_init(&button_exit);
+    car_insu_button_my_info_init(&button_my_info);
 
-    car_serv_button_car_insurance_page_init(&button_car_insurance_page);
-    car_serv_button_car_maintenance_page_init(&button_car_maintenance_page);
-    car_serv_button_car_roadside_assistance_page_init(&button_car_roadside_assistance_page);
-    car_serv_button_car_vehicle_administration_page_init(&button_car_vehicle_administration_page);
-    
-
+    car_insu_button_car_insurance_purchase_page_init(&button_car_insurance_purchase_page);
+    car_insu_button_claim_settlement_page_init(&button_claim_settlement_page);
 
     /* COMPONENTS INIT END */
 
@@ -78,10 +74,10 @@ int CAR_SERV(char* user_ID)
     setfillstyle(1,RED);
     bar(595,400,640,460);//按钮的边
 
-    CHN_print(22,21,"汽车",48,48,DARKGRAY,2);
+    CHN_print(22,21,"车险",48,48,DARKGRAY,2);
     CHN_print(22,71,"服务",48,48,DARKGRAY,2);
 
-    CHN_print(20,20,"汽车",48,48,RED,2);
+    CHN_print(20,20,"车险",48,48,RED,2);
     CHN_print(20,70,"服务",48,48,RED,2);
 
     setfillstyle(SOLID_FILL,DARKGRAY);
@@ -94,7 +90,7 @@ int CAR_SERV(char* user_ID)
     /* DRAW END */
 
     /*WHILE*/
-    while (page == _CAR_SERV)
+    while (page == _CAR_INSU)
     {
         /*ACTION START*/
         BFL_mouse_action();
@@ -103,10 +99,9 @@ int CAR_SERV(char* user_ID)
         BFL_button_action(&button_exit);
         BFL_button_action(&button_my_info);
 
-        BFL_button_action(&button_car_insurance_page);
-        BFL_button_action(&button_car_maintenance_page);
-        BFL_button_action(&button_car_roadside_assistance_page);
-        BFL_button_action(&button_car_vehicle_administration_page);
+        BFL_button_action(&button_claim_settlement_page);
+        BFL_button_action(&button_car_insurance_purchase_page);
+
         /* ACTION END */
 
 	    /*CODE START*/
@@ -120,21 +115,15 @@ int CAR_SERV(char* user_ID)
             page = _MY_INFO;
             break;
         }
-        if(button_car_insurance_page.status == PRESS)
-        {
-            page = _CAR_INSU;
-            break;
-        }
 	    /*CODE END*/
 
         /* REDRAW START */
         BFL_button_draw(&button_other_insurance);
         BFL_button_draw(&button_exit);
         BFL_button_draw(&button_my_info);
-        BFL_button_draw(&button_car_insurance_page);
-        BFL_button_draw(&button_car_maintenance_page);
-        BFL_button_draw(&button_car_roadside_assistance_page);
-        BFL_button_draw(&button_car_vehicle_administration_page);
+
+        BFL_button_draw(&button_claim_settlement_page);
+        BFL_button_draw(&button_car_insurance_purchase_page);
 
         BFL_mouse_draw();
         /* REDRAW  END */
@@ -146,7 +135,7 @@ int CAR_SERV(char* user_ID)
 }   
 
 
-void car_serv_button_other_insurance_init(BFL_button* buttonPtr )
+void car_insu_button_other_insurance_init(BFL_button* buttonPtr )
 {
     buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
@@ -175,7 +164,7 @@ void car_serv_button_other_insurance_init(BFL_button* buttonPtr )
 
     buttonPtr->status = REST;
 }
-void car_serv_button_exit_init(BFL_button* buttonPtr )
+void car_insu_button_exit_init(BFL_button* buttonPtr )
 {
     buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
@@ -205,7 +194,7 @@ void car_serv_button_exit_init(BFL_button* buttonPtr )
     buttonPtr->status = REST;
 }
 
-void car_serv_button_my_info_init(BFL_button* buttonPtr )
+void car_insu_button_my_info_init(BFL_button* buttonPtr )
 {
     buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
@@ -234,18 +223,19 @@ void car_serv_button_my_info_init(BFL_button* buttonPtr )
     buttonPtr->status = REST;
 }
 
-void car_serv_button_car_insurance_page_init(BFL_button* buttonPtr)
+void car_insu_button_car_insurance_purchase_page_init(BFL_button* buttonPtr )
 {
-    buttonPtr->color_rest=BROWN;
+    buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
     buttonPtr->color_text=YELLOW;
     buttonPtr->color_shadow=DARKGRAY;
+
     buttonPtr->reDraw_status = SET;
 
-    buttonPtr->position_left=180;
-    buttonPtr->position_top =50;
-    buttonPtr->position_right = 360;
-    buttonPtr->position_bottom = 120;
+    buttonPtr->position_left=200;
+    buttonPtr->position_top =60;
+    buttonPtr->position_right = 570;
+    buttonPtr->position_bottom = 110;
 
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left =buttonPtr->position_left+5;
@@ -253,57 +243,29 @@ void car_serv_button_car_insurance_page_init(BFL_button* buttonPtr)
     buttonPtr->position_shadow_right = buttonPtr->position_right +5;
     buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
 
-    buttonPtr->position_text_left =buttonPtr->position_left + 20;
-    buttonPtr->position_text_top = buttonPtr->position_top + 20;
+    buttonPtr->position_text_left =buttonPtr->position_left + 10;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
     buttonPtr->text_size = 32;
 
-    strcpy(buttonPtr->display_text,"车险服务");
+    strcpy(buttonPtr->display_text,"车险购买");
     buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
 
-void car_serv_button_car_maintenance_page_init(BFL_button* buttonPtr)
+void car_insu_button_claim_settlement_page_init(BFL_button* buttonPtr )
 {
-    buttonPtr->color_rest=BROWN;
+    buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
     buttonPtr->color_text=YELLOW;
     buttonPtr->color_shadow=DARKGRAY;
+
     buttonPtr->reDraw_status = SET;
 
-    buttonPtr->position_left=420;
-    buttonPtr->position_top =50;
-    buttonPtr->position_right = 600;
-    buttonPtr->position_bottom = 120;
-
-    buttonPtr->is_shadow_enable = SET;
-    buttonPtr->position_shadow_left =buttonPtr->position_left+5;
-    buttonPtr->position_shadow_top = buttonPtr->position_top +5;
-    buttonPtr->position_shadow_right = buttonPtr->position_right +5;
-    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
-
-    buttonPtr->position_text_left =buttonPtr->position_left + 20;
-    buttonPtr->position_text_top = buttonPtr->position_top + 20;
-    buttonPtr->text_size = 32;
-
-    strcpy(buttonPtr->display_text,"用车养车");
-    buttonPtr->text_length = 4;
-
-    buttonPtr->status = REST;
-}
-
-void car_serv_button_car_roadside_assistance_page_init(BFL_button* buttonPtr)
-{
-    buttonPtr->color_rest=BROWN;
-    buttonPtr->color_hover=LIGHTRED;  
-    buttonPtr->color_text=YELLOW;
-    buttonPtr->color_shadow=DARKGRAY;
-    buttonPtr->reDraw_status = SET;
-
-    buttonPtr->position_left=180;
+    buttonPtr->position_left=200;
     buttonPtr->position_top =210;
-    buttonPtr->position_right = 360;
-    buttonPtr->position_bottom = 280;
+    buttonPtr->position_right = 570;
+    buttonPtr->position_bottom = 260;
 
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left =buttonPtr->position_left+5;
@@ -311,40 +273,11 @@ void car_serv_button_car_roadside_assistance_page_init(BFL_button* buttonPtr)
     buttonPtr->position_shadow_right = buttonPtr->position_right +5;
     buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
 
-    buttonPtr->position_text_left =buttonPtr->position_left + 20;
-    buttonPtr->position_text_top = buttonPtr->position_top + 20;
+    buttonPtr->position_text_left =buttonPtr->position_left + 10;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
     buttonPtr->text_size = 32;
 
-    strcpy(buttonPtr->display_text,"道路帮助");
-    buttonPtr->text_length = 4;
-
-    buttonPtr->status = REST;
-}
-
-void car_serv_button_car_vehicle_administration_page_init(BFL_button* buttonPtr)
-{
-    buttonPtr->color_rest=BROWN;
-    buttonPtr->color_hover=LIGHTRED;  
-    buttonPtr->color_text=YELLOW;
-    buttonPtr->color_shadow=DARKGRAY;
-    buttonPtr->reDraw_status = SET;
-
-    buttonPtr->position_left=420;
-    buttonPtr->position_top =210;
-    buttonPtr->position_right = 600;
-    buttonPtr->position_bottom = 280;
-
-    buttonPtr->is_shadow_enable = SET;
-    buttonPtr->position_shadow_left =buttonPtr->position_left+5;
-    buttonPtr->position_shadow_top = buttonPtr->position_top +5;
-    buttonPtr->position_shadow_right = buttonPtr->position_right +5;
-    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
-
-    buttonPtr->position_text_left =buttonPtr->position_left + 20;
-    buttonPtr->position_text_top = buttonPtr->position_top + 20;
-    buttonPtr->text_size = 32;
-
-    strcpy(buttonPtr->display_text,"交管服务");
+    strcpy(buttonPtr->display_text,"报案理赔");
     buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;

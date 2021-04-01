@@ -34,7 +34,8 @@
 			"PINYIN.C": "c",
 			"TEST.C": "c",
 			"CAR_SERV.C": "c",
-			"INSUR_SE.C": "c"
+			"INSUR_SE.C": "c",
+			"CAR_INSU.C": "cpp"
 		},
 		"files.encoding": "gb2312",
 		"diffEditor.codeLens": true,

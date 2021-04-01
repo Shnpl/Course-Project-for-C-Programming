@@ -20,6 +20,7 @@
 
 #define _MY_INFO 4
 #define _CAR_SERV 5
+#define _CAR_INSU 6
 /* µÇÂ¼Óë×¢²á user ½á¹¹ */
 typedef struct user_struct
 {

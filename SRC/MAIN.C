@@ -13,6 +13,8 @@
 #include"INCLUDE/MY_INFO.H"
 #include"INCLUDE/TEST.H"
 #include"INCLUDE/CAR_SERV.H"
+#include"INCLUDE/CAR_INSU.H"
+
 #include"INCLUDE/GENERAL.H"
 
 void main()
@@ -31,26 +33,29 @@ void main()
     {
         switch (page)
         {
-        case -1:
+        case _TEST:
             page = TEST(user_ID);
             break;
-        case 0:
+        case _INITIAL:
             page = INITIAL();
             break;
-        case 1:
+        case _SIGN_IN:
             page = SIGN_IN();
             break;
-        case 2:
+        case _LOGIN:
             page = LOGIN(user_ID);
             break; 
-        case 3:
+        case _MAIN_PAGE:
             page = MAIN_PAGE(user_ID);
             break; 
-        case 4:
+        case _MY_INFO:
             page = MY_INFO(user_ID);  
             break;
         case _CAR_SERV:
             page = CAR_SERV(user_ID);
+            break;
+        case _CAR_INSU:
+            page = CAR_INSU(user_ID);
             break;
         default:
             break;
