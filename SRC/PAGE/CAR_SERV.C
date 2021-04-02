@@ -125,6 +125,12 @@ int CAR_SERV(char* user_ID)
             page = _CAR_INSU;
             break;
         }
+        if(button_car_vehicle_administration_page.status == PRESS)
+        {
+            page = _VEH_ADMI;
+            break;
+        }
+        
 	    /*CODE END*/
 
         /* REDRAW START */

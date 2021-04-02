@@ -35,7 +35,8 @@
 			"TEST.C": "c",
 			"CAR_SERV.C": "c",
 			"INSUR_SE.C": "c",
-			"CAR_INSU.C": "cpp"
+			"CAR_INSU.C": "c",
+			"VEH_ADMI.C": "c"
 		},
 		"files.encoding": "gb2312",
 		"diffEditor.codeLens": true,
