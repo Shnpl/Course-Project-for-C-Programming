@@ -16,32 +16,33 @@
 /*BFL INCLUDES END*/
 
 /*OTHER INCLUDES START*/
+
 /*OTHER INCLUDES END*/
 
 /* INTERNAL FUNCTION DEFINITION START */
 
-void my_info_button_car_service_init(BFL_button* );
-void my_info_button_other_insurance_init(BFL_button* );
-void my_info_button_exit_init(BFL_button* );
-void my_info_button_my_insurance_policy_page_init(BFL_button*);
-void my_info_button_my_service_page_init(BFL_button*);
+void veh_admi_button_car_service_init(BFL_button* );
+void veh_admi_button_other_insurance_init(BFL_button* );
+void veh_admi_button_exit_init(BFL_button* );
+void veh_admi_button_my_info_init(BFL_button* );
+
+void veh_admi_button_annual_check_appointment_page_init(BFL_button* );
+
 
 /* INTERNAL FUNCTION DEFINITION END */
 
 /*MAIN FUNCTION*/
-int MY_INFO(char* user_ID)
+int VEH_ADMI(char* user_ID)
 {
-    /*DEFINITION START*/
+    /* DEFINITION START */
 
-    int page = 4;
+    int page = _VEH_ADMI;
 
     BFL_button button_car_service;
     BFL_button button_other_insurance;
     BFL_button button_exit;
-    BFL_button button_my_insurance_policy_page;
-    BFL_button button_my_service_page;
-
-    int poly_bottom_bar[]={0,320, 160,320, 160,400, 640,400, 640,480, 0,480, 0,320};
+    BFL_button button_my_info;
+    BFL_button button_annual_check_appointment_page;
 
     /* DEFINITION END */
 
@@ -54,40 +55,36 @@ int MY_INFO(char* user_ID)
 
     /* COMPONENTS INIT START */
 
-    my_info_button_car_service_init(&button_car_service );
-    my_info_button_other_insurance_init(&button_other_insurance );
-    my_info_button_exit_init(&button_exit );
-    
-    my_info_button_my_insurance_policy_page_init(&button_my_insurance_policy_page);
-    my_info_button_my_service_page_init(&button_my_service_page);
+    veh_admi_button_car_service_init(&button_car_service );
+    veh_admi_button_other_insurance_init(&button_other_insurance );
+    veh_admi_button_exit_init(&button_exit );
+    veh_admi_button_my_info_init(&button_my_info);
+    veh_admi_button_annual_check_appointment_page_init(&button_annual_check_appointment_page);
+
     /* COMPONENTS INIT END */
 
     /* DRAW START */
-
     setfillstyle(1,LIGHTGRAY);
     bar(0,420,640,480);
-    
-    setfillstyle(1,DARKGRAY);
-    bar(10,355,160,465);
-    setfillstyle(1,RED);
-    bar(3,350,155,460);
 
     setfillstyle(1,DARKGRAY);
     bar(600,405,645,465);//按钮的边
     setfillstyle(1,RED);
     bar(595,400,640,460);//按钮的边
 
-    CHN_print(22,21,"我的",48,48,DARKGRAY,2);
-    CHN_print(22,71,"信息",48,48,DARKGRAY,2);
+    CHN_print(22,21,"交管",48,48,DARKGRAY,2);
+    CHN_print(22,71,"服务",48,48,DARKGRAY,2);
 
-    CHN_print(20,20,"我的",48,48,RED,2);
-    CHN_print(20,70,"信息",48,48,RED,2);
+    CHN_print(20,20,"交管",48,48,RED,2);
+    CHN_print(20,70,"服务",48,48,RED,2);
 
+    
+    
 
     /* DRAW END */
 
     /*WHILE*/
-    while (page == 4)
+    while (page == _VEH_ADMI)
     {
         /*ACTION START*/
         BFL_mouse_action();
@@ -95,21 +92,27 @@ int MY_INFO(char* user_ID)
         BFL_button_action(&button_car_service);
         BFL_button_action(&button_other_insurance);
         BFL_button_action(&button_exit);
+        BFL_button_action(&button_my_info);
 
-        BFL_button_action(&button_my_insurance_policy_page);
-        BFL_button_action(&button_my_service_page);
+        BFL_button_action(&button_annual_check_appointment_page);
 
         /* ACTION END */
 
 	    /*CODE START*/
         if(button_exit.status == PRESS)
         {
-            page = 0;
+            page = _INITIAL;
+            break;
+        }
+        if(button_my_info.status == PRESS)
+        {
+            page = _MY_INFO;
             break;
         }
         if(button_car_service.status == PRESS)
         {
             page = _CAR_SERV;
+            break;
         }
 	    /*CODE END*/
 
@@ -117,9 +120,9 @@ int MY_INFO(char* user_ID)
         BFL_button_draw(&button_car_service);
         BFL_button_draw(&button_other_insurance);
         BFL_button_draw(&button_exit);
+        BFL_button_draw(&button_my_info);
 
-        BFL_button_draw(&button_my_insurance_policy_page);
-        BFL_button_draw(&button_my_service_page);
+        BFL_button_draw(&button_annual_check_appointment_page);
 
         BFL_mouse_draw();
         /* REDRAW  END */
@@ -130,12 +133,13 @@ int MY_INFO(char* user_ID)
 
 }   
 
-void my_info_button_car_service_init(BFL_button* buttonPtr )
+void veh_admi_button_car_service_init(BFL_button* buttonPtr )
 {
     buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
     buttonPtr->color_text=YELLOW;
     buttonPtr->color_shadow=DARKGRAY;
+
     buttonPtr->reDraw_status = SET;
 
     buttonPtr->position_left=170;
@@ -143,14 +147,15 @@ void my_info_button_car_service_init(BFL_button* buttonPtr )
     buttonPtr->position_right = 315;
     buttonPtr->position_bottom = 460;
 
+    buttonPtr->position_text_left =buttonPtr->position_left + 10;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left =buttonPtr->position_left+5;
     buttonPtr->position_shadow_top = buttonPtr->position_top +5;
     buttonPtr->position_shadow_right = buttonPtr->position_right +5;
     buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
 
-    buttonPtr->position_text_left =buttonPtr->position_left + 10;
-    buttonPtr->position_text_top = buttonPtr->position_top + 10;
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"汽车服务");
@@ -159,13 +164,12 @@ void my_info_button_car_service_init(BFL_button* buttonPtr )
     buttonPtr->status = REST;
 }
 
-void my_info_button_other_insurance_init(BFL_button* buttonPtr )
+void veh_admi_button_other_insurance_init(BFL_button* buttonPtr )
 {
     buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
     buttonPtr->color_text=YELLOW;
     buttonPtr->color_shadow=DARKGRAY;
-
     buttonPtr->reDraw_status = SET;
 
     buttonPtr->position_left=325;
@@ -173,14 +177,15 @@ void my_info_button_other_insurance_init(BFL_button* buttonPtr )
     buttonPtr->position_right = 470;
     buttonPtr->position_bottom = 460;
 
+    buttonPtr->position_text_left =buttonPtr->position_left + 10;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
+
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left =buttonPtr->position_left+5;
     buttonPtr->position_shadow_top = buttonPtr->position_top +5;
     buttonPtr->position_shadow_right = buttonPtr->position_right +5;
     buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
 
-    buttonPtr->position_text_left =buttonPtr->position_left + 10;
-    buttonPtr->position_text_top = buttonPtr->position_top + 10;
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"其他保险");
@@ -188,7 +193,7 @@ void my_info_button_other_insurance_init(BFL_button* buttonPtr )
 
     buttonPtr->status = REST;
 }
-void my_info_button_exit_init(BFL_button* buttonPtr )
+void veh_admi_button_exit_init(BFL_button* buttonPtr )
 {
     buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
@@ -218,19 +223,18 @@ void my_info_button_exit_init(BFL_button* buttonPtr )
     buttonPtr->status = REST;
 }
 
-void my_info_button_my_insurance_policy_page_init(BFL_button* buttonPtr )
+void veh_admi_button_my_info_init(BFL_button* buttonPtr )
 {
-    buttonPtr->color_rest=CYAN;
+    buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
     buttonPtr->color_text=YELLOW;
     buttonPtr->color_shadow=DARKGRAY;
-
     buttonPtr->reDraw_status = SET;
 
-    buttonPtr->position_left=200;
-    buttonPtr->position_top =60;
-    buttonPtr->position_right = 570;
-    buttonPtr->position_bottom = 110;
+    buttonPtr->position_left=5;
+    buttonPtr->position_top =350;
+    buttonPtr->position_right = 155;
+    buttonPtr->position_bottom = 460;
 
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left =buttonPtr->position_left+5;
@@ -238,19 +242,20 @@ void my_info_button_my_insurance_policy_page_init(BFL_button* buttonPtr )
     buttonPtr->position_shadow_right = buttonPtr->position_right +5;
     buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+5;
 
-    buttonPtr->position_text_left =buttonPtr->position_left + 125;
-    buttonPtr->position_text_top = buttonPtr->position_top + 10;
-    buttonPtr->text_size = 32;
+    buttonPtr->position_text_left =buttonPtr->position_left + 17;
+    buttonPtr->position_text_top = buttonPtr->position_top + 25;
+    buttonPtr->text_size = 48;
 
-    strcpy(buttonPtr->display_text,"我的保单");
-    buttonPtr->text_length = 4;
+    strcpy(buttonPtr->display_text,"我的");
+    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
 
-void my_info_button_my_service_page_init(BFL_button* buttonPtr )
+
+void veh_admi_button_annual_check_appointment_page_init(BFL_button* buttonPtr )
 {
-    buttonPtr->color_rest=CYAN;
+    buttonPtr->color_rest=RED;
     buttonPtr->color_hover=LIGHTRED;  
     buttonPtr->color_text=YELLOW;
     buttonPtr->color_shadow=DARKGRAY;
@@ -258,9 +263,9 @@ void my_info_button_my_service_page_init(BFL_button* buttonPtr )
     buttonPtr->reDraw_status = SET;
 
     buttonPtr->position_left=200;
-    buttonPtr->position_top =210;
+    buttonPtr->position_top =160;
     buttonPtr->position_right = 570;
-    buttonPtr->position_bottom = 260;
+    buttonPtr->position_bottom = 210;
 
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left =buttonPtr->position_left+5;
@@ -272,7 +277,7 @@ void my_info_button_my_service_page_init(BFL_button* buttonPtr )
     buttonPtr->position_text_top = buttonPtr->position_top + 10;
     buttonPtr->text_size = 32;
 
-    strcpy(buttonPtr->display_text,"我的服务");
+    strcpy(buttonPtr->display_text,"预约年检");
     buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;

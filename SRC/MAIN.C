@@ -14,6 +14,7 @@
 #include"INCLUDE/TEST.H"
 #include"INCLUDE/CAR_SERV.H"
 #include"INCLUDE/CAR_INSU.H"
+#include"INCLUDE/VEH_ADMI.H"
 
 #include"INCLUDE/GENERAL.H"
 
@@ -57,6 +58,8 @@ void main()
         case _CAR_INSU:
             page = CAR_INSU(user_ID);
             break;
+        case _VEH_ADMI:
+            page = VEH_ADMI(user_ID);
         default:
             break;
         }
