@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include<bios.h>
 
-#include "./INCLUDE/TEXTBOX.H"
-#include "./INCLUDE/MOUSE.H"
-#include "./INCLUDE/BUTTON.H"
-#include"./INCLUDE/GENERAL.H"
+#include"INCLUDE/TEXTBOX.H"
+#include"INCLUDE/MOUSE.H"
+#include"INCLUDE/BUTTON.H"
+#include"INCLUDE/GENERAL.H"
 char get_ch(void);
 
 void BFL_textbox_action(BFL_textbox* textboxPtr)
@@ -91,7 +91,7 @@ void BFL_textbox_draw(BFL_textbox* textboxPtr)
 {
     if(textboxPtr->reDraw == SET)
     {
-        settextstyle(SANS_SERIF_FONT,0,4);
+        settextstyle(SANS_SERIF_FONT,0,textboxPtr->size);
         settextjustify(5,18);
 
         if(textboxPtr->is_shadow_enable == SET)

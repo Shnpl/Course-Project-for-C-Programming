@@ -36,7 +36,14 @@
 			"CAR_SERV.C": "c",
 			"INSUR_SE.C": "c",
 			"CAR_INSU.C": "c",
-			"VEH_ADMI.C": "c"
+			"VEH_ADMI.C": "c",
+			"CAR_INSU copy.C": "cpp",
+			"CHEK_APMT.C": "cpp",
+			"CHK_APMT.C": "cpp",
+			"array": "cpp",
+			"string_view": "cpp",
+			"initializer_list": "cpp",
+			"utility": "cpp"
 		},
 		"files.encoding": "gb2312",
 		"diffEditor.codeLens": true,

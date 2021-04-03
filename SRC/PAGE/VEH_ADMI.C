@@ -114,6 +114,12 @@ int VEH_ADMI(char* user_ID)
             page = _CAR_SERV;
             break;
         }
+
+        if(button_annual_check_appointment_page.status == PRESS)
+        {
+            page = _CHK_APMT;
+            break;
+        }
 	    /*CODE END*/
 
         /* REDRAW START */

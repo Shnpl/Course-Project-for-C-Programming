@@ -15,6 +15,7 @@ typedef struct BFL_textbox_struct{
     int color_box;
     int color_text;
     int color_shadow;
+    int size;
 
     //int color_cursor;
     

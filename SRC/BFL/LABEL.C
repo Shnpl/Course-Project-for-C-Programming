@@ -4,12 +4,12 @@
 #include <dos.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "./INCLUDE/TEXTBOX.H"
-#include "./INCLUDE/MOUSE.H"
-#include "./INCLUDE/BUTTON.H"
-#include"./INCLUDE/GENERAL.H"
-#include"./INCLUDE/LABEL.H"
-#include"./INCLUDE/CHN.H"
+#include"INCLUDE/TEXTBOX.H"
+#include"INCLUDE/MOUSE.H"
+#include"INCLUDE/BUTTON.H"
+#include"INCLUDE/GENERAL.H"
+#include"INCLUDE/LABEL.H"
+#include"INCLUDE/CHN.H"
 
 
 void BFL_label_action(BFL_label* labelPtr)

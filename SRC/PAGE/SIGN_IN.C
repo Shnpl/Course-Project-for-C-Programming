@@ -206,6 +206,7 @@ void textbox_user_name_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
+    textboxPtr->size = 4;
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
     textboxPtr->is_in_the_box = 0;
@@ -236,6 +237,9 @@ void textbox_user_code_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
+    textboxPtr->size = 4;
+
+
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
     textboxPtr->is_in_the_box = 0;
@@ -266,6 +270,9 @@ void textbox_user_code_repeat_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
+    textboxPtr->size = 4;
+
+
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
     textboxPtr->is_in_the_box = 0;

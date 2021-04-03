@@ -3,11 +3,11 @@
 #include <dos.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "./INCLUDE/pinyin.H"
-#include "./INCLUDE/MOUSE.H"
-#include "./INCLUDE/BUTTON.H"
-#include "./INCLUDE/GENERAL.H"
-#include "./INCLUDE/PINYIN.H"
+#include "INCLUDE/pinyin.H"
+#include "INCLUDE/MOUSE.H"
+#include "INCLUDE/BUTTON.H"
+#include "INCLUDE/GENERAL.H"
+#include "INCLUDE/PINYIN.H"
 //临时注释：输入法框放在左下角，左边位置0，上360，右边300，下480
 
 void BFL_pinyin_action(BFL_pinyin *pinyinPtr)

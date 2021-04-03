@@ -2,10 +2,10 @@
 #include<GRAPHICS.H>
 #include<STDLIB.H>
 #include<DOS.H>
-#include "./INCLUDE/GENERAL.H"
-#include "./INCLUDE/BUTTON.H"
-#include "./INCLUDE/MOUSE.H"
-#include"./INCLUDE/CHN.H"
+#include"INCLUDE/GENERAL.H"
+#include"INCLUDE/BUTTON.H"
+#include"INCLUDE/MOUSE.H"
+#include"INCLUDE/CHN.H"
 
 
 void BFL_button_draw(BFL_button* buttonPtr)

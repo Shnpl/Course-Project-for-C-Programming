@@ -190,6 +190,8 @@ void login_textbox_user_name_init(BFL_textbox* textboxPtr)
     textboxPtr->color_shadow = DARKGRAY;
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
+    textboxPtr->size = 4;
+
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
 
@@ -219,6 +221,8 @@ void login_textbox_user_code_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_shadow = DARKGRAY;
     textboxPtr->color_text = RED;
+    textboxPtr->size = 4;
+
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
 
