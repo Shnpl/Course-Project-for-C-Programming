@@ -7,4 +7,4 @@
 返回：int page 跳转页面值 
 */
 int TEST(char* user_ID);
-#endif///////
+#endif
