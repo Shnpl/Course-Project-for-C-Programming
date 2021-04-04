@@ -25,6 +25,9 @@
 
 void chk_apmt_button_exit_init(BFL_button* );
 void chk_apmt_textbox_tel_init(BFL_textbox* );
+void chk_apmt_textbox_liaison_init(BFL_textbox* );
+void chk_apmt_button_province_01_init(BFL_button* );
+void chk_apmt_button_province_02_init(BFL_button* );
 
 /* INTERNAL FUNCTION DEFINITION END */
 
@@ -37,7 +40,11 @@ int CHK_APMT(char* user_ID)
     check_appointment check_appointment_handle;
     BFL_button button_exit;
     BFL_textbox textbox_tel;
-    
+    BFL_textbox textbox_liaison;
+
+    BFL_textbox button_province_01;
+    BFL_textbox button_province_02;
+
     /* DEFINITION END */
 
     /* DEVICE AND MOUSE INIT START */
@@ -53,6 +60,9 @@ int CHK_APMT(char* user_ID)
     
     chk_apmt_button_exit_init(&button_exit);
     chk_apmt_textbox_tel_init(&textbox_tel);
+    chk_apmt_textbox_liaison_init(&textbox_liaison);
+    chk_apmt_button_province_01_init(&button_province_01);
+    chk_apmt_button_province_02_init(&button_province_02);
     /* COMPONENTS INIT END */
 
     /* DRAW START */
@@ -99,7 +109,10 @@ int CHK_APMT(char* user_ID)
         BFL_mouse_action();
         BFL_button_action(&button_exit);
         BFL_textbox_action(&textbox_tel);
+        BFL_textbox_action(&textbox_liaison);
 
+        BFL_button_action(&button_province_01);
+        BFL_button_action(&button_province_02);
         /* ACTION END */
 
 	    /*CODE START*/
@@ -113,6 +126,10 @@ int CHK_APMT(char* user_ID)
         /* REDRAW START */
         BFL_button_draw(&button_exit);
         BFL_textbox_draw(&textbox_tel);
+        BFL_textbox_draw(&textbox_liaison);
+
+        BFL_button_draw(&button_province_01);
+        BFL_button_draw(&button_province_02);
         BFL_mouse_draw();
         /* REDRAW  END */
     }
@@ -183,4 +200,97 @@ void chk_apmt_textbox_tel_init(BFL_textbox* textboxPtr)
     BFL_textbox_draw(textboxPtr);
     
     textboxPtr->reDraw = RESET;
+}
+
+void chk_apmt_textbox_liaison_init(BFL_textbox* textboxPtr)
+{
+    textboxPtr->color_box = LIGHTGRAY;
+    //textboxPtr->color_cursor =BROWN;
+    textboxPtr->color_text = RED;
+    textboxPtr->color_shadow = DARKGRAY;
+    textboxPtr->size = 3;
+
+    textboxPtr->reDraw = SET;
+    // textboxPtr->cursor_count = 0;
+    textboxPtr->is_in_the_box = 0;
+
+    textboxPtr->position_left = 330;//可修改
+    textboxPtr->position_top = 135;//可修改
+    textboxPtr->position_right = 515;//可修改
+    textboxPtr->position_bottom = textboxPtr->position_top + 30;
+
+    textboxPtr->is_shadow_enable = SET;
+    textboxPtr->position_shadow_left = textboxPtr->position_left+5;
+    textboxPtr->position_shadow_top = textboxPtr->position_top+5;
+    textboxPtr->position_shadow_right = textboxPtr->position_right + 5;
+    textboxPtr->position_shadow_bottom = textboxPtr->position_bottom +5;
+
+    textboxPtr->current_length = -1;
+    *(textboxPtr->display_text) = '\0';
+    *(textboxPtr->true_text) = '\0';
+    textboxPtr->word_length = 11;
+    textboxPtr->is_secret = RESET;
+    BFL_textbox_draw(textboxPtr);
+    
+    textboxPtr->reDraw = RESET;
+}
+
+void chk_apmt_button_province_01_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=330;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 350;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"京");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_02_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=355;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 375;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"沪");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
 }
