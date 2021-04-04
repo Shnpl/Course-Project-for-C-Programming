@@ -24,11 +24,11 @@ void BFL_label_draw(BFL_label* labelPtr)
         setfillstyle(SOLID_FILL,labelPtr->color_box);
         bar(labelPtr->position_left,labelPtr->position_top,labelPtr->position_right,labelPtr->position_bottom);
 
-        CHN_print(labelPtr->position_left+10,
-        labelPtr->position_top+10,
+        CHN_print(labelPtr->position_left,
+        labelPtr->position_top,
         labelPtr->display_text,
-        32,
-        32,
+        labelPtr->size,
+        labelPtr->size,
         labelPtr->color_text,
         labelPtr->word_length);
 

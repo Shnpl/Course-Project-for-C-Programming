@@ -367,13 +367,14 @@ void user_init(user* userPtr)
 }
 void label_1_init(BFL_label* labelPtr)
 {
-    labelPtr->color_box = WHITE;
+    labelPtr->color_box = YELLOW;
     labelPtr->color_text = RED;
 
     labelPtr->position_left = 50;
     labelPtr->position_top = 300;
     labelPtr->position_right = 500;
     labelPtr->position_bottom = 350;
+    labelPtr->size = 32;
     memset(labelPtr->display_text,0,51);
     labelPtr->reDraw = RESET;
 }

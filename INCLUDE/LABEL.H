@@ -14,6 +14,7 @@ typedef struct BFL_label_struct{
     int position_top;
     int position_right;
     int position_bottom;
+    int size;
 
     char display_text[51];
     int word_length;

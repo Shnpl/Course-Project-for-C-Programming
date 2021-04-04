@@ -78,9 +78,6 @@ int VEH_ADMI(char* user_ID)
     CHN_print(20,20,"交管",48,48,RED,2);
     CHN_print(20,70,"服务",48,48,RED,2);
 
-    
-    
-
     /* DRAW END */
 
     /*WHILE*/
@@ -119,7 +116,7 @@ int VEH_ADMI(char* user_ID)
             page = _CHK_APMT;
             break;
         }
-	    /*CODE END*/
+	    /* CODE END */
 
         /* REDRAW START */
         BFL_button_draw(&button_car_service);

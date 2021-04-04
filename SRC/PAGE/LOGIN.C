@@ -323,6 +323,7 @@ void login_label_1_init(BFL_label* labelPtr)
     labelPtr->position_top = 300;
     labelPtr->position_right = 500;
     labelPtr->position_bottom = 350;
+    labelPtr->size = 32;
     memset(labelPtr->display_text,0,51);
     labelPtr->reDraw = RESET;
 }
