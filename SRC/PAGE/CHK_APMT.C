@@ -26,8 +26,18 @@
 void chk_apmt_button_exit_init(BFL_button* );
 void chk_apmt_textbox_tel_init(BFL_textbox* );
 void chk_apmt_textbox_liaison_init(BFL_textbox* );
-void chk_apmt_button_province_01_init(BFL_button* );
-void chk_apmt_button_province_02_init(BFL_button* );
+void chk_apmt_button_province_01_init(BFL_button* );//¾©
+void chk_apmt_button_province_02_init(BFL_button* );//»¦
+void chk_apmt_button_province_03_init(BFL_button* );//½ò
+void chk_apmt_button_province_04_init(BFL_button* );//Óå
+void chk_apmt_button_province_05_init(BFL_button* );//ÃÉ
+
+void chk_apmt_button_province_06_init(BFL_button* );//Äþ
+void chk_apmt_button_province_07_init(BFL_button* );//ÐÂ
+void chk_apmt_button_province_08_init(BFL_button* );//²Ø
+void chk_apmt_button_province_09_init(BFL_button* );//¹ð
+void chk_apmt_button_province_10_init(BFL_button* );//ºÚ
+
 
 /* INTERNAL FUNCTION DEFINITION END */
 
@@ -42,8 +52,18 @@ int CHK_APMT(char* user_ID)
     BFL_textbox textbox_tel;
     BFL_textbox textbox_liaison;
 
-    BFL_textbox button_province_01;
-    BFL_textbox button_province_02;
+    BFL_button button_province_01;
+    BFL_button button_province_02;
+    BFL_button button_province_03;
+    BFL_button button_province_04;
+    BFL_button button_province_05;
+
+    BFL_button button_province_06;
+    BFL_button button_province_07;
+    BFL_button button_province_08;
+    BFL_button button_province_09;
+    BFL_button button_province_10;
+
 
     /* DEFINITION END */
 
@@ -63,6 +83,17 @@ int CHK_APMT(char* user_ID)
     chk_apmt_textbox_liaison_init(&textbox_liaison);
     chk_apmt_button_province_01_init(&button_province_01);
     chk_apmt_button_province_02_init(&button_province_02);
+    chk_apmt_button_province_03_init(&button_province_03);
+    chk_apmt_button_province_04_init(&button_province_04);
+    chk_apmt_button_province_05_init(&button_province_05);
+
+    chk_apmt_button_province_06_init(&button_province_06);
+    chk_apmt_button_province_07_init(&button_province_07);
+    chk_apmt_button_province_08_init(&button_province_08);
+    chk_apmt_button_province_09_init(&button_province_09);
+    chk_apmt_button_province_10_init(&button_province_10);
+
+
     /* COMPONENTS INIT END */
 
     /* DRAW START */
@@ -113,6 +144,16 @@ int CHK_APMT(char* user_ID)
 
         BFL_button_action(&button_province_01);
         BFL_button_action(&button_province_02);
+        BFL_button_action(&button_province_03);
+        BFL_button_action(&button_province_04);
+        BFL_button_action(&button_province_05);
+
+        BFL_button_action(&button_province_06);
+        BFL_button_action(&button_province_07);
+        BFL_button_action(&button_province_08);
+        BFL_button_action(&button_province_09);
+        BFL_button_action(&button_province_10);
+
         /* ACTION END */
 
 	    /*CODE START*/
@@ -130,6 +171,17 @@ int CHK_APMT(char* user_ID)
 
         BFL_button_draw(&button_province_01);
         BFL_button_draw(&button_province_02);
+        BFL_button_draw(&button_province_03);
+        BFL_button_draw(&button_province_04);
+        BFL_button_draw(&button_province_05);
+
+        BFL_button_draw(&button_province_06);
+        BFL_button_draw(&button_province_07);
+        BFL_button_draw(&button_province_08);
+        BFL_button_draw(&button_province_09);
+        BFL_button_draw(&button_province_10);
+
+
         BFL_mouse_draw();
         /* REDRAW  END */
     }
@@ -290,6 +342,246 @@ void chk_apmt_button_province_02_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text,"»¦");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_03_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=380;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 400;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"½ò");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_04_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=405;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 425;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"Óå");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_05_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=430;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 450;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"ÃÉ");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_06_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=455;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 475;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"Äþ");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_07_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=480;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 500;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"ÐÂ");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_08_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=505;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 525;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"²Ø");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_09_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=530;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 550;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"¹ð");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_province_10_init(BFL_button* buttonPtr )
+{
+    buttonPtr->color_rest=LIGHTGRAY;
+    buttonPtr->color_hover=LIGHTRED;  
+    buttonPtr->color_text=RED;
+    buttonPtr->color_shadow=DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left=555;
+    buttonPtr->position_top =70;
+    buttonPtr->position_right = 575;
+    buttonPtr->position_bottom = 90;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left =buttonPtr->position_left+3;
+    buttonPtr->position_shadow_top = buttonPtr->position_top +3;
+    buttonPtr->position_shadow_right = buttonPtr->position_right +3;
+    buttonPtr->position_shadow_bottom=buttonPtr->position_bottom+3;
+
+    buttonPtr->position_text_left =buttonPtr->position_left+2;
+    buttonPtr->position_text_top = buttonPtr->position_top+1;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text,"ºÚ");
     buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;

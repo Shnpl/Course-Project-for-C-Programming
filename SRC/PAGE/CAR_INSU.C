@@ -107,7 +107,7 @@ int CAR_INSU(char* user_ID)
 	    /*CODE START*/
         if(button_exit.status == PRESS)
         {
-            page = _INITIAL;
+            page = _MAIN_PAGE;
             break;
         }
         if(button_my_info.status == PRESS)
