@@ -515,14 +515,17 @@ int CHK_APMT(char *user_ID)
             break;
         }
         strcpy(check_appointment_handle.car_licence,textbox_licence.true_text);
-
+        strcpy(check_appointment_handle.liason,textbox_liaison.true_text);
+        strcpy(check_appointment_handle.tel,textbox_tel.true_text);
         
         
         if(button_confirm.status == PRESS)
         {
             setcolor(BROWN);
             
-            outtextxy(0,300,check_appointment_handle.car_licence);
+            outtextxy(0,200,check_appointment_handle.car_licence);
+	        outtextxy(0,240,check_appointment_handle.liason);
+	        outtextxy(0,280,check_appointment_handle.tel);
             if(check_appointment_handle.car_province == -1)
             {
                 strcpy(label_messagebox.display_text,"Œ¥ ‰»Î °∑›£°");

@@ -280,6 +280,85 @@ char get_ch()
         case 0x5230:
             return_char = '0';
             break;
+        case 0x1E41:
+            return_char = 'A';
+            break;
+        case 0x3042:
+            return_char = 'B';
+            break;
+        case 0x2E43:
+            return_char = 'C';
+            break;
+        case 0x2044:
+            return_char = 'D';
+            break;
+        case 0x1245:
+            return_char = 'E';
+            break;
+        case 0x2146:
+            return_char = 'F';
+            break;
+        case 0x2247:
+            return_char = 'G';
+            break;
+        case 0x2348:
+            return_char = 'H';
+            break;
+        case 0x1749:
+            return_char = 'I';
+            break;
+        case 0x244A:
+            return_char = 'J';
+            break;
+        case 0x254B:
+            return_char = 'K';
+            break;
+        case 0x264C:
+            return_char = 'L';
+            break;
+        case 0x324D:
+            return_char = 'M';
+            break;
+        case 0x314E:
+            return_char = 'N';
+            break;
+        case 0x184F:
+            return_char = 'O';
+            break;
+        case 0x1950:
+            return_char = 'P';
+            break;
+        case 0x1051:
+            return_char = 'Q';
+            break;
+        case 0x1352:
+            return_char = 'R';
+            break;
+        case 0x1F53:
+            return_char = 'S';
+            break;
+        case 0x1454:
+            return_char = 'T';
+            break;
+        case 0x1655:
+            return_char = 'U';
+            break;
+        case 0x2F56:
+            return_char = 'V';
+            break;
+        case 0x1157:
+            return_char = 'W';
+            break;
+        case 0x2D58:
+            return_char = 'X';
+            break;
+        case 0x1559:
+            return_char = 'Y';
+            break;
+        case 0x2C5A:
+            return_char ='Z';
+            break;
+
         }
     }
     return return_char;
