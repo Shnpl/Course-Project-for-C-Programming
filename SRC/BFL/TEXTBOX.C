@@ -51,6 +51,7 @@ void BFL_textbox_action(BFL_textbox* textboxPtr)
                 if(textboxPtr->current_length >= 0)
                 {
                     textboxPtr->display_text[textboxPtr->current_length] = '\0';
+                    textboxPtr->true_text[textboxPtr->current_length] = '\0';
                     textboxPtr->current_length--;
                     textboxPtr->reDraw = SET;
                 }

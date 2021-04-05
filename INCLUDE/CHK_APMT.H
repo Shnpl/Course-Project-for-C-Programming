@@ -9,6 +9,10 @@ int CHK_APMT(char* user_ID);
 typedef struct check_appointment_struct
 {
     char user_id[50];
+    int car_province;
+    char car_licence[7];
+    char liason[50];
+    char tel[20];
 }check_appointment;
 
 #endif

@@ -22,50 +22,53 @@
 
 /* INTERNAL FUNCTION DEFINITION START */
 
-void chk_apmt_button_exit_init(BFL_button *);
-void chk_apmt_textbox_tel_init(BFL_textbox *);
-void chk_apmt_textbox_liaison_init(BFL_textbox *);
-void chk_apmt_textbox_licence_init(BFL_textbox *);
+void chk_apmt_button_exit_init(BFL_button*);
+void chk_apmt_button_confirm_init(BFL_button*);
+void chk_apmt_textbox_tel_init(BFL_textbox*);
+void chk_apmt_textbox_liaison_init(BFL_textbox*);
+void chk_apmt_textbox_licence_init(BFL_textbox*);
 
-void chk_apmt_label_province_init(BFL_label *);
+void chk_apmt_label_province_init(BFL_label*);
+void chk_apmt_label_messagebox_init(BFL_label*);
+void chk_apmt_label_debug_init(BFL_label*);
 
-void chk_apmt_button_province_01_init(BFL_button *); //¾©
-void chk_apmt_button_province_02_init(BFL_button *); //»¦
-void chk_apmt_button_province_03_init(BFL_button *); //½ò
-void chk_apmt_button_province_04_init(BFL_button *); //Óå
-void chk_apmt_button_province_05_init(BFL_button *); //ÃÉ
+void chk_apmt_button_province_01_init(BFL_button*); //¾©
+void chk_apmt_button_province_02_init(BFL_button*); //»¦
+void chk_apmt_button_province_03_init(BFL_button*); //½ò
+void chk_apmt_button_province_04_init(BFL_button*); //Óå
+void chk_apmt_button_province_05_init(BFL_button*); //ÃÉ
 
-void chk_apmt_button_province_06_init(BFL_button *); //Äþ
-void chk_apmt_button_province_07_init(BFL_button *); //ÐÂ
-void chk_apmt_button_province_08_init(BFL_button *); //²Ø
-void chk_apmt_button_province_09_init(BFL_button *); //¹ð
-void chk_apmt_button_province_10_init(BFL_button *); //ºÚ
+void chk_apmt_button_province_06_init(BFL_button*); //Äþ
+void chk_apmt_button_province_07_init(BFL_button*); //ÐÂ
+void chk_apmt_button_province_08_init(BFL_button*); //²Ø
+void chk_apmt_button_province_09_init(BFL_button*); //¹ð
+void chk_apmt_button_province_10_init(BFL_button*); //ºÚ
 
-void chk_apmt_button_province_11_init(BFL_button *); //ÁÉ
-void chk_apmt_button_province_12_init(BFL_button *); //¼ª
-void chk_apmt_button_province_13_init(BFL_button *); //¼½
-void chk_apmt_button_province_14_init(BFL_button *); //Â³
-void chk_apmt_button_province_15_init(BFL_button *); //½ú
+void chk_apmt_button_province_11_init(BFL_button*); //ÁÉ
+void chk_apmt_button_province_12_init(BFL_button*); //¼ª
+void chk_apmt_button_province_13_init(BFL_button*); //¼½
+void chk_apmt_button_province_14_init(BFL_button*); //Â³
+void chk_apmt_button_province_15_init(BFL_button*); //½ú
 
-void chk_apmt_button_province_16_init(BFL_button *); //ÉÂ
-void chk_apmt_button_province_17_init(BFL_button *); //¸Ê
-void chk_apmt_button_province_18_init(BFL_button *); //Çà
-void chk_apmt_button_province_19_init(BFL_button *); //Ô¥
-void chk_apmt_button_province_20_init(BFL_button *); //Íî
+void chk_apmt_button_province_16_init(BFL_button*); //ÉÂ
+void chk_apmt_button_province_17_init(BFL_button*); //¸Ê
+void chk_apmt_button_province_18_init(BFL_button*); //Çà
+void chk_apmt_button_province_19_init(BFL_button*); //Ô¥
+void chk_apmt_button_province_20_init(BFL_button*); //Íî
 
-void chk_apmt_button_province_21_init(BFL_button *); //¶õ
-void chk_apmt_button_province_22_init(BFL_button *); //Ïæ
-void chk_apmt_button_province_23_init(BFL_button *); //ËÕ
-void chk_apmt_button_province_24_init(BFL_button *); //Õã
-void chk_apmt_button_province_25_init(BFL_button *); //¸Ó
+void chk_apmt_button_province_21_init(BFL_button*); //¶õ
+void chk_apmt_button_province_22_init(BFL_button*); //Ïæ
+void chk_apmt_button_province_23_init(BFL_button*); //ËÕ
+void chk_apmt_button_province_24_init(BFL_button*); //Õã
+void chk_apmt_button_province_25_init(BFL_button*); //¸Ó
 
-void chk_apmt_button_province_26_init(BFL_button *); //Ãö
-void chk_apmt_button_province_27_init(BFL_button *); //ÔÁ
-void chk_apmt_button_province_28_init(BFL_button *); //Çí
-void chk_apmt_button_province_29_init(BFL_button *); //´¨
-void chk_apmt_button_province_30_init(BFL_button *); //µá
+void chk_apmt_button_province_26_init(BFL_button*); //Ãö
+void chk_apmt_button_province_27_init(BFL_button*); //ÔÁ
+void chk_apmt_button_province_28_init(BFL_button*); //Çí
+void chk_apmt_button_province_29_init(BFL_button*); //´¨
+void chk_apmt_button_province_30_init(BFL_button*); //µá
 
-void chk_apmt_button_province_31_init(BFL_button *); //¹ó
+void chk_apmt_button_province_31_init(BFL_button*); //¹ó
 
 /* INTERNAL FUNCTION DEFINITION END */
 
@@ -77,10 +80,12 @@ int CHK_APMT(char *user_ID)
     int page = _CHK_APMT;
     check_appointment check_appointment_handle;
     BFL_button button_exit;
+    BFL_button button_confirm;
     BFL_textbox textbox_tel;
     BFL_textbox textbox_liaison;
     BFL_textbox textbox_licence;
     BFL_label label_province;
+    BFL_label label_messagebox;
 
     BFL_button button_province_01;
     BFL_button button_province_02;
@@ -131,13 +136,20 @@ int CHK_APMT(char *user_ID)
     /* COMPONENTS INIT START */
     memset(check_appointment_handle.user_id, 0, 50);
     strcpy(check_appointment_handle.user_id, user_ID);
+    check_appointment_handle.car_province = -1;
+    memset(check_appointment_handle.car_licence,0,7);
+    memset(check_appointment_handle.liason,0,50);
+    memset(check_appointment_handle.tel,0,20);
 
     chk_apmt_button_exit_init(&button_exit);
+    chk_apmt_button_confirm_init(&button_confirm);
     chk_apmt_textbox_tel_init(&textbox_tel);
     chk_apmt_textbox_liaison_init(&textbox_liaison);
     chk_apmt_textbox_licence_init(&textbox_licence);
+    
 
     chk_apmt_label_province_init(&label_province);
+    chk_apmt_label_messagebox_init(&label_messagebox);
 
     chk_apmt_button_province_01_init(&button_province_01);
     chk_apmt_button_province_02_init(&button_province_02);
@@ -219,12 +231,14 @@ int CHK_APMT(char *user_ID)
         /* ACTION START */
         BFL_mouse_action();
         BFL_button_action(&button_exit);
+        BFL_button_action(&button_confirm);
 
         BFL_textbox_action(&textbox_tel);
         BFL_textbox_action(&textbox_liaison);
         BFL_textbox_action(&textbox_licence);
 
         BFL_label_action(&label_province);
+        BFL_label_action(&label_messagebox);
 
         {
             BFL_button_action(&button_province_01);
@@ -275,30 +289,35 @@ int CHK_APMT(char *user_ID)
             strcpy(label_province.display_text, "¾©");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 1;
         }
         if (button_province_02.status == PRESS)
         {
             strcpy(label_province.display_text, "»¦");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 2;
         }
         if (button_province_03.status == PRESS)
         {
             strcpy(label_province.display_text, "½ò");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 3;
         }
         if (button_province_04.status == PRESS)
         {
             strcpy(label_province.display_text, "Óå");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 4;
         }
         if (button_province_05.status == PRESS)
         {
             strcpy(label_province.display_text, "ÃÉ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 5;
         }
 
         if (button_province_06.status == PRESS)
@@ -306,30 +325,35 @@ int CHK_APMT(char *user_ID)
             strcpy(label_province.display_text, "Äþ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 6;
         }
         if (button_province_07.status == PRESS)
         {
             strcpy(label_province.display_text, "ÐÂ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 7;
         }
         if (button_province_08.status == PRESS)
         {
             strcpy(label_province.display_text, "²Ø");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 8;
         }
         if (button_province_09.status == PRESS)
         {
             strcpy(label_province.display_text, "¹ð");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 9;
         }
         if (button_province_10.status == PRESS)
         {
             strcpy(label_province.display_text, "ºÚ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 10;
         }
 
         if (button_province_11.status == PRESS)
@@ -337,30 +361,36 @@ int CHK_APMT(char *user_ID)
             strcpy(label_province.display_text, "ÁÉ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 11;
         }
         if (button_province_12.status == PRESS)
         {
             strcpy(label_province.display_text, "¼ª");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 12;
         }
         if (button_province_13.status == PRESS)
         {
             strcpy(label_province.display_text, "¼½");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 13;
         }
         if (button_province_14.status == PRESS)
         {
             strcpy(label_province.display_text, "Â³");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 14;
         }
         if (button_province_15.status == PRESS)
         {
             strcpy(label_province.display_text, "½ú");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 15;
+            
         }
 
         if (button_province_16.status == PRESS)
@@ -368,30 +398,35 @@ int CHK_APMT(char *user_ID)
             strcpy(label_province.display_text, "ÉÂ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 16;
         }
         if (button_province_17.status == PRESS)
         {
             strcpy(label_province.display_text, "¸Ê");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 17;
         }
         if (button_province_18.status == PRESS)
         {
             strcpy(label_province.display_text, "Çà");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 18;
         }
         if (button_province_19.status == PRESS)
         {
             strcpy(label_province.display_text, "Ô¥");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 19;
         }
         if (button_province_20.status == PRESS)
         {
             strcpy(label_province.display_text, "Íî");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 20;
         }
 
         if (button_province_21.status == PRESS)
@@ -399,30 +434,35 @@ int CHK_APMT(char *user_ID)
             strcpy(label_province.display_text, "¶õ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 21;
         }
         if (button_province_22.status == PRESS)
         {
             strcpy(label_province.display_text, "Ïæ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 22;
         }
         if (button_province_23.status == PRESS)
         {
             strcpy(label_province.display_text, "ËÕ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 23;
         }
         if (button_province_24.status == PRESS)
         {
             strcpy(label_province.display_text, "Õã");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 24;
         }
         if (button_province_25.status == PRESS)
         {
             strcpy(label_province.display_text, "¸Ó");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 25;
         }
 
         if (button_province_26.status == PRESS)
@@ -430,36 +470,42 @@ int CHK_APMT(char *user_ID)
             strcpy(label_province.display_text, "Ãö");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 26;
         }
         if (button_province_27.status == PRESS)
         {
             strcpy(label_province.display_text, "ÔÁ");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 27;
         }
         if (button_province_28.status == PRESS)
         {
             strcpy(label_province.display_text, "Çí");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 28;
         }
         if (button_province_29.status == PRESS)
         {
             strcpy(label_province.display_text, "´¨");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 29;
         }
         if (button_province_30.status == PRESS)
         {
             strcpy(label_province.display_text, "µá");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 30;
         }
         if (button_province_31.status == PRESS)
         {
             strcpy(label_province.display_text, "¹ó");
             label_province.word_length = 1;
             label_province.reDraw = SET;
+            check_appointment_handle.car_province = 31;
         }
         }
         
@@ -468,16 +514,46 @@ int CHK_APMT(char *user_ID)
             page = _VEH_ADMI;
             break;
         }
+        strcpy(check_appointment_handle.car_licence,textbox_licence.true_text);
+
+        
+        
+        if(button_confirm.status == PRESS)
+        {
+            setcolor(BROWN);
+            
+            outtextxy(0,300,check_appointment_handle.car_licence);
+            if(check_appointment_handle.car_province == -1)
+            {
+                strcpy(label_messagebox.display_text,"Î´ÊäÈëÊ¡·Ý£¡");
+                label_messagebox.word_length = 6;
+                label_messagebox.reDraw = SET;
+            }
+            else if(strlen(check_appointment_handle.car_licence) != 6)
+            {
+                strcpy(label_messagebox.display_text,"³µÅÆÊäÈë´íÎó£¡");
+                label_messagebox.word_length = 7;
+                label_messagebox.reDraw = SET;
+            }
+            else
+            {
+                strcpy(label_messagebox.display_text,"Ô¤Ô¼³É¹¦£¡");
+                label_messagebox.word_length = 5;
+                label_messagebox.reDraw = SET;
+            }
+        }
 
         /*CODE END*/
 
         /* REDRAW START */
         BFL_button_draw(&button_exit);
+        BFL_button_draw(&button_confirm);
         BFL_textbox_draw(&textbox_tel);
         BFL_textbox_draw(&textbox_liaison);
         BFL_textbox_draw(&textbox_licence);
 
         BFL_label_draw(&label_province);
+        BFL_label_draw(&label_messagebox);
 
         {
             BFL_button_draw(&button_province_01);
@@ -556,6 +632,38 @@ void chk_apmt_button_exit_init(BFL_button *buttonPtr)
 
     buttonPtr->status = REST;
 }
+
+void chk_apmt_button_confirm_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = RED;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = YELLOW;
+    buttonPtr->color_shadow = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 410;
+    buttonPtr->position_top = 400;
+    buttonPtr->position_right = 500;
+    buttonPtr->position_bottom = 450;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+    buttonPtr->position_text_left = buttonPtr->position_left + 15;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text, "È·ÈÏ");
+    buttonPtr->text_length = 2;
+
+    buttonPtr->status = REST;
+}
+
+
 
 void chk_apmt_textbox_tel_init(BFL_textbox *textboxPtr)
 {
@@ -666,6 +774,20 @@ void chk_apmt_label_province_init(BFL_label *labelPtr)
     labelPtr->position_right = 350;
     labelPtr->position_bottom = 60;
     labelPtr->size = 16;
+    memset(labelPtr->display_text, 0, 51);
+    labelPtr->reDraw = RESET;
+}
+
+void chk_apmt_label_messagebox_init(BFL_label *labelPtr)
+{
+    labelPtr->color_box = YELLOW;
+    labelPtr->color_text = RED;
+
+    labelPtr->position_left = 230;
+    labelPtr->position_top = 340;
+    labelPtr->position_right = 500;
+    labelPtr->position_bottom = 390;
+    labelPtr->size = 32;
     memset(labelPtr->display_text, 0, 51);
     labelPtr->reDraw = RESET;
 }
