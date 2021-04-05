@@ -14,10 +14,18 @@ typedef struct BFL_label_struct{
     int position_top;
     int position_right;
     int position_bottom;
+
+    int position_text_left;
+    int position_text_top;
+
+
     int size;
+    int en_size;//英文状态下的大小
 
     char display_text[51];
     int word_length;
+    int display_type; //中文 0 ;英文与数字 1
+    
     //int letter_distance;
 
     int reDraw;

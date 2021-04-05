@@ -9,6 +9,7 @@
 	],
 	"settings": {
 		"files.associations": {
+			"*.C": "c",
 			"string": "c",
 			"MOUSE.C": "c",
 			"MAIN.C": "c",
@@ -44,7 +45,8 @@
 			"string_view": "c",
 			"initializer_list": "c",
 			"utility": "c",
-			"tempCodeRunnerFile.C": "c"
+			"tempCodeRunnerFile.C": "c",
+			"LABEL.H": "cpp"
 		},
 		"files.encoding": "gb2312",
 		"diffEditor.codeLens": true,

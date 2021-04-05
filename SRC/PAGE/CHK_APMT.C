@@ -30,7 +30,10 @@ void chk_apmt_textbox_licence_init(BFL_textbox*);
 
 void chk_apmt_label_province_init(BFL_label*);
 void chk_apmt_label_messagebox_init(BFL_label*);
-void chk_apmt_label_debug_init(BFL_label*);
+void chk_apmt_label_year_init(BFL_label*);
+
+void chk_apmt_button_year_plus_init(BFL_button*);
+void chk_apmt_button_year_minus_init(BFL_button*);
 
 void chk_apmt_button_province_01_init(BFL_button*); //京
 void chk_apmt_button_province_02_init(BFL_button*); //沪
@@ -78,6 +81,10 @@ int CHK_APMT(char *user_ID)
     /* DEFINITION START */
 
     int page = _CHK_APMT;
+    int i=0;
+    int year = 2021;
+    //int j=0;
+    int tel_OK = 1;
     check_appointment check_appointment_handle;
     BFL_button button_exit;
     BFL_button button_confirm;
@@ -86,6 +93,10 @@ int CHK_APMT(char *user_ID)
     BFL_textbox textbox_licence;
     BFL_label label_province;
     BFL_label label_messagebox;
+    BFL_label label_year;
+
+    BFL_button button_year_plus;
+    BFL_button button_year_minus;
 
     BFL_button button_province_01;
     BFL_button button_province_02;
@@ -150,7 +161,10 @@ int CHK_APMT(char *user_ID)
 
     chk_apmt_label_province_init(&label_province);
     chk_apmt_label_messagebox_init(&label_messagebox);
+    chk_apmt_label_year_init(&label_year);
 
+    chk_apmt_button_year_plus_init(&button_year_plus);
+    chk_apmt_button_year_minus_init(&button_year_minus);
     chk_apmt_button_province_01_init(&button_province_01);
     chk_apmt_button_province_02_init(&button_province_02);
     chk_apmt_button_province_03_init(&button_province_03);
@@ -239,7 +253,10 @@ int CHK_APMT(char *user_ID)
 
         BFL_label_action(&label_province);
         BFL_label_action(&label_messagebox);
+        BFL_label_action(&label_year);
 
+        BFL_button_action(&button_year_plus);
+        BFL_button_action(&button_year_minus);
         {
             BFL_button_action(&button_province_01);
             BFL_button_action(&button_province_02);
@@ -514,6 +531,28 @@ int CHK_APMT(char *user_ID)
             page = _VEH_ADMI;
             break;
         }
+        if(button_year_plus.status == PRESS)
+        {
+            if(year < 2025)
+            {
+                year++;
+                 itoa(year,label_year.display_text,10);
+                delay(150);
+                label_year.reDraw = SET;
+            }
+            
+        }
+        if(button_year_minus.status == PRESS)
+        {
+            if(year > 2021)
+            {
+                year--;
+                itoa(year,label_year.display_text,10);
+                delay(150);
+                label_year.reDraw = SET;
+            }
+        }
+
         strcpy(check_appointment_handle.car_licence,textbox_licence.true_text);
         strcpy(check_appointment_handle.liason,textbox_liaison.true_text);
         strcpy(check_appointment_handle.tel,textbox_tel.true_text);
@@ -526,6 +565,23 @@ int CHK_APMT(char *user_ID)
             outtextxy(0,200,check_appointment_handle.car_licence);
 	        outtextxy(0,240,check_appointment_handle.liason);
 	        outtextxy(0,280,check_appointment_handle.tel);
+
+            tel_OK = SET;
+            if(strlen(check_appointment_handle.tel) != 11)
+            {
+                tel_OK = RESET;
+            }
+            else
+            {
+                for(i = 0;i < 11;i++)
+                {
+                    if(*((check_appointment_handle.tel)+i)< '0' ||*((check_appointment_handle.tel)+i) > '9')
+                    {
+                        tel_OK =RESET;
+                    }
+                }
+            }
+
             if(check_appointment_handle.car_province == -1)
             {
                 strcpy(label_messagebox.display_text,"未输入省份！");
@@ -536,6 +592,12 @@ int CHK_APMT(char *user_ID)
             {
                 strcpy(label_messagebox.display_text,"车牌输入错误！");
                 label_messagebox.word_length = 7;
+                label_messagebox.reDraw = SET;
+            }
+	        else if(tel_OK == RESET)
+            {
+                strcpy(label_messagebox.display_text,"联系电话输入错误！");
+                label_messagebox.word_length = 9;
                 label_messagebox.reDraw = SET;
             }
             else
@@ -557,7 +619,10 @@ int CHK_APMT(char *user_ID)
 
         BFL_label_draw(&label_province);
         BFL_label_draw(&label_messagebox);
+        BFL_label_draw(&label_year);
 
+        BFL_button_draw(&button_year_plus);
+        BFL_button_draw(&button_year_minus);
         {
             BFL_button_draw(&button_province_01);
             BFL_button_draw(&button_province_02);
@@ -776,8 +841,13 @@ void chk_apmt_label_province_init(BFL_label *labelPtr)
     labelPtr->position_top = 40;
     labelPtr->position_right = 350;
     labelPtr->position_bottom = 60;
+
+    labelPtr->position_text_left = labelPtr->position_left;
+    labelPtr->position_text_top = labelPtr->position_top;
+
     labelPtr->size = 16;
     memset(labelPtr->display_text, 0, 51);
+    labelPtr->display_type = 0;
     labelPtr->reDraw = RESET;
 }
 
@@ -790,11 +860,84 @@ void chk_apmt_label_messagebox_init(BFL_label *labelPtr)
     labelPtr->position_top = 340;
     labelPtr->position_right = 500;
     labelPtr->position_bottom = 390;
+
+    labelPtr->position_text_left = labelPtr->position_left;
+    labelPtr->position_text_top = labelPtr->position_top;
     labelPtr->size = 32;
     memset(labelPtr->display_text, 0, 51);
+    labelPtr->display_type = 0;
     labelPtr->reDraw = RESET;
 }
+void chk_apmt_label_year_init(BFL_label* labelPtr)
+{
+    labelPtr->color_box = LIGHTGRAY;
+    labelPtr->color_text = YELLOW;
 
+    labelPtr->position_left = 330;
+    labelPtr->position_top = 260;
+    labelPtr->position_right = 405;
+    labelPtr->position_bottom = 285;
+
+    labelPtr->position_text_left = labelPtr->position_left + 5;
+    labelPtr->position_text_top = labelPtr->position_top +5;
+    
+    labelPtr->size = 16;
+    labelPtr->word_length=4;
+    memset(labelPtr->display_text, 0, 51);
+    strcpy(labelPtr->display_text,"2021");
+    labelPtr->display_type = 1;
+    labelPtr->en_size =2;
+    labelPtr->reDraw = SET;
+}
+void chk_apmt_button_year_plus_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = LIGHTGRAY;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 410;
+    buttonPtr->position_top = 252;
+    buttonPtr->position_right = 426;
+    buttonPtr->position_bottom = 268;
+
+    buttonPtr->is_shadow_enable = RESET;
+   
+    buttonPtr->position_text_left = buttonPtr->position_left ;
+    buttonPtr->position_text_top = buttonPtr->position_top ;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "＋");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_button_year_minus_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = LIGHTGRAY;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 410;
+    buttonPtr->position_top = 272;
+    buttonPtr->position_right = 426;
+    buttonPtr->position_bottom = 288;
+
+    buttonPtr->is_shadow_enable = RESET;
+   
+    buttonPtr->position_text_left = buttonPtr->position_left ;
+    buttonPtr->position_text_top = buttonPtr->position_top ;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "－");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
 void chk_apmt_button_province_01_init(BFL_button *buttonPtr)
 {
     buttonPtr->color_rest = LIGHTGRAY;

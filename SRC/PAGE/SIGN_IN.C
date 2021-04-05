@@ -374,7 +374,11 @@ void label_1_init(BFL_label* labelPtr)
     labelPtr->position_top = 300;
     labelPtr->position_right = 500;
     labelPtr->position_bottom = 350;
+
+    labelPtr->position_text_left = labelPtr->position_left;
+    labelPtr->position_text_top = labelPtr->position_top;
     labelPtr->size = 32;
+    labelPtr->display_type = 0;
     memset(labelPtr->display_text,0,51);
     labelPtr->reDraw = RESET;
 }

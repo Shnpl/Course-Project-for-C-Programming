@@ -87,7 +87,8 @@ int INITIAL()
             break;
         }
         if(button_exit.status == PRESS)
-        {
+	{
+	    closegraph();
             exit(0);
         }
         if(button_test.status == PRESS)

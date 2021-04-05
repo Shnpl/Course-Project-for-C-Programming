@@ -280,6 +280,8 @@ char get_ch()
         case 0x5230:
             return_char = '0';
             break;
+
+            
         case 0x1E41:
             return_char = 'A';
             break;

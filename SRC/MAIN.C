@@ -33,43 +33,43 @@ void main()
 
     while(1)
     {
-        switch (page)
-        {
-        case _TEST:
-            page = TEST(user_ID);
-            break;
-        case _INITIAL:
-            page = INITIAL();
-            break;
-        case _SIGN_IN:
-            page = SIGN_IN();
-            break;
-        case _LOGIN:
-            page = LOGIN(user_ID);
-            break; 
-        case _MAIN_PAGE:
-            page = MAIN_PAGE(user_ID);
-            break; 
-        case _MY_INFO:
-            page = MY_INFO(user_ID);  
-            break;
-        case _CAR_SERV:
-            page = CAR_SERV(user_ID);
-            break;
-        case _CAR_INSU:
-            page = CAR_INSU(user_ID);
-            break;
-        case _VEH_ADMI:
-            page = VEH_ADMI(user_ID);
-            break;
-        case _CHK_APMT:
-            page = CHK_APMT(user_ID);
-            break;
-        default:
-            break;
-        }
+	switch (page)
+	{
+	case _TEST:
+	    page = TEST(user_ID);
+	    break;
+	case _INITIAL:
+	    page = INITIAL();
+	    break;
+	case _SIGN_IN:
+	    page = SIGN_IN();
+	    break;
+	case _LOGIN:
+	    page = LOGIN(user_ID);
+	    break;
+	case _MAIN_PAGE:
+	    page = MAIN_PAGE(user_ID);
+	    break;
+	case _MY_INFO:
+	    page = MY_INFO(user_ID);
+	    break;
+	case _CAR_SERV:
+	    page = CAR_SERV(user_ID);
+	    break;
+	case _CAR_INSU:
+	    page = CAR_INSU(user_ID);
+	    break;
+	case _VEH_ADMI:
+	    page = VEH_ADMI(user_ID);
+	    break;
+	case _CHK_APMT:
+	    page = CHK_APMT(user_ID);
+	    break;
+	default:
+	    break;
+	}
     }
 
-    closegraph();
+
 
 }
