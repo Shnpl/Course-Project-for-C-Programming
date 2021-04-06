@@ -93,6 +93,8 @@ int CHK_APMT(char *user_ID)
     int year = 2021;
     int month = 4;
     int day = 25;
+    FILE* chk_apmt_file = NULL;
+    int file_write_OK = RESET;
     //int j=0;
     int tel_OK = SET;
     int appointment_OK = SET; 
@@ -754,11 +756,24 @@ int CHK_APMT(char *user_ID)
                 appointment_OK = RESET;
             }
             
-            if(appointment_OK == SET)
+            if(appointment_OK == SET && file_write_OK == RESET)
             {
-                strcpy(label_messagebox.display_text,"预约成功！");
-                label_messagebox.word_length = 5;
-                label_messagebox.reDraw = SET;
+                if((chk_apmt_file =fopen("./FILE/CHK_APMT.TXT","at+")) == NULL)
+                {
+                    outtextxy(0,0,"FILE ERROR");
+                }
+                else
+                {
+                    fwrite(&check_appointment_handle,sizeof(check_appointment_handle),1,chk_apmt_file);
+                    fclose(chk_apmt_file);
+                    strcpy(label_messagebox.display_text,"预约成功！");
+                    label_messagebox.word_length = 5;
+                    label_messagebox.reDraw = SET;
+                    file_write_OK = SET;
+                    
+                    page = _VEH_ADMI;
+                }
+                
             }
         }
 
