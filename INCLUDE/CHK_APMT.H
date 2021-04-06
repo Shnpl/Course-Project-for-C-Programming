@@ -13,6 +13,10 @@ typedef struct check_appointment_struct
     char car_licence[7];
     char liason[50];
     char tel[20];
+
+    int year;
+    int month;
+    int day;
 }check_appointment;
 
 #endif

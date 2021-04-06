@@ -9,7 +9,7 @@
 #include "INCLUDE/GENERAL.H"
 #include "INCLUDE/PINYIN.H"
 //临时注释：输入法框放在左下角，左边位置0，上360，右边300，下480
-
+char get_ch_pinyin(void);
 void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
 {
     char get_char;
@@ -24,7 +24,7 @@ void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
     if (pinyinPtr->is_in_the_box == 1)
     {
 	mouse_enable = 0;
-	get_char = get_ch();
+	get_char = get_ch_pinyin();
 	pinyinPtr->reDraw = RESET;
 	// pinyinPtr->cursor_count++;
 	/*

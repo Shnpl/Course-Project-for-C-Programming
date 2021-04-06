@@ -226,6 +226,7 @@ void textbox_user_name_init(BFL_textbox* textboxPtr)
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 10;
     textboxPtr->is_secret = RESET;
+    textboxPtr->mode = 0;
     BFL_textbox_draw(textboxPtr);
     
     textboxPtr->reDraw = RESET;
@@ -260,6 +261,7 @@ void textbox_user_code_init(BFL_textbox* textboxPtr)
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 10;
     textboxPtr->is_secret = SET;
+    textboxPtr->mode = 0;
     BFL_textbox_draw(textboxPtr);
     
     textboxPtr->reDraw = RESET;
@@ -293,6 +295,7 @@ void textbox_user_code_repeat_init(BFL_textbox* textboxPtr)
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 10;
     textboxPtr->is_secret = SET;
+    textboxPtr->mode = 0;
     BFL_textbox_draw(textboxPtr);
     
     textboxPtr->reDraw = RESET;

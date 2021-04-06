@@ -36,6 +36,7 @@ typedef struct BFL_textbox_struct{
     int word_length;
     int letter_distance;
     int is_secret ;
+    int mode; //0:大小写均可 1:全部输出为小写 2：全部输出为大写
 	//int cursor_count;
     int is_in_the_box;
     int reDraw;

@@ -31,9 +31,17 @@ void chk_apmt_textbox_licence_init(BFL_textbox*);
 void chk_apmt_label_province_init(BFL_label*);
 void chk_apmt_label_messagebox_init(BFL_label*);
 void chk_apmt_label_year_init(BFL_label*);
+void chk_apmt_label_month_init(BFL_label*);
+void chk_apmt_label_day_init(BFL_label*);
 
 void chk_apmt_button_year_plus_init(BFL_button*);
 void chk_apmt_button_year_minus_init(BFL_button*);
+
+void chk_apmt_button_month_plus_init(BFL_button*);
+void chk_apmt_button_month_minus_init(BFL_button*);
+
+void chk_apmt_button_day_plus_init(BFL_button*);
+void chk_apmt_button_day_minus_init(BFL_button*);
 
 void chk_apmt_button_province_01_init(BFL_button*); //京
 void chk_apmt_button_province_02_init(BFL_button*); //沪
@@ -83,8 +91,11 @@ int CHK_APMT(char *user_ID)
     int page = _CHK_APMT;
     int i=0;
     int year = 2021;
+    int month = 4;
+    int day = 25;
     //int j=0;
-    int tel_OK = 1;
+    int tel_OK = SET;
+    int appointment_OK = SET; 
     check_appointment check_appointment_handle;
     BFL_button button_exit;
     BFL_button button_confirm;
@@ -94,9 +105,17 @@ int CHK_APMT(char *user_ID)
     BFL_label label_province;
     BFL_label label_messagebox;
     BFL_label label_year;
+    BFL_label label_month;
+    BFL_label label_day;
 
     BFL_button button_year_plus;
     BFL_button button_year_minus;
+
+    BFL_button button_month_plus;
+    BFL_button button_month_minus;
+
+    BFL_button button_day_plus;
+    BFL_button button_day_minus;
 
     BFL_button button_province_01;
     BFL_button button_province_02;
@@ -151,6 +170,10 @@ int CHK_APMT(char *user_ID)
     memset(check_appointment_handle.car_licence,0,7);
     memset(check_appointment_handle.liason,0,50);
     memset(check_appointment_handle.tel,0,20);
+    check_appointment_handle.year = 2021;
+    check_appointment_handle.month = 4;
+    check_appointment_handle.day = 25;
+ 
 
     chk_apmt_button_exit_init(&button_exit);
     chk_apmt_button_confirm_init(&button_confirm);
@@ -161,10 +184,19 @@ int CHK_APMT(char *user_ID)
 
     chk_apmt_label_province_init(&label_province);
     chk_apmt_label_messagebox_init(&label_messagebox);
+    
     chk_apmt_label_year_init(&label_year);
-
     chk_apmt_button_year_plus_init(&button_year_plus);
     chk_apmt_button_year_minus_init(&button_year_minus);
+    
+    chk_apmt_label_month_init(&label_month);
+    chk_apmt_button_month_plus_init(&button_month_plus);
+    chk_apmt_button_month_minus_init(&button_month_minus);
+
+    chk_apmt_label_day_init(&label_day);
+    chk_apmt_button_day_plus_init(&button_day_plus);
+    chk_apmt_button_day_minus_init(&button_day_minus);
+
     chk_apmt_button_province_01_init(&button_province_01);
     chk_apmt_button_province_02_init(&button_province_02);
     chk_apmt_button_province_03_init(&button_province_03);
@@ -254,9 +286,17 @@ int CHK_APMT(char *user_ID)
         BFL_label_action(&label_province);
         BFL_label_action(&label_messagebox);
         BFL_label_action(&label_year);
+        BFL_label_action(&label_month);
+        BFL_label_action(&label_day);
 
         BFL_button_action(&button_year_plus);
         BFL_button_action(&button_year_minus);
+
+        BFL_button_action(&button_month_plus);
+        BFL_button_action(&button_month_minus);
+
+        BFL_button_action(&button_day_plus);
+        BFL_button_action(&button_day_minus);
         {
             BFL_button_action(&button_province_01);
             BFL_button_action(&button_province_02);
@@ -533,7 +573,7 @@ int CHK_APMT(char *user_ID)
         }
         if(button_year_plus.status == PRESS)
         {
-            if(year < 2025)
+            if(year < 2023)
             {
                 year++;
                  itoa(year,label_year.display_text,10);
@@ -553,20 +593,122 @@ int CHK_APMT(char *user_ID)
             }
         }
 
+        if(button_month_plus.status == PRESS)
+        {
+            if(month < 12)
+            {
+                month++;
+                itoa(month,label_month.display_text,10);
+                delay(150);
+                label_month.reDraw = SET;
+            }
+            
+            if(month == 2 && day > 28)
+            {
+                day = 28;
+                itoa(day,label_day.display_text,10);
+                label_day.reDraw = SET;
+            }
+            if((month == 4||month == 6||month == 9||month == 11) && day > 30 )
+            {
+                day = 30;
+                itoa(day,label_day.display_text,10);
+                label_day.reDraw = SET;
+            }
+        }
+        if(button_month_minus.status == PRESS)
+        {
+            if(month > 1)
+            {
+                itoa(day,label_day.display_text,10);
+                delay(150);
+                label_day.reDraw = SET;
+
+                month--;
+                itoa(month,label_month.display_text,10);
+                delay(150);
+                label_month.reDraw = SET;
+            }
+
+            if(month == 2 && day > 28)
+            {
+                day = 28;
+                itoa(day,label_day.display_text,10);
+                label_day.reDraw = SET;
+            }
+            if((month == 4||month == 6||month == 9||month == 11) && day > 30 )
+            {
+                day = 30;
+                itoa(day,label_day.display_text,10);
+                label_day.reDraw = SET;
+            }
+        }
+
+        if(button_day_plus.status == PRESS)
+        {
+            if(month == 2)
+            {
+                if(day < 28)
+                {
+                    day++;
+                    itoa(day,label_day.display_text,10);
+                    delay(150);
+                    label_day.reDraw = SET;
+                }
+            }
+            if(month == 1||month == 3||month ==5||month == 7||month == 8||month == 10||month == 12)
+            {
+                if(day < 31)
+                {
+                    day++;
+                    itoa(day,label_day.display_text,10);
+                    delay(150);
+                    label_day.reDraw = SET;
+                }
+            }
+            if(month == 4||month == 6||month == 9||month == 11)
+            {
+                if(day < 30)
+                {
+                    day++;
+                    itoa(day,label_day.display_text,10);
+                    delay(150);
+                    label_day.reDraw = SET;
+                }
+            }       
+            
+        }
+        if(button_day_minus.status == PRESS)
+        {
+            if(day > 1)
+            {
+                day--;
+                itoa(day,label_day.display_text,10);
+                delay(150);
+                label_day.reDraw = SET;
+            }
+        }
+
         strcpy(check_appointment_handle.car_licence,textbox_licence.true_text);
         strcpy(check_appointment_handle.liason,textbox_liaison.true_text);
         strcpy(check_appointment_handle.tel,textbox_tel.true_text);
-        
+        check_appointment_handle.year = year;
+        check_appointment_handle.month = month;
+        check_appointment_handle.day = day;
+
         
         if(button_confirm.status == PRESS)
         {
-            setcolor(BROWN);
             
-            outtextxy(0,200,check_appointment_handle.car_licence);
-	        outtextxy(0,240,check_appointment_handle.liason);
-	        outtextxy(0,280,check_appointment_handle.tel);
+            
+            //下面的几行是debug时候用到的
+            //setcolor(BROWN);
+            //outtextxy(0,200,check_appointment_handle.car_licence);
+	        //outtextxy(0,240,check_appointment_handle.liason);
+	        //outtextxy(0,280,check_appointment_handle.tel);
 
             tel_OK = SET;
+            appointment_OK = SET;
             if(strlen(check_appointment_handle.tel) != 11)
             {
                 tel_OK = RESET;
@@ -578,29 +720,41 @@ int CHK_APMT(char *user_ID)
                     if(*((check_appointment_handle.tel)+i)< '0' ||*((check_appointment_handle.tel)+i) > '9')
                     {
                         tel_OK =RESET;
+                        break;//?
                     }
                 }
             }
 
+            if(strlen(check_appointment_handle.liason) == 0)
+            {
+                strcpy(label_messagebox.display_text,"联系人不能为空！");
+                label_messagebox.word_length = 8;
+                label_messagebox.reDraw = SET;
+                appointment_OK = RESET;
+            }
             if(check_appointment_handle.car_province == -1)
             {
                 strcpy(label_messagebox.display_text,"未输入省份！");
                 label_messagebox.word_length = 6;
                 label_messagebox.reDraw = SET;
+                appointment_OK = RESET;
             }
-            else if(strlen(check_appointment_handle.car_licence) != 6)
+            if(strlen(check_appointment_handle.car_licence) != 6)
             {
                 strcpy(label_messagebox.display_text,"车牌输入错误！");
                 label_messagebox.word_length = 7;
                 label_messagebox.reDraw = SET;
+                appointment_OK = RESET;
             }
-	        else if(tel_OK == RESET)
+	        if(tel_OK == RESET)
             {
                 strcpy(label_messagebox.display_text,"联系电话输入错误！");
                 label_messagebox.word_length = 9;
                 label_messagebox.reDraw = SET;
+                appointment_OK = RESET;
             }
-            else
+            
+            if(appointment_OK == SET)
             {
                 strcpy(label_messagebox.display_text,"预约成功！");
                 label_messagebox.word_length = 5;
@@ -620,9 +774,18 @@ int CHK_APMT(char *user_ID)
         BFL_label_draw(&label_province);
         BFL_label_draw(&label_messagebox);
         BFL_label_draw(&label_year);
+        BFL_label_draw(&label_month);
+        BFL_label_draw(&label_day);
 
         BFL_button_draw(&button_year_plus);
         BFL_button_draw(&button_year_minus);
+
+        BFL_button_draw(&button_month_plus);
+        BFL_button_draw(&button_month_minus);
+
+        BFL_button_draw(&button_day_plus);
+        BFL_button_draw(&button_day_minus);
+
         {
             BFL_button_draw(&button_province_01);
             BFL_button_draw(&button_province_02);
@@ -761,6 +924,7 @@ void chk_apmt_textbox_tel_init(BFL_textbox *textboxPtr)
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 11;
     textboxPtr->is_secret = RESET;
+    textboxPtr->mode = 0;
     BFL_textbox_draw(textboxPtr);
 
     textboxPtr->reDraw = RESET;
@@ -794,6 +958,7 @@ void chk_apmt_textbox_liaison_init(BFL_textbox *textboxPtr)
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 11;
     textboxPtr->is_secret = RESET;
+    textboxPtr->mode = 0;
     BFL_textbox_draw(textboxPtr);
 
     textboxPtr->reDraw = RESET;
@@ -827,6 +992,7 @@ void chk_apmt_textbox_licence_init(BFL_textbox *textboxPtr)
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 6;
     textboxPtr->is_secret = RESET;
+    textboxPtr->mode = 2;
     BFL_textbox_draw(textboxPtr);
 
     textboxPtr->reDraw = RESET;
@@ -868,6 +1034,7 @@ void chk_apmt_label_messagebox_init(BFL_label *labelPtr)
     labelPtr->display_type = 0;
     labelPtr->reDraw = RESET;
 }
+
 void chk_apmt_label_year_init(BFL_label* labelPtr)
 {
     labelPtr->color_box = LIGHTGRAY;
@@ -913,7 +1080,6 @@ void chk_apmt_button_year_plus_init(BFL_button *buttonPtr)
 
     buttonPtr->status = REST;
 }
-
 void chk_apmt_button_year_minus_init(BFL_button *buttonPtr)
 {
     buttonPtr->color_rest = LIGHTGRAY;
@@ -938,6 +1104,147 @@ void chk_apmt_button_year_minus_init(BFL_button *buttonPtr)
 
     buttonPtr->status = REST;
 }
+
+void chk_apmt_label_month_init(BFL_label* labelPtr)
+{
+    labelPtr->color_box = LIGHTGRAY;
+    labelPtr->color_text = YELLOW;
+
+    labelPtr->position_left = 430;
+    labelPtr->position_top = 260;
+    labelPtr->position_right = 470;
+    labelPtr->position_bottom = 285;
+
+    labelPtr->position_text_left = labelPtr->position_left + 5;
+    labelPtr->position_text_top = labelPtr->position_top +5;
+    
+    labelPtr->size = 16;
+    labelPtr->word_length=4;
+    memset(labelPtr->display_text, 0, 51);
+    strcpy(labelPtr->display_text,"4");
+    labelPtr->display_type = 1;
+    labelPtr->en_size =2;
+    labelPtr->reDraw = SET;
+}
+void chk_apmt_button_month_plus_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = LIGHTGRAY;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 475;
+    buttonPtr->position_top = 252;
+    buttonPtr->position_right = 491;
+    buttonPtr->position_bottom = 268;
+
+    buttonPtr->is_shadow_enable = RESET;
+   
+    buttonPtr->position_text_left = buttonPtr->position_left ;
+    buttonPtr->position_text_top = buttonPtr->position_top ;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "＋");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+void chk_apmt_button_month_minus_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = LIGHTGRAY;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 475;
+    buttonPtr->position_top = 272;
+    buttonPtr->position_right = 491;
+    buttonPtr->position_bottom = 288;
+
+    buttonPtr->is_shadow_enable = RESET;
+   
+    buttonPtr->position_text_left = buttonPtr->position_left ;
+    buttonPtr->position_text_top = buttonPtr->position_top ;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "－");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
+void chk_apmt_label_day_init(BFL_label* labelPtr)
+{
+    labelPtr->color_box = LIGHTGRAY;
+    labelPtr->color_text = YELLOW;
+
+    labelPtr->position_left = 495;
+    labelPtr->position_top = 260;
+    labelPtr->position_right = 535;
+    labelPtr->position_bottom = 285;
+
+    labelPtr->position_text_left = labelPtr->position_left + 5;
+    labelPtr->position_text_top = labelPtr->position_top +5;
+    
+    labelPtr->size = 16;
+    labelPtr->word_length=4;
+    memset(labelPtr->display_text, 0, 51);
+    strcpy(labelPtr->display_text,"25");
+    labelPtr->display_type = 1;
+    labelPtr->en_size =2;
+    labelPtr->reDraw = SET;
+}
+void chk_apmt_button_day_plus_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = LIGHTGRAY;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 540;
+    buttonPtr->position_top = 252;
+    buttonPtr->position_right = 556;
+    buttonPtr->position_bottom = 268;
+
+    buttonPtr->is_shadow_enable = RESET;
+   
+    buttonPtr->position_text_left = buttonPtr->position_left ;
+    buttonPtr->position_text_top = buttonPtr->position_top ;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "＋");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+void chk_apmt_button_day_minus_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = LIGHTGRAY;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 540;
+    buttonPtr->position_top = 272;
+    buttonPtr->position_right = 556;
+    buttonPtr->position_bottom = 288;
+
+    buttonPtr->is_shadow_enable = RESET;
+   
+    buttonPtr->position_text_left = buttonPtr->position_left ;
+    buttonPtr->position_text_top = buttonPtr->position_top ;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "－");
+    buttonPtr->text_length = 1;
+
+    buttonPtr->status = REST;
+}
+
 void chk_apmt_button_province_01_init(BFL_button *buttonPtr)
 {
     buttonPtr->color_rest = LIGHTGRAY;

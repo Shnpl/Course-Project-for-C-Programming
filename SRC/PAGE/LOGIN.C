@@ -209,6 +209,7 @@ void login_textbox_user_name_init(BFL_textbox* textboxPtr)
     *(textboxPtr->display_text) = '\0';
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 10;
+    textboxPtr->mode = 0;
     textboxPtr->is_secret = RESET;
     BFL_textbox_draw(textboxPtr);
     
@@ -242,6 +243,7 @@ void login_textbox_user_code_init(BFL_textbox* textboxPtr)
     *(textboxPtr->true_text) = '\0';
     textboxPtr->word_length = 10;
     textboxPtr->is_secret = SET;
+    textboxPtr->mode = 0;
     BFL_textbox_draw(textboxPtr);
     
     textboxPtr->reDraw = RESET;
