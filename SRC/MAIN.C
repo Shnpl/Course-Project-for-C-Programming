@@ -16,6 +16,7 @@
 #include"INCLUDE/CAR_INSU.H"
 #include"INCLUDE/VEH_ADMI.H"
 #include"INCLUDE/CHK_APMT.H"
+#include"INCLUDE/MY_SERV.H"
 
 #include"INCLUDE/GENERAL.H"
 
@@ -65,6 +66,9 @@ void main()
 	case _CHK_APMT:
 	    page = CHK_APMT(user_ID);
 	    break;
+	case _MY_SERV:
+		page = MY_SERV(user_ID);
+		break;
 	default:
 	    break;
 	}

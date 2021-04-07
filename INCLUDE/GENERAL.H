@@ -23,6 +23,7 @@
 #define _CAR_INSU 6
 #define _VEH_ADMI 7
 #define _CHK_APMT 8
+#define _MY_SERV 9
 /* µÇÂ¼Óë×¢²á user ½á¹¹ */
 typedef struct user_struct
 {

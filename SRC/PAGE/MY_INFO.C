@@ -87,7 +87,7 @@ int MY_INFO(char* user_ID)
     /* DRAW END */
 
     /*WHILE*/
-    while (page == 4)
+    while (page == _MY_INFO)
     {
         /*ACTION START*/
         BFL_mouse_action();
@@ -104,12 +104,16 @@ int MY_INFO(char* user_ID)
 	    /*CODE START*/
         if(button_exit.status == PRESS)
         {
-            page = 0;
+            page = _INITIAL;
             break;
         }
         if(button_car_service.status == PRESS)
         {
             page = _CAR_SERV;
+        }
+        if(button_my_service_page.status == PRESS)
+        {
+            page = _MY_SERV;
         }
 	    /*CODE END*/
 
