@@ -94,6 +94,13 @@ int CHK_APMT(char *user_ID)
     int month = 4;
     int day = 25;
     FILE* chk_apmt_file = NULL;
+    FILE* ID_file =NULL;
+    
+    char temp_ID[20]={'\0'};
+    char rand_ID[20]={'\0'};
+    int ID_OK = SET;
+ 
+
     int file_write_OK = RESET;
     //int j=0;
     int tel_OK = SET;
@@ -758,19 +765,49 @@ int CHK_APMT(char *user_ID)
             
             if(appointment_OK == SET && file_write_OK == RESET)
             {
+                if((ID_file=fopen("./FILE/ID.TXT","at+")) == NULL)
+                {
+                    outtextxy(0,0,"ID.TXT FILE ERROR");
+                }
+                
+                do
+                {
+                    ID_OK = SET;
+                    itoa(rand(),rand_ID,10);
+                    
+                    while(!feof(ID_file))
+                        {
+                            if((fread(temp_ID,sizeof(temp_ID),1,ID_file)) == 0)
+                            {
+                                break;
+                            }
+                            if(strcmp(temp_ID,rand_ID) == 0)
+                            {
+                                ID_OK = RESET;
+                                rewind(ID_file);
+                                break;
+                            }
+                        }
+                } while (ID_OK == RESET);
+                fwrite(rand_ID,sizeof(rand_ID),1,ID_file);
+                fclose(ID_file);
+                strcpy(check_appointment_handle.ID,rand_ID);
+                setcolor(BROWN);
+                outtextxy(0,0,rand_ID);
                 if((chk_apmt_file =fopen("./FILE/CHK_APMT.TXT","at+")) == NULL)
                 {
-                    outtextxy(0,0,"FILE ERROR");
+                    outtextxy(0,0,"CHK_APMT.TXT FILE ERROR");
                 }
                 else
                 {
+
                     fwrite(&check_appointment_handle,sizeof(check_appointment_handle),1,chk_apmt_file);
                     fclose(chk_apmt_file);
                     strcpy(label_messagebox.display_text,"Ô¤Ô¼³É¹¦£¡");
                     label_messagebox.word_length = 5;
                     label_messagebox.reDraw = SET;
                     file_write_OK = SET;
-                    
+                   
                     page = _VEH_ADMI;
                 }
                 

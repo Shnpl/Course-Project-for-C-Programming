@@ -9,8 +9,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"*.C": "c",
 			"string": "c",
+			"*.C": "c",
 			"MOUSE.C": "c",
 			"MAIN.C": "c",
 			"BFL_MOUSE.C": "c",
@@ -46,7 +46,10 @@
 			"initializer_list": "c",
 			"utility": "c",
 			"tempCodeRunnerFile.C": "c",
-			"LABEL.H": "cpp"
+			"LABEL.H": "cpp",
+			"*.tcc": "cpp",
+			"cstdlib": "cpp",
+			"memory": "cpp"
 		},
 		"files.encoding": "gb2312",
 		"diffEditor.codeLens": true,

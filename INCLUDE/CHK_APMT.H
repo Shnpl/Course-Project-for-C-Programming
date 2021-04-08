@@ -16,6 +16,7 @@ typedef struct check_appointment_struct
     int year;
     int month;
     int day;
+    char ID[20];
 }check_appointment;
 
 #endif

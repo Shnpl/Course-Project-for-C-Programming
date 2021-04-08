@@ -169,7 +169,6 @@ int SIGN_IN()
                     label_1.word_length = 5;
                     label_1.reDraw = SET;
                     page = 0;
-                    break;
 
                 }
             }

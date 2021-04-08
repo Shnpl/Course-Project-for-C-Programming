@@ -2,6 +2,7 @@
 #include <STDIO.H>
 #include <GRAPHICS.H>
 #include <STDLIB.H>
+#include<MALLOC.H>
 #include <DOS.H>
 #include <STRING.H>
 #include <BIOS.H>
@@ -18,12 +19,34 @@
 
 /*OTHER INCLUDES START*/
 #include "INCLUDE/MY_SERV.H"
+#include"INCLUDE/CHK_APMT.H"
 /*OTHER INCLUDES END*/
 
 /* INTERNAL FUNCTION DEFINITION START */
 
 void my_serv_button_exit_init(BFL_button*);
 void my_serv_button_delete_init(BFL_button*);
+struct CHK_APMT_node;
+typedef struct CHK_APMT_node* CHK_APMT_node_ptr;
+typedef CHK_APMT_node_ptr CHK_APMT_position;
+typedef CHK_APMT_node_ptr CHK_APMT_list;
+
+//struct main_linklist_node;
+//typedef struct main_linklist_node* main_linklist_ptr;
+//typedef main_linklist_ptr main_linklist_position;
+//typedef main_linklist_ptr main_linklist_list;
+
+//struct main_linklist_node
+//{
+//
+//}
+
+struct CHK_APMT_node
+{
+    check_appointment check_appointment_node;
+    CHK_APMT_position next;
+};
+
 
 /* INTERNAL FUNCTION DEFINITION END */
 
@@ -36,6 +59,18 @@ int MY_SERV(char *user_ID)
     
     BFL_button button_exit;
     BFL_button button_delete;
+
+    int check_appointment_count = 0;
+    FILE* check_appointment_file;
+
+    CHK_APMT_list CHK_APMT_HEAD = (CHK_APMT_list)malloc(sizeof(struct CHK_APMT_node));
+    CHK_APMT_position CHK_APMT_READ_PTR = CHK_APMT_HEAD;
+
+    char debug1[50]={'\0'};
+    char debug2[50]={'\0'};
+    char debug3[50]={'\0'};
+    
+
     
     /* DEFINITION END */
 
@@ -47,8 +82,57 @@ int MY_SERV(char *user_ID)
     /* DEVICE AND MOUSE INIT END */
 
     /* COMPONENTS INIT START */
+    if(CHK_APMT_HEAD == NULL)
+    {
+        outtextxy(0,0,"MEMORY ERROR");
+    }
+    CHK_APMT_HEAD->next = NULL;
+    
+    if((check_appointment_file =fopen("./FILE/CHK_APMT.TXT","at+")) == NULL)
+    {
+        outtextxy(0,0,"FILE ERROR");
+    }
+
+    while(!feof(check_appointment_file))
+    {
+        CHK_APMT_READ_PTR->next = malloc(sizeof(struct CHK_APMT_node));
+        if(CHK_APMT_READ_PTR->next == NULL)
+        {
+            outtextxy(0,0,"MEMORY ERROR");
+        }
+        if((fread(&(CHK_APMT_READ_PTR->next->check_appointment_node),sizeof(check_appointment),1,check_appointment_file)) == 0)
+        {
+            free(CHK_APMT_READ_PTR->next);
+            CHK_APMT_READ_PTR->next = NULL;
+            break;
+        } 
+        if(strcmp(CHK_APMT_READ_PTR->next->check_appointment_node.user_id,user_ID) == 0)
+        {
+            CHK_APMT_READ_PTR = CHK_APMT_READ_PTR->next;
+            CHK_APMT_READ_PTR->next = NULL;
+            check_appointment_count++;
+        }
+        else
+        {
+            free(CHK_APMT_READ_PTR->next);
+            CHK_APMT_READ_PTR->next = NULL;
+        }
+        
+    }
+    fclose(check_appointment_file);
+    
+    outtextxy(0,200,CHK_APMT_READ_PTR->check_appointment_node.tel);
+    //itoa((int)CHK_APMT_READ_PTR,debug1,16);// once used in debug
+    //itoa((int)CHK_APMT_HEAD->next,debug2,16);
+    itoa(check_appointment_count,debug3,10);
+    
+    //outtextxy(0,240,debug1);
+    //outtextxy(0,280,debug2);
+    outtextxy(0,320,debug3);
+
     my_serv_button_exit_init(&button_exit);
     my_serv_button_delete_init(&button_delete);
+
     /* COMPONENTS INIT END */
 
     /* DRAW START */
@@ -75,13 +159,12 @@ int MY_SERV(char *user_ID)
         /* ACTION END */
 
         /*CODE START*/
+        
         if (button_exit.status == PRESS)
         {
             page = _VEH_ADMI;
             break;
         }
-       
-
         /*CODE END*/
 
         /* REDRAW START */
