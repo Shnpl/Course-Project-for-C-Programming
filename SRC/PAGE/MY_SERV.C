@@ -18,7 +18,7 @@
 /*BFL INCLUDES END*/
 
 /*OTHER INCLUDES START*/
-#include "INCLUDE/MY_SERV.H"
+#include"INCLUDE/MY_SERV.H"
 #include"INCLUDE/CHK_APMT.H"
 /*OTHER INCLUDES END*/
 
@@ -26,6 +26,14 @@
 
 void my_serv_button_exit_init(BFL_button*);
 void my_serv_button_delete_init(BFL_button*);
+
+void my_serv_button_up_init(BFL_button*);
+void my_serv_button_down_init(BFL_button*);
+
+void my_serv_button_next_init(BFL_button*);
+void my_serv_button_prev_init(BFL_button*);
+
+
 struct CHK_APMT_node;
 typedef struct CHK_APMT_node* CHK_APMT_node_ptr;
 typedef CHK_APMT_node_ptr CHK_APMT_position;
@@ -65,6 +73,11 @@ int MY_SERV(char *user_ID)
     
     BFL_button button_exit;
     BFL_button button_delete;
+
+    BFL_button button_up;
+    BFL_button button_down;
+    BFL_button button_prev;
+    BFL_button button_next;
 
     int check_appointment_count = 0;
     FILE* check_appointment_file;
@@ -176,6 +189,13 @@ int MY_SERV(char *user_ID)
     my_serv_button_exit_init(&button_exit);
     my_serv_button_delete_init(&button_delete);
 
+    my_serv_button_up_init(&button_up);
+    my_serv_button_down_init(&button_down);
+
+    my_serv_button_prev_init(&button_prev);
+    my_serv_button_next_init(&button_next);
+
+
     /* COMPONENTS INIT END */
 
     /* DRAW START */
@@ -188,18 +208,44 @@ int MY_SERV(char *user_ID)
     CHN_print(20, 20, "我的", 48, 48, RED, 2);
     CHN_print(20, 70, "服务", 48, 48, RED, 2);
 
+    setfillstyle(SOLID_FILL,DARKGRAY);
+    bar(150+5,25+5,605+5,380+5);
+    
+    setfillstyle(SOLID_FILL,DARKGRAY);
+    bar(150,25,605,55);
+
+    setfillstyle(SOLID_FILL,LIGHTGRAY);
+    bar(150,55,605,380);
+
+    setfillstyle(SOLID_FILL,WHITE);
+    bar(153,28,155,377);
+    bar(153,28,602,30);
+    bar(600,28,602,377);
+    bar(153,375,602,377);
+    //setfillstyle(SOLID_FILL,CYAN);
+    //bar(150,25,525,380);
+    CHN_print(160,35,"服务ＩＤ",16,16,YELLOW,4);
+    CHN_print(240,35,"服务类型",16,16,YELLOW,4);
+    CHN_print(320,35,"服务信息",16,16,YELLOW,4);
+    CHN_print(520,35,"服务状态",16,16,YELLOW,4);
+
 
     /* DRAW END */
 
     /*WHILE*/
     while (page == _MY_SERV)
     {
-        /* ACTION START */
-        BFL_mouse_action();
-        BFL_button_action(&button_exit);
-        BFL_button_action(&button_delete);
+        /* REDRAW START */
+        BFL_button_draw(&button_exit);
+        BFL_button_draw(&button_delete);
+        BFL_button_draw(&button_up);
+        BFL_button_draw(&button_down);
 
-        /* ACTION END */
+        BFL_button_draw(&button_prev);
+        BFL_button_draw(&button_next);
+
+        BFL_mouse_draw();
+        /* REDRAW END */
 
         /*CODE START*/
         
@@ -210,12 +256,18 @@ int MY_SERV(char *user_ID)
         }
         /*CODE END*/
 
-        /* REDRAW START */
-        BFL_button_draw(&button_exit);
-        BFL_button_draw(&button_delete);
+        /* ACTION START */
+        BFL_mouse_action();
+
+        BFL_button_action(&button_exit);
+        BFL_button_action(&button_delete);
         
-        BFL_mouse_draw();
-        /* REDRAW  END */
+        BFL_button_action(&button_up);
+        BFL_button_action(&button_down);
+
+        BFL_button_action(&button_prev);
+        BFL_button_action(&button_next);
+        /* ACTION  END */
     }
 
     delay(200); //防止下一页面的按钮因为按下鼠标的时长而误操作
@@ -261,9 +313,9 @@ void my_serv_button_delete_init(BFL_button *buttonPtr)
 
     buttonPtr->reDraw_status = SET;
 
-    buttonPtr->position_left = 150;
+    buttonPtr->position_left = 30;
     buttonPtr->position_top = 400;
-    buttonPtr->position_right = 240;
+    buttonPtr->position_right = 140;
     buttonPtr->position_bottom = 450;
 
     buttonPtr->is_shadow_enable = SET;
@@ -278,6 +330,126 @@ void my_serv_button_delete_init(BFL_button *buttonPtr)
 
     strcpy(buttonPtr->display_text, "删除");
     buttonPtr->text_length = 2;
+
+    buttonPtr->status = REST;
+}
+
+void my_serv_button_up_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = CYAN;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = YELLOW;
+    buttonPtr->color_shadow = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 160;
+    buttonPtr->position_top = 400;
+    buttonPtr->position_right = 250;
+    buttonPtr->position_bottom = 421;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+    buttonPtr->position_text_left = buttonPtr->position_left + 27;
+    buttonPtr->position_text_top = buttonPtr->position_top +3;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "向上");
+    buttonPtr->text_length = 2;
+
+    buttonPtr->status = REST;
+}
+
+void my_serv_button_down_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = CYAN;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = YELLOW;
+    buttonPtr->color_shadow = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 160;
+    buttonPtr->position_top = 429;
+    buttonPtr->position_right = 250;
+    buttonPtr->position_bottom = 450;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+    buttonPtr->position_text_left = buttonPtr->position_left + 27;
+    buttonPtr->position_text_top = buttonPtr->position_top +3;
+    buttonPtr->text_size = 16;
+
+    strcpy(buttonPtr->display_text, "向下");
+    buttonPtr->text_length = 2;
+
+    buttonPtr->status = REST;
+}
+
+void my_serv_button_prev_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = RED;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = YELLOW;
+    buttonPtr->color_shadow = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 270;
+    buttonPtr->position_top = 400;
+    buttonPtr->position_right = 375;
+    buttonPtr->position_bottom = 450;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+    buttonPtr->position_text_left = buttonPtr->position_left + 2;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text, "上一页");
+    buttonPtr->text_length = 3;
+
+    buttonPtr->status = REST;
+}
+
+void my_serv_button_next_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = RED;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = YELLOW;
+    buttonPtr->color_shadow = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 390;
+    buttonPtr->position_top = 400;
+    buttonPtr->position_right = 495;
+    buttonPtr->position_bottom = 450;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+    buttonPtr->position_text_left = buttonPtr->position_left + 2;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text, "下一页");
+    buttonPtr->text_length = 3;
 
     buttonPtr->status = REST;
 }

@@ -6,5 +6,6 @@
 返回：int page 跳转页面值 
 */
 int MY_SERV(char* user_ID);
+//struct MY__LIST
 
 #endif
