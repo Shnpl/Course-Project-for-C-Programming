@@ -77,11 +77,11 @@ int MY_INFO(char* user_ID)
     setfillstyle(1,RED);
     bar(595,400,640,460);//按钮的边
 
-    CHN_print(22,21,"我的",48,48,DARKGRAY,2);
-    CHN_print(22,71,"信息",48,48,DARKGRAY,2);
+    CHN_print(22,21,"我的",48,DARKGRAY);
+    CHN_print(22,71,"信息",48,DARKGRAY);
 
-    CHN_print(20,20,"我的",48,48,RED,2);
-    CHN_print(20,70,"信息",48,48,RED,2);
+    CHN_print(20,20,"我的",48,RED);
+    CHN_print(20,70,"信息",48,RED);
 
 
     /* DRAW END */
@@ -158,7 +158,6 @@ void my_info_button_car_service_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"汽车服务");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -188,7 +187,6 @@ void my_info_button_other_insurance_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"其他保险");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -217,7 +215,6 @@ void my_info_button_exit_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"退出");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -247,7 +244,6 @@ void my_info_button_my_insurance_policy_page_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"我的保单");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -277,7 +273,6 @@ void my_info_button_my_service_page_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"我的服务");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }

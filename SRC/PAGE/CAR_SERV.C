@@ -78,11 +78,11 @@ int CAR_SERV(char* user_ID)
     setfillstyle(1,RED);
     bar(595,400,640,460);//按钮的边
 
-    CHN_print(22,21,"汽车",48,48,DARKGRAY,2);
-    CHN_print(22,71,"服务",48,48,DARKGRAY,2);
+    CHN_print(22,21,"汽车",48,DARKGRAY);
+    CHN_print(22,71,"服务",48,DARKGRAY);
 
-    CHN_print(20,20,"汽车",48,48,RED,2);
-    CHN_print(20,70,"服务",48,48,RED,2);
+    CHN_print(20,20,"汽车",48,RED);
+    CHN_print(20,70,"服务",48,RED);
 
     setfillstyle(SOLID_FILL,DARKGRAY);
     bar(170+5,400+5,315+5,460+5);
@@ -177,7 +177,6 @@ void car_serv_button_other_insurance_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"其他保险");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -206,7 +205,6 @@ void car_serv_button_exit_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"退出");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -235,7 +233,6 @@ void car_serv_button_my_info_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 48;
 
     strcpy(buttonPtr->display_text,"我的");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -264,7 +261,6 @@ void car_serv_button_car_insurance_page_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"车险服务");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -293,7 +289,6 @@ void car_serv_button_car_maintenance_page_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"用车养车");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -322,7 +317,6 @@ void car_serv_button_car_roadside_assistance_page_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"道路帮助");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -351,7 +345,6 @@ void car_serv_button_car_vehicle_administration_page_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"交管服务");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }

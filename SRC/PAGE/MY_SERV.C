@@ -202,15 +202,15 @@ int MY_SERV(char *user_ID)
     setfillstyle(1, LIGHTGRAY);
     bar(0, 420, 640, 480);
 
-    CHN_print(22, 21, "我的", 48, 48, DARKGRAY, 2);
-    CHN_print(22, 71, "服务", 48, 48, DARKGRAY, 2);
+    CHN_print(22, 21, "我的", 48, DARKGRAY);
+    CHN_print(22, 71, "服务", 48, DARKGRAY);
 
-    CHN_print(20, 20, "我的", 48, 48, RED, 2);
-    CHN_print(20, 70, "服务", 48, 48, RED, 2);
+    CHN_print(20, 20, "我的", 48, RED);
+    CHN_print(20, 70, "服务", 48, RED);
 
     setfillstyle(SOLID_FILL,DARKGRAY);
     bar(150+5,25+5,605+5,380+5);
-    
+
     setfillstyle(SOLID_FILL,DARKGRAY);
     bar(150,25,605,55);
 
@@ -224,10 +224,10 @@ int MY_SERV(char *user_ID)
     bar(153,375,602,377);
     //setfillstyle(SOLID_FILL,CYAN);
     //bar(150,25,525,380);
-    CHN_print(160,35,"服务ＩＤ",16,16,YELLOW,4);
-    CHN_print(240,35,"服务类型",16,16,YELLOW,4);
-    CHN_print(320,35,"服务信息",16,16,YELLOW,4);
-    CHN_print(520,35,"服务状态",16,16,YELLOW,4);
+    CHN_print(160,35,"服务ID",16,YELLOW);
+    CHN_print(240,35,"服务类型",16,YELLOW);
+    CHN_print(320,35,"服务信息",16,YELLOW);
+    CHN_print(520,35,"服务状态",16,YELLOW);
 
 
     /* DRAW END */
@@ -299,7 +299,6 @@ void my_serv_button_exit_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "退出");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -329,7 +328,6 @@ void my_serv_button_delete_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "删除");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -359,7 +357,6 @@ void my_serv_button_up_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "向上");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -389,7 +386,6 @@ void my_serv_button_down_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "向下");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -419,7 +415,6 @@ void my_serv_button_prev_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "上一页");
-    buttonPtr->text_length = 3;
 
     buttonPtr->status = REST;
 }
@@ -449,7 +444,52 @@ void my_serv_button_next_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "下一页");
-    buttonPtr->text_length = 3;
 
     buttonPtr->status = REST;
 }
+/*
+page = 0;
+item = 1;
+
+void list_draw(my_list* listPtr)
+{
+    int i=0;
+    int page;
+    int y_now = listPtr->position_top+5;
+    int x_now = listPtr->position_left+5;
+    main_linklist_position draw_main_linklist_ptr = listPtr->main_list->next;
+    if(draw_main_linklist_ptr == NULL)
+    {
+	return;
+    }
+    if(listPtr == RESET)
+    {
+	return;
+    }
+
+    setfillstyle(SOLID_FILL,listPtr->color_box);
+    bar(listPtr->position_left,listPtr->position_top,listPtr->position_right,listPtr->position_bottom);
+
+    listPtr->page= (listPtr->item -1) / 10;
+    while( i < page * 10)
+    {
+	draw_main_linklist_ptr = draw_main_linklist_ptr->next;
+    }
+
+    while(draw_main_linklist_ptr != listPtr->main_read_ptr)
+    {
+	outtextxy(x_now,y_now,draw_main_linklist_ptr->ID);
+
+	CHN_print(,35,"服务类型",16,16,YELLOW);
+    CHN_print(320,35,"服务信息",16,16,YELLOW);
+    CHN_print(520,35,"服务状态",16,16,YELLOW);
+
+    }
+
+
+
+
+
+
+
+}*/

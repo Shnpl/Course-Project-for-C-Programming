@@ -33,7 +33,10 @@ int TEST(char *user_ID)
     /* DEFINITION START */
 
     int page = -1;
-
+    // char test[6]="aa°¡";
+    // int test1=0;
+    // char test2[10];
+    // char test3[2]={'\0'};
     BFL_button button_exit;
     BFL_pinyin pinyin_0;
 
@@ -52,10 +55,20 @@ int TEST(char *user_ID)
     test_pinyin_0_init(&pinyin_0);
 
     /* COMPONENTS INIT END */
-
+    //16ÏñËØ¶ÔÓ¦2ºÅ
+    //24 ¶ÔÓ¦ 3
+    //32 4
+    //48 6
     /* DRAW START */
     setfillstyle(1, LIGHTGRAY);
-    bar(0, 420, 640, 480);
+    bar(0,420, 640, 480);
+    CHN_print(0,0,"°¡123ACB¹þ¹þDaaaAa",16,RED);
+    // test3[0] = test[4];
+    // test1 = (int)test3[0];
+    // itoa(test1,test2,10);
+    // outtextxy(0,20,test2);
+    //settextstyle(0,0,6);
+    //outtextxy(0,0,"AB");
 
     /* DRAW END */
 
@@ -134,7 +147,6 @@ void test_button_exit_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "ÍË³ö");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }

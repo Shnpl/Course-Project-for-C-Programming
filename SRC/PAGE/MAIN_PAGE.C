@@ -72,7 +72,7 @@ int MAIN_PAGE(char* user_ID)
     
 
 
-    CHN_print(150,120,"用车就上好车主！",48,48,LIGHTRED,8);
+    CHN_print(150,120,"用车就上好车主！",48,LIGHTRED);
     setfillstyle(1,LIGHTRED);
     bar(400,200,490,205);
     bar(420,220,490,225);
@@ -152,7 +152,6 @@ void main_page_button_car_service_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"汽车服务");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -182,7 +181,6 @@ void main_page_button_other_insurance_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"其他保险");
-    buttonPtr->text_length = 4;
 
     buttonPtr->status = REST;
 }
@@ -211,7 +209,6 @@ void main_page_button_exit_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"退出");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -240,7 +237,6 @@ void main_page_button_my_info_init(BFL_button* buttonPtr )
     buttonPtr->text_size = 48;
 
     strcpy(buttonPtr->display_text,"我的");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }

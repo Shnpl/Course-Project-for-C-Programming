@@ -27,7 +27,6 @@ typedef struct BFL_button_struct
     int position_shadow_bottom;
 
     char display_text[51];
-    int text_length;
     
     int status;//×ó¼üµ¥»÷ PRESS (1) ÓÒ¼üµ¥»÷2,Î´µã»÷HOVER (0)
 } BFL_button;

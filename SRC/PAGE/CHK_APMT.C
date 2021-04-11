@@ -249,31 +249,31 @@ int CHK_APMT(char *user_ID)
     setfillstyle(1, LIGHTGRAY);
     bar(0, 420, 640, 480);
 
-    CHN_print(22, 21, "预约", 48, 48, DARKGRAY, 2);
-    CHN_print(22, 71, "年检", 48, 48, DARKGRAY, 2);
+    CHN_print(22, 21, "预约", 48,  DARKGRAY);
+    CHN_print(22, 71, "年检", 48,  DARKGRAY);
 
-    CHN_print(20, 20, "预约", 48, 48, RED, 2);
-    CHN_print(20, 70, "年检", 48, 48, RED, 2);
+    CHN_print(20, 20, "预约", 48, RED);
+    CHN_print(20, 70, "年检", 48, RED);
 
-    CHN_print(140, 40, "请输入预约车辆号牌：", 16, 16, RED, 10);
-    CHN_print(124, 60, "（暂时仅支持大陆地区）", 16, 16, RED, 11);
+    CHN_print(140, 40, "请输入预约车辆号牌：", 16,RED);
+    CHN_print(124, 60, "（暂时仅支持大陆地区）", 16, RED);
 
-    CHN_print(188, 160, "请输入联系人：", 16, 16, RED, 7);
-    CHN_print(172, 220, "请输入联系电话：", 16, 16, RED, 8);
-    CHN_print(220, 260, "预约时间：", 16, 16, RED, 5);
-    CHN_print(220, 300, "预约地点：", 16, 16, RED, 5);
+    CHN_print(188, 160, "请输入联系人：", 16,RED);
+    CHN_print(172, 220, "请输入联系电话：", 16,RED);
+    CHN_print(220, 260, "预约时间：", 16,RED);
+    CHN_print(220, 300, "预约地点：", 16,RED);
     setfillstyle(1, DARKGRAY);
     bar(330, 295, 470, 320);
-    CHN_print(380, 300, "自动", 16, 16, YELLOW, 2);
+    CHN_print(380, 300, "自动", 16,YELLOW);
 
-    CHN_print(20, 350, "费用（代办费）：", 16, 16, RED, 8);
-    CHN_print(20, 380, "（不含年检费用）", 16, 16, RED, 8);
+    CHN_print(20, 350, "费用（代办费）：", 16,RED);
+    CHN_print(20, 380, "（不含年检费用）", 16,RED);
     setfillstyle(1, DARKGRAY);
     bar(144, 345, 200, 370);
     setcolor(YELLOW);
     settextstyle(0, 0, 1);
     outtextxy(150, 355, "100");
-    CHN_print(180, 350, "元", 16, 16, YELLOW, 1);
+    CHN_print(180, 350, "元", 16, YELLOW);
 
     setfillstyle(SOLID_FILL,LIGHTGRAY);
     bar(325,35,350,60);
@@ -353,35 +353,30 @@ int CHK_APMT(char *user_ID)
         {if (button_province_01.status == PRESS)
         {
             strcpy(label_province.display_text, "京");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 1;
         }
         if (button_province_02.status == PRESS)
         {
             strcpy(label_province.display_text, "沪");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 2;
         }
         if (button_province_03.status == PRESS)
         {
             strcpy(label_province.display_text, "津");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 3;
         }
         if (button_province_04.status == PRESS)
         {
             strcpy(label_province.display_text, "渝");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 4;
         }
         if (button_province_05.status == PRESS)
         {
             strcpy(label_province.display_text, "蒙");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 5;
         }
@@ -389,35 +384,30 @@ int CHK_APMT(char *user_ID)
         if (button_province_06.status == PRESS)
         {
             strcpy(label_province.display_text, "宁");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 6;
         }
         if (button_province_07.status == PRESS)
         {
             strcpy(label_province.display_text, "新");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 7;
         }
         if (button_province_08.status == PRESS)
         {
             strcpy(label_province.display_text, "藏");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 8;
         }
         if (button_province_09.status == PRESS)
         {
             strcpy(label_province.display_text, "桂");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 9;
         }
         if (button_province_10.status == PRESS)
         {
             strcpy(label_province.display_text, "黑");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 10;
         }
@@ -425,35 +415,30 @@ int CHK_APMT(char *user_ID)
         if (button_province_11.status == PRESS)
         {
             strcpy(label_province.display_text, "辽");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 11;
         }
         if (button_province_12.status == PRESS)
         {
             strcpy(label_province.display_text, "吉");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 12;
         }
         if (button_province_13.status == PRESS)
         {
             strcpy(label_province.display_text, "冀");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 13;
         }
         if (button_province_14.status == PRESS)
         {
             strcpy(label_province.display_text, "鲁");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 14;
         }
         if (button_province_15.status == PRESS)
         {
             strcpy(label_province.display_text, "晋");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 15;
             
@@ -462,35 +447,30 @@ int CHK_APMT(char *user_ID)
         if (button_province_16.status == PRESS)
         {
             strcpy(label_province.display_text, "陕");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 16;
         }
         if (button_province_17.status == PRESS)
         {
             strcpy(label_province.display_text, "甘");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 17;
         }
         if (button_province_18.status == PRESS)
         {
             strcpy(label_province.display_text, "青");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 18;
         }
         if (button_province_19.status == PRESS)
         {
             strcpy(label_province.display_text, "豫");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 19;
         }
         if (button_province_20.status == PRESS)
         {
             strcpy(label_province.display_text, "皖");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 20;
         }
@@ -498,35 +478,30 @@ int CHK_APMT(char *user_ID)
         if (button_province_21.status == PRESS)
         {
             strcpy(label_province.display_text, "鄂");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 21;
         }
         if (button_province_22.status == PRESS)
         {
             strcpy(label_province.display_text, "湘");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 22;
         }
         if (button_province_23.status == PRESS)
         {
             strcpy(label_province.display_text, "苏");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 23;
         }
         if (button_province_24.status == PRESS)
         {
             strcpy(label_province.display_text, "浙");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 24;
         }
         if (button_province_25.status == PRESS)
         {
             strcpy(label_province.display_text, "赣");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 25;
         }
@@ -534,42 +509,36 @@ int CHK_APMT(char *user_ID)
         if (button_province_26.status == PRESS)
         {
             strcpy(label_province.display_text, "闽");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 26;
         }
         if (button_province_27.status == PRESS)
         {
             strcpy(label_province.display_text, "粤");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 27;
         }
         if (button_province_28.status == PRESS)
         {
             strcpy(label_province.display_text, "琼");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 28;
         }
         if (button_province_29.status == PRESS)
         {
             strcpy(label_province.display_text, "川");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 29;
         }
         if (button_province_30.status == PRESS)
         {
             strcpy(label_province.display_text, "滇");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 30;
         }
         if (button_province_31.status == PRESS)
         {
             strcpy(label_province.display_text, "贵");
-            label_province.word_length = 1;
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 31;
         }
@@ -737,28 +706,24 @@ int CHK_APMT(char *user_ID)
             if(strlen(check_appointment_handle.liason) == 0)
             {
                 strcpy(label_messagebox.display_text,"联系人不能为空！");
-                label_messagebox.word_length = 8;
                 label_messagebox.reDraw = SET;
                 appointment_OK = RESET;
             }
             if(check_appointment_handle.car_province == -1)
             {
                 strcpy(label_messagebox.display_text,"未输入省份！");
-                label_messagebox.word_length = 6;
                 label_messagebox.reDraw = SET;
                 appointment_OK = RESET;
             }
             if(strlen(check_appointment_handle.car_licence) != 6)
             {
                 strcpy(label_messagebox.display_text,"车牌输入错误！");
-                label_messagebox.word_length = 7;
                 label_messagebox.reDraw = SET;
                 appointment_OK = RESET;
             }
 	        if(tel_OK == RESET)
             {
                 strcpy(label_messagebox.display_text,"联系电话输入错误！");
-                label_messagebox.word_length = 9;
                 label_messagebox.reDraw = SET;
                 appointment_OK = RESET;
             }
@@ -804,7 +769,6 @@ int CHK_APMT(char *user_ID)
                     fwrite(&check_appointment_handle,sizeof(check_appointment_handle),1,chk_apmt_file);
                     fclose(chk_apmt_file);
                     strcpy(label_messagebox.display_text,"预约成功！");
-                    label_messagebox.word_length = 5;
                     label_messagebox.reDraw = SET;
                     file_write_OK = SET;
                    
@@ -911,8 +875,6 @@ void chk_apmt_button_exit_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "退出");
-    buttonPtr->text_length = 2;
-
     buttonPtr->status = REST;
 }
 
@@ -941,7 +903,6 @@ void chk_apmt_button_confirm_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "确认");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -954,7 +915,7 @@ void chk_apmt_textbox_tel_init(BFL_textbox *textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
-    textboxPtr->size = 3;
+    textboxPtr->size = 16;
 
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
@@ -962,7 +923,7 @@ void chk_apmt_textbox_tel_init(BFL_textbox *textboxPtr)
 
     textboxPtr->position_left = 330;  //可修改
     textboxPtr->position_top = 210;   //可修改
-    textboxPtr->position_right = 515; //可修改
+    textboxPtr->position_right = 550; //可修改
     textboxPtr->position_bottom = textboxPtr->position_top + 30;
 
     textboxPtr->is_shadow_enable = SET;
@@ -988,7 +949,7 @@ void chk_apmt_textbox_liaison_init(BFL_textbox *textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
-    textboxPtr->size = 3;
+    textboxPtr->size = 16;
 
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
@@ -996,7 +957,7 @@ void chk_apmt_textbox_liaison_init(BFL_textbox *textboxPtr)
 
     textboxPtr->position_left = 330;  //可修改
     textboxPtr->position_top = 155;   //可修改
-    textboxPtr->position_right = 515; //可修改
+    textboxPtr->position_right = 550; //可修改
     textboxPtr->position_bottom = textboxPtr->position_top + 30;
 
     textboxPtr->is_shadow_enable = SET;
@@ -1022,7 +983,7 @@ void chk_apmt_textbox_licence_init(BFL_textbox *textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
-    textboxPtr->size = 2;
+    textboxPtr->size = 16;
 
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
@@ -1030,7 +991,7 @@ void chk_apmt_textbox_licence_init(BFL_textbox *textboxPtr)
 
     textboxPtr->position_left = 360;  //可修改
     textboxPtr->position_top = 35;   //可修改
-    textboxPtr->position_right = 455; //可修改
+    textboxPtr->position_right = 480; //可修改
     textboxPtr->position_bottom = textboxPtr->position_top + 25;
 
     textboxPtr->is_shadow_enable = SET;
@@ -1065,7 +1026,6 @@ void chk_apmt_label_province_init(BFL_label *labelPtr)
 
     labelPtr->size = 16;
     memset(labelPtr->display_text, 0, 51);
-    labelPtr->display_type = 0;
     labelPtr->reDraw = RESET;
 }
 
@@ -1083,7 +1043,6 @@ void chk_apmt_label_messagebox_init(BFL_label *labelPtr)
     labelPtr->position_text_top = labelPtr->position_top;
     labelPtr->size = 32;
     memset(labelPtr->display_text, 0, 51);
-    labelPtr->display_type = 0;
     labelPtr->reDraw = RESET;
 }
 
@@ -1101,11 +1060,8 @@ void chk_apmt_label_year_init(BFL_label* labelPtr)
     labelPtr->position_text_top = labelPtr->position_top +5;
     
     labelPtr->size = 16;
-    labelPtr->word_length=4;
     memset(labelPtr->display_text, 0, 51);
     strcpy(labelPtr->display_text,"2021");
-    labelPtr->display_type = 1;
-    labelPtr->en_size =2;
     labelPtr->reDraw = SET;
 }
 void chk_apmt_button_year_plus_init(BFL_button *buttonPtr)
@@ -1128,7 +1084,6 @@ void chk_apmt_button_year_plus_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "＋");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1152,7 +1107,6 @@ void chk_apmt_button_year_minus_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "－");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1171,11 +1125,8 @@ void chk_apmt_label_month_init(BFL_label* labelPtr)
     labelPtr->position_text_top = labelPtr->position_top +5;
     
     labelPtr->size = 16;
-    labelPtr->word_length=4;
     memset(labelPtr->display_text, 0, 51);
     strcpy(labelPtr->display_text,"4");
-    labelPtr->display_type = 1;
-    labelPtr->en_size =2;
     labelPtr->reDraw = SET;
 }
 void chk_apmt_button_month_plus_init(BFL_button *buttonPtr)
@@ -1198,7 +1149,6 @@ void chk_apmt_button_month_plus_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "＋");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1222,7 +1172,6 @@ void chk_apmt_button_month_minus_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "－");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1241,11 +1190,8 @@ void chk_apmt_label_day_init(BFL_label* labelPtr)
     labelPtr->position_text_top = labelPtr->position_top +5;
     
     labelPtr->size = 16;
-    labelPtr->word_length=4;
     memset(labelPtr->display_text, 0, 51);
     strcpy(labelPtr->display_text,"25");
-    labelPtr->display_type = 1;
-    labelPtr->en_size =2;
     labelPtr->reDraw = SET;
 }
 void chk_apmt_button_day_plus_init(BFL_button *buttonPtr)
@@ -1268,7 +1214,6 @@ void chk_apmt_button_day_plus_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "＋");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1292,7 +1237,6 @@ void chk_apmt_button_day_minus_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "－");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1322,7 +1266,6 @@ void chk_apmt_button_province_01_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "京");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1352,7 +1295,6 @@ void chk_apmt_button_province_02_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "沪");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1382,7 +1324,6 @@ void chk_apmt_button_province_03_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "津");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1412,7 +1353,6 @@ void chk_apmt_button_province_04_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "渝");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1442,7 +1382,6 @@ void chk_apmt_button_province_05_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "蒙");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1472,7 +1411,6 @@ void chk_apmt_button_province_06_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "宁");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1502,7 +1440,6 @@ void chk_apmt_button_province_07_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "新");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1532,7 +1469,6 @@ void chk_apmt_button_province_08_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "藏");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1562,7 +1498,6 @@ void chk_apmt_button_province_09_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "桂");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1592,7 +1527,6 @@ void chk_apmt_button_province_10_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "黑");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1622,7 +1556,6 @@ void chk_apmt_button_province_11_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "辽");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1652,7 +1585,6 @@ void chk_apmt_button_province_12_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "吉");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1682,7 +1614,6 @@ void chk_apmt_button_province_13_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "冀");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1712,7 +1643,6 @@ void chk_apmt_button_province_14_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "鲁");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1742,7 +1672,6 @@ void chk_apmt_button_province_15_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "晋");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1772,7 +1701,6 @@ void chk_apmt_button_province_16_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "陕");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1802,7 +1730,6 @@ void chk_apmt_button_province_17_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "甘");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1832,7 +1759,6 @@ void chk_apmt_button_province_18_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "青");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1862,7 +1788,6 @@ void chk_apmt_button_province_19_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "豫");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1892,7 +1817,6 @@ void chk_apmt_button_province_20_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "皖");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1922,7 +1846,6 @@ void chk_apmt_button_province_21_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "鄂");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1952,7 +1875,6 @@ void chk_apmt_button_province_22_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "湘");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -1982,7 +1904,6 @@ void chk_apmt_button_province_23_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "苏");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2012,7 +1933,6 @@ void chk_apmt_button_province_24_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "浙");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2042,7 +1962,6 @@ void chk_apmt_button_province_25_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "赣");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2072,7 +1991,6 @@ void chk_apmt_button_province_26_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "闽");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2102,7 +2020,6 @@ void chk_apmt_button_province_27_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "粤");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2132,7 +2049,6 @@ void chk_apmt_button_province_28_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "琼");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2162,7 +2078,6 @@ void chk_apmt_button_province_29_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "川");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2192,7 +2107,6 @@ void chk_apmt_button_province_30_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "滇");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }
@@ -2222,7 +2136,6 @@ void chk_apmt_button_province_31_init(BFL_button *buttonPtr)
     buttonPtr->text_size = 16;
 
     strcpy(buttonPtr->display_text, "贵");
-    buttonPtr->text_length = 1;
 
     buttonPtr->status = REST;
 }

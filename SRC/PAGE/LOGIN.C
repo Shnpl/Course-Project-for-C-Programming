@@ -85,14 +85,14 @@ int LOGIN(char* user_ID)
     setfillstyle(1,RED);
     bar(50,50,100,100);
 
-    CHN_print(122,52,"用户登录",48,48,LIGHTGRAY,4);
-    CHN_print(120,50,"用户登录",48,48,RED,4);
+    CHN_print(122,52,"用户登录",48,LIGHTGRAY);
+    CHN_print(120,50,"用户登录",48,RED);
 
     //CHN_print(52,152,"请输入用户名：",24,24,LIGHTGRAY,7);
-    CHN_print(50,150,"请输入用户名：",24,24,RED,7);
+    CHN_print(50,150,"请输入用户名：",24,RED);
     
     //CHN_print(52,202,"请输入密码：",24,24,LIGHTGRAY,6);
-    CHN_print(50,200,"请输入密码：",24,24,RED,6);
+    CHN_print(50,200,"请输入密码：",24,RED);
 
     /* DRAW END */
 
@@ -137,7 +137,6 @@ int LOGIN(char* user_ID)
                         fclose(user_file);
                         user_OK = SET;
                         strcpy(label_1.display_text,"登录成功！");
-                        label_1.word_length = 5;
                         label_1.reDraw = 1;
                         page = 3;
                         strcpy(user_ID,login_user.name);
@@ -150,7 +149,6 @@ int LOGIN(char* user_ID)
                     
                 
                     strcpy(label_1.display_text,"用户名或密码错误，请重试！");
-                    label_1.word_length = 13;
                     label_1.reDraw = 1;
                 }
             }
@@ -190,7 +188,7 @@ void login_textbox_user_name_init(BFL_textbox* textboxPtr)
     textboxPtr->color_shadow = DARKGRAY;
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
-    textboxPtr->size = 4;
+    textboxPtr->size = 24;
 
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
@@ -222,7 +220,7 @@ void login_textbox_user_code_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_shadow = DARKGRAY;
     textboxPtr->color_text = RED;
-    textboxPtr->size = 4;
+    textboxPtr->size = 24;
 
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
@@ -274,7 +272,6 @@ void login_button_confirm_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"确认");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -304,7 +301,6 @@ void login_button_exit_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"退出");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -329,7 +325,6 @@ void login_label_1_init(BFL_label* labelPtr)
     labelPtr->position_text_left = labelPtr->position_left;
     labelPtr->position_text_top = labelPtr->position_top;
     labelPtr->size = 32;
-    labelPtr->display_type = 0;
     memset(labelPtr->display_text,0,51);
     labelPtr->reDraw = RESET;
 }

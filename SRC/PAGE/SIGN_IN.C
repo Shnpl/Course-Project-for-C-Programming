@@ -93,11 +93,11 @@ int SIGN_IN()
     bar(55,55,105,105);
     setfillstyle(1,RED);
     bar(50,50,100,100);
-    CHN_print(120,50,"用户注册",48,48,RED,4);
+    CHN_print(120,50,"用户注册",48,RED);
 
-    CHN_print(50,150,"请输入用户名：",24,24,RED,7);
-    CHN_print(50,200,"请输入密码：",24,24,RED,6);
-    CHN_print(50,250,"请再次输入密码：",24,24,RED,8);
+    CHN_print(50,150,"请输入用户名：",24,RED);
+    CHN_print(50,200,"请输入密码：",24,RED);
+    CHN_print(50,250,"请再次输入密码：",24,RED);
 
     /* DRAW END */
 
@@ -127,7 +127,6 @@ int SIGN_IN()
             if(strcmp(sign_in_user.code,sign_in_user.codeRepeat) != 0 )
             {
                 strcpy(label_1.display_text,"两次密码不一致，请重新输入！");
-                label_1.word_length = 14;
                 label_1.reDraw = SET;
             }
             else
@@ -150,7 +149,6 @@ int SIGN_IN()
                     {
                         fclose(user_file);
                         strcpy(label_1.display_text,"用户名已被注册！");
-                        label_1.word_length = 8;
                         label_1.reDraw = SET;
                         user_OK = RESET;
                     }
@@ -166,7 +164,6 @@ int SIGN_IN()
                     file_write_OK = SET;
                     
                     strcpy(label_1.display_text,"完成注册！");
-                    label_1.word_length = 5;
                     label_1.reDraw = SET;
                     page = 0;
 
@@ -205,7 +202,7 @@ void textbox_user_name_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
-    textboxPtr->size = 4;
+    textboxPtr->size = 24;
     textboxPtr->reDraw = SET;
     // textboxPtr->cursor_count = 0;
     textboxPtr->is_in_the_box = 0;
@@ -237,7 +234,7 @@ void textbox_user_code_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
-    textboxPtr->size = 4;
+    textboxPtr->size = 24;
 
 
     textboxPtr->reDraw = SET;
@@ -271,7 +268,7 @@ void textbox_user_code_repeat_init(BFL_textbox* textboxPtr)
     //textboxPtr->color_cursor =BROWN;
     textboxPtr->color_text = RED;
     textboxPtr->color_shadow = DARKGRAY;
-    textboxPtr->size = 4;
+    textboxPtr->size = 24;
 
 
     textboxPtr->reDraw = SET;
@@ -326,7 +323,6 @@ void button_confirm_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"确认");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -356,7 +352,6 @@ void button_exit_sign_in_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"退出");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -380,7 +375,6 @@ void label_1_init(BFL_label* labelPtr)
     labelPtr->position_text_left = labelPtr->position_left;
     labelPtr->position_text_top = labelPtr->position_top;
     labelPtr->size = 32;
-    labelPtr->display_type = 0;
     memset(labelPtr->display_text,0,51);
     labelPtr->reDraw = RESET;
 }

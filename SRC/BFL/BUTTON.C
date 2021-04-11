@@ -30,10 +30,9 @@ void BFL_button_draw(BFL_button* buttonPtr)
                 CHN_print(  buttonPtr->position_text_left,
                             buttonPtr->position_text_top,
                             buttonPtr->display_text,
-                            buttonPtr->text_size,
-                            buttonPtr->text_size,
-                            buttonPtr->color_text,
-                            buttonPtr->text_length
+			                buttonPtr->text_size,
+                            buttonPtr->color_text
+
                         );
                 break;
             case HOVER:
@@ -48,9 +47,7 @@ void BFL_button_draw(BFL_button* buttonPtr)
                             buttonPtr->position_text_top,
                             buttonPtr->display_text,
                             buttonPtr->text_size,
-                            buttonPtr->text_size,
-                            buttonPtr->color_text,
-                            buttonPtr->text_length
+			                buttonPtr->color_text
                         );
                 break;
         }

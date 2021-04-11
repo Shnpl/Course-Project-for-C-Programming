@@ -49,7 +49,9 @@
 			"LABEL.H": "cpp",
 			"*.tcc": "cpp",
 			"cstdlib": "cpp",
-			"memory": "cpp"
+			"memory": "cpp",
+			"MY_SERV.H": "cpp",
+			"CHN.H": "cpp"
 		},
 		"files.encoding": "gb2312",
 		"diffEditor.codeLens": true,

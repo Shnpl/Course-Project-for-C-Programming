@@ -45,8 +45,8 @@ int INITIAL()
     /*COMPONENTS INIT END*/
 
     /* DRAW START */
-    CHN_print(43,103,"平安好车主",48,48,LIGHTGRAY,5);
-    CHN_print(40,100,"平安好车主",48,48,RED,5);
+    CHN_print(43,103,"平安好车主",48,LIGHTGRAY);
+    CHN_print(40,100,"平安好车主",48,RED);
     
     
     setfillstyle(1,LIGHTGRAY);
@@ -159,7 +159,6 @@ void button_sign_in_init(BFL_button* buttonPtr)
     buttonPtr->position_text_top = buttonPtr->position_top + 10;
     buttonPtr->text_size = 32;
     strcpy(buttonPtr->display_text,"注册");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -188,7 +187,6 @@ void button_login_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"登录");
-    buttonPtr->text_length = 2;
     buttonPtr->status = REST;
 }
 void button_exit_init(BFL_button* buttonPtr)
@@ -216,7 +214,6 @@ void button_exit_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"退出");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }
@@ -246,7 +243,6 @@ void button_test_init(BFL_button* buttonPtr)
     buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text,"测试");
-    buttonPtr->text_length = 2;
 
     buttonPtr->status = REST;
 }

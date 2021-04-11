@@ -9,6 +9,7 @@
 #include"INCLUDE/MOUSE.H"
 #include"INCLUDE/BUTTON.H"
 #include"INCLUDE/GENERAL.H"
+#include"INCLUDE/CHN.H"
 char get_ch_0(void);//大小写均有
 char get_ch_1(void);//仅限小写
 char get_ch_2(void);//仅限大写
@@ -121,7 +122,7 @@ void BFL_textbox_draw(BFL_textbox* textboxPtr)
             textboxPtr->position_bottom);
         //settextstyle(3,HORIZ_DIR,5);
         setcolor(textboxPtr->color_text);
-        outtextxy(textboxPtr->position_left+5,textboxPtr->position_top,textboxPtr->display_text);
+        CHN_print(textboxPtr->position_left+5,(textboxPtr->position_top+textboxPtr->position_bottom)/2-textboxPtr->size/2,textboxPtr->display_text,textboxPtr->size,textboxPtr->color_text);
         //outtextxy(0,0,textboxPtr->true_text);
 
         /*
