@@ -757,8 +757,8 @@ int CHK_APMT(char *user_ID)
                 fwrite(rand_ID,sizeof(rand_ID),1,ID_file);
                 fclose(ID_file);
                 strcpy(check_appointment_handle.ID,rand_ID);
-                setcolor(BROWN);
-                outtextxy(0,0,rand_ID);
+                //setcolor(BROWN);
+                //outtextxy(0,0,rand_ID);
                 if((chk_apmt_file =fopen("./FILE/CHK_APMT.TXT","at+")) == NULL)
                 {
                     outtextxy(0,0,"CHK_APMT.TXT FILE ERROR");

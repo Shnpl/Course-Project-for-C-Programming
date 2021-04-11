@@ -93,7 +93,7 @@ int MY_SERV(char *user_ID)
     char debug1[50]={'\0'};
     char debug2[50]={'\0'};
     char debug3[50]={'\0'};
-    
+    int  y=60; 
 
     
     /* DEFINITION END */
@@ -146,14 +146,14 @@ int MY_SERV(char *user_ID)
     }
     fclose(check_appointment_file);
     
-    outtextxy(0,200,CHK_APMT_read_ptr->check_appointment_node.tel);
+    //outtextxy(0,200,CHK_APMT_read_ptr->check_appointment_node.tel);
     //itoa((int)CHK_APMT_read_ptr,debug1,16);// once used in debug
     //itoa((int)CHK_APMT_head->next,debug2,16);
-    itoa(check_appointment_count,debug3,10);
+    //itoa(check_appointment_count,debug3,10);
 
     //outtextxy(0,240,debug1);
     //outtextxy(0,280,debug2);
-    outtextxy(0,320,debug3);
+    //outtextxy(0,320,debug3);
     
     //主链表的操作 将各个链表读入主链表中
     if(main_linklist_head == NULL)
@@ -183,7 +183,7 @@ int MY_SERV(char *user_ID)
         CHK_APMT_read_ptr = CHK_APMT_read_ptr->next;
         main_count++;
     }
-    itoa(main_count,debug3,10);
+    //itoa(main_count,debug3,10);
 
 
     my_serv_button_exit_init(&button_exit);
@@ -225,9 +225,20 @@ int MY_SERV(char *user_ID)
     //setfillstyle(SOLID_FILL,CYAN);
     //bar(150,25,525,380);
     CHN_print(160,35,"服务ID",16,YELLOW);
-    CHN_print(240,35,"服务类型",16,YELLOW);
+    CHN_print(245,35,"服务类型",16,YELLOW);
     CHN_print(320,35,"服务信息",16,YELLOW);
     CHN_print(520,35,"服务状态",16,YELLOW);
+
+    main_linklist_read_ptr = main_linklist_head->next;
+    while(main_linklist_read_ptr != NULL)
+    {
+        CHN_print(160,y,main_linklist_read_ptr->ID,16,YELLOW);
+        CHN_print(245,y,"年检预约",16,YELLOW);
+        CHN_print(320,y,main_linklist_read_ptr->info,16,YELLOW);
+        CHN_print(520,y,main_linklist_read_ptr->status,16,YELLOW);
+        main_linklist_read_ptr = main_linklist_read_ptr->next;
+        y += 25;
+    }
 
 
     /* DRAW END */
@@ -251,7 +262,7 @@ int MY_SERV(char *user_ID)
         
         if (button_exit.status == PRESS)
         {
-            page = _VEH_ADMI;
+            page = _MAIN_PAGE;
             break;
         }
         /*CODE END*/
