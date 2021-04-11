@@ -33,32 +33,9 @@ void my_serv_button_down_init(BFL_button*);
 void my_serv_button_next_init(BFL_button*);
 void my_serv_button_prev_init(BFL_button*);
 
+void list_draw(My_List* listPtr);
+void list_action(My_List* listPtr);
 
-struct CHK_APMT_node;
-typedef struct CHK_APMT_node* CHK_APMT_node_ptr;
-typedef CHK_APMT_node_ptr CHK_APMT_position;
-typedef CHK_APMT_node_ptr CHK_APMT_list;
-
-struct main_linklist_node;
-typedef struct main_linklist_node* main_linklist_ptr;
-typedef main_linklist_ptr main_linklist_position;
-typedef main_linklist_ptr main_linklist_list;
-
-struct main_linklist_node
-{
-    char ID[20];
-    int type;
-    char info[30];
-    char status[20];
-    main_linklist_position next;
-    main_linklist_position front;
-};
-
-struct CHK_APMT_node
-{
-    check_appointment check_appointment_node;
-    CHK_APMT_position next;
-};
 
 
 
@@ -79,17 +56,9 @@ int MY_SERV(char *user_ID)
     BFL_button button_prev;
     BFL_button button_next;
 
-    int check_appointment_count = 0;
     FILE* check_appointment_file;
 
-    CHK_APMT_list CHK_APMT_head = (CHK_APMT_list)malloc(sizeof(struct CHK_APMT_node));
-    CHK_APMT_position CHK_APMT_read_ptr = CHK_APMT_head;
-    
-    int main_count = 0;
-    main_linklist_list main_linklist_head= (main_linklist_list)malloc(sizeof(struct main_linklist_node));
-    main_linklist_position main_linklist_read_ptr = main_linklist_head;
-
-
+    My_List main_list;
     char debug1[50]={'\0'};
     char debug2[50]={'\0'};
     char debug3[50]={'\0'};
@@ -106,13 +75,36 @@ int MY_SERV(char *user_ID)
     /* DEVICE AND MOUSE INIT END */
 
     /* COMPONENTS INIT START */
+    //main_list 初始化   
+    main_list.main_list_head = (main_linklist_list)malloc(sizeof(struct main_linklist_node));
+    main_list.main_list_read_ptr=main_list.main_list_head;
+    main_list.chk_apmt_list_head = (CHK_APMT_list)malloc(sizeof(struct CHK_APMT_node));
+    main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_head;
     
+    main_list.position_left =155;
+    main_list.position_top = 55;
+    main_list.position_right = 600;
+    main_list.position_bottom = 375;
+    main_list.color_box = LIGHTGRAY;
+    main_list.color_text =YELLOW;
+    main_list.color_lightened = LIGHTRED;
+    // main_list.is_next_page =RESET;
+    // main_list.is_prev_page = RESET;
+    main_list.is_next_item = RESET;
+    main_list.is_prev_item = RESET;
+
+    main_list.is_delete = RESET;
+    main_list.redraw = SET;
+
+    main_list.item = 1;
+    main_list.total_item = 0;
+
     //年检预约的文件操作与链表操作
-    if(CHK_APMT_head == NULL)
+    if(main_list.chk_apmt_list_head == NULL)
     {
         outtextxy(0,0,"MEMORY ERROR");
     }
-    CHK_APMT_head->next = NULL;
+    main_list.chk_apmt_list_head->next = NULL;
     if((check_appointment_file =fopen("./FILE/CHK_APMT.TXT","at+")) == NULL)
     {
         outtextxy(0,0,"FILE ERROR");
@@ -120,27 +112,26 @@ int MY_SERV(char *user_ID)
 
     while(!feof(check_appointment_file))
     {
-        CHK_APMT_read_ptr->next = malloc(sizeof(struct CHK_APMT_node));
-        if(CHK_APMT_read_ptr->next == NULL)
+        main_list.chk_apmt_list_read_ptr->next = malloc(sizeof(struct CHK_APMT_node));
+        if(main_list.chk_apmt_list_read_ptr->next == NULL)
         {
             outtextxy(0,0,"MEMORY ERROR");
         }
-        if((fread(&(CHK_APMT_read_ptr->next->check_appointment_node),sizeof(check_appointment),1,check_appointment_file)) == 0)
+        if((fread(&(main_list.chk_apmt_list_read_ptr->next->check_appointment_node),sizeof(check_appointment),1,check_appointment_file)) == 0)
         {
-            free(CHK_APMT_read_ptr->next);
-            CHK_APMT_read_ptr->next = NULL;
+            free(main_list.chk_apmt_list_read_ptr->next);
+            main_list.chk_apmt_list_read_ptr->next = NULL;
             break;
         } 
-        if(strcmp(CHK_APMT_read_ptr->next->check_appointment_node.user_id,user_ID) == 0)
+        if(strcmp(main_list.chk_apmt_list_read_ptr->next->check_appointment_node.user_id,user_ID) == 0)
         {
-            CHK_APMT_read_ptr = CHK_APMT_read_ptr->next;
-            CHK_APMT_read_ptr->next = NULL;
-            check_appointment_count++;
+            main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_read_ptr->next;
+            main_list.chk_apmt_list_read_ptr->next = NULL;
         }
         else
         {
-            free(CHK_APMT_read_ptr->next);
-            CHK_APMT_read_ptr->next = NULL;
+            free(main_list.chk_apmt_list_read_ptr->next);
+            main_list.chk_apmt_list_read_ptr->next = NULL;
         }
         
     }
@@ -153,47 +144,47 @@ int MY_SERV(char *user_ID)
 
     //outtextxy(0,240,debug1);
     //outtextxy(0,280,debug2);
-    //outtextxy(0,320,debug3);
+    
     
     //主链表的操作 将各个链表读入主链表中
-    if(main_linklist_head == NULL)
+    if(main_list.main_list_head == NULL)
     {
         outtextxy(0,0,"MEMORY ERROR");
     }
-    CHK_APMT_read_ptr = CHK_APMT_head->next;
-    main_linklist_head->next = NULL;
-    main_linklist_head->front = NULL;
+    main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_head->next;
+    main_list.main_list_head->next = NULL;
+    main_list.main_list_head->front = NULL;
 
-    while(CHK_APMT_read_ptr != NULL)
+    while(main_list.chk_apmt_list_read_ptr != NULL)
     {
-        main_linklist_read_ptr->next = (main_linklist_position)malloc(sizeof(struct main_linklist_node));
-        if(main_linklist_read_ptr->next == NULL)
+        main_list.main_list_read_ptr->next = (main_linklist_position)malloc(sizeof(struct main_linklist_node));
+        if(main_list.main_list_read_ptr->next == NULL)
         {
             outtextxy(0,0,"MEMORY ERROR");
         }
-        main_linklist_read_ptr->next->front = main_linklist_read_ptr;//新节点的前向指针指向现在的节点
-        main_linklist_read_ptr->next->next = NULL;//新节点的后向指针指向 NULL
-        main_linklist_read_ptr = main_linklist_read_ptr->next;
+        main_list.main_list_read_ptr->next->front = main_list.main_list_read_ptr;//新节点的前向指针指向现在的节点
+        main_list.main_list_read_ptr->next->next = NULL;//新节点的后向指针指向 NULL
+        main_list.main_list_read_ptr = main_list.main_list_read_ptr->next;
 
-        strcpy(main_linklist_read_ptr->ID,CHK_APMT_read_ptr->check_appointment_node.ID);
-        strcpy(main_linklist_read_ptr->info,CHK_APMT_read_ptr->check_appointment_node.car_licence);
-        strcpy(main_linklist_read_ptr->status,"正在处理");
-        main_linklist_read_ptr->type = 0;
+        strcpy(main_list.main_list_read_ptr->ID,main_list.chk_apmt_list_read_ptr->check_appointment_node.ID);
+        strcpy(main_list.main_list_read_ptr->info,main_list.chk_apmt_list_read_ptr->check_appointment_node.car_licence);
+        strcpy(main_list.main_list_read_ptr->status,"正在处理");
+        main_list.main_list_read_ptr->type = 0;
 
-        CHK_APMT_read_ptr = CHK_APMT_read_ptr->next;
-        main_count++;
+        main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_read_ptr->next;
+        main_list.total_item++;
     }
-    //itoa(main_count,debug3,10);
-
-
+    main_list.main_list_read_ptr->next = NULL;
+    itoa(main_list.total_item,debug3,10);
+    outtextxy(0,320,debug3);
     my_serv_button_exit_init(&button_exit);
     my_serv_button_delete_init(&button_delete);
 
     my_serv_button_up_init(&button_up);
     my_serv_button_down_init(&button_down);
 
-    my_serv_button_prev_init(&button_prev);
-    my_serv_button_next_init(&button_next);
+    // my_serv_button_prev_init(&button_prev);
+    // my_serv_button_next_init(&button_next);
 
 
     /* COMPONENTS INIT END */
@@ -229,17 +220,7 @@ int MY_SERV(char *user_ID)
     CHN_print(320,35,"服务信息",16,YELLOW);
     CHN_print(520,35,"服务状态",16,YELLOW);
 
-    main_linklist_read_ptr = main_linklist_head->next;
-    while(main_linklist_read_ptr != NULL)
-    {
-        CHN_print(160,y,main_linklist_read_ptr->ID,16,YELLOW);
-        CHN_print(245,y,"年检预约",16,YELLOW);
-        CHN_print(320,y,main_linklist_read_ptr->info,16,YELLOW);
-        CHN_print(520,y,main_linklist_read_ptr->status,16,YELLOW);
-        main_linklist_read_ptr = main_linklist_read_ptr->next;
-        y += 25;
-    }
-
+    main_list.main_list_read_ptr = main_list.main_list_head->next;
 
     /* DRAW END */
 
@@ -252,20 +233,50 @@ int MY_SERV(char *user_ID)
         BFL_button_draw(&button_up);
         BFL_button_draw(&button_down);
 
-        BFL_button_draw(&button_prev);
-        BFL_button_draw(&button_next);
-
+        // BFL_button_draw(&button_prev);
+        // BFL_button_draw(&button_next);
+        list_draw(&main_list);
         BFL_mouse_draw();
         /* REDRAW END */
-
         /*CODE START*/
         
         if (button_exit.status == PRESS)
         {
             page = _MAIN_PAGE;
-            break;
+            break;//还需要做内存的释放工作
         }
+        if(button_down.status == PRESS)
+        {
+            main_list.is_next_item = SET;
+            
+            delay(150);
+	        
+        }
+        if(button_up.status == PRESS)
+        {
+            main_list.is_prev_item = SET;
+            //CHN_print(0,0,"OK",16,RED);
+            delay(150);
+        }
+        if(button_delete.status == PRESS)
+        {
+            main_list.is_delete = SET;
+            delay(150);
+        }
+        // if(button_next.status == PRESS)//下一页
+        // {
+        //     main_list.is_next_page = SET;
+        //     CHN_print(0,0,"OK",16,RED);
+        //     delay(150);
+        // }
+        // if(button_prev.status == PRESS)//下一页
+        // {
+        //     main_list.is_prev_page = SET;
+        //     CHN_print(0,0,"OK",16,RED);
+        //     delay(150);
+        // }
         /*CODE END*/
+      
 
         /* ACTION START */
         BFL_mouse_action();
@@ -276,9 +287,12 @@ int MY_SERV(char *user_ID)
         BFL_button_action(&button_up);
         BFL_button_action(&button_down);
 
-        BFL_button_action(&button_prev);
-        BFL_button_action(&button_next);
-        /* ACTION  END */
+        // BFL_button_action(&button_prev);
+        // BFL_button_action(&button_next);
+
+        list_action(&main_list);
+        /* ACTION  END */  
+       
     }
 
     delay(200); //防止下一页面的按钮因为按下鼠标的时长而误操作
@@ -351,11 +365,11 @@ void my_serv_button_up_init(BFL_button *buttonPtr)
     buttonPtr->color_shadow = DARKGRAY;
 
     buttonPtr->reDraw_status = SET;
-
-    buttonPtr->position_left = 160;
+    
+    buttonPtr->position_left = 270;
     buttonPtr->position_top = 400;
-    buttonPtr->position_right = 250;
-    buttonPtr->position_bottom = 421;
+    buttonPtr->position_right = 375;
+    buttonPtr->position_bottom = 450;
 
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
@@ -363,9 +377,9 @@ void my_serv_button_up_init(BFL_button *buttonPtr)
     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
 
-    buttonPtr->position_text_left = buttonPtr->position_left + 27;
-    buttonPtr->position_text_top = buttonPtr->position_top +3;
-    buttonPtr->text_size = 16;
+    buttonPtr->position_text_left = buttonPtr->position_left + 5;
+    buttonPtr->position_text_top = buttonPtr->position_top +10;
+    buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "向上");
 
@@ -381,126 +395,236 @@ void my_serv_button_down_init(BFL_button *buttonPtr)
 
     buttonPtr->reDraw_status = SET;
 
-    buttonPtr->position_left = 160;
-    buttonPtr->position_top = 429;
-    buttonPtr->position_right = 250;
+    buttonPtr->position_left = 390;
+    buttonPtr->position_top = 400;
+    buttonPtr->position_right = 495;
     buttonPtr->position_bottom = 450;
-
+    
     buttonPtr->is_shadow_enable = SET;
     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
     buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
 
-    buttonPtr->position_text_left = buttonPtr->position_left + 27;
-    buttonPtr->position_text_top = buttonPtr->position_top +3;
-    buttonPtr->text_size = 16;
+    buttonPtr->position_text_left = buttonPtr->position_left + 5;
+    buttonPtr->position_text_top = buttonPtr->position_top +10;
+    buttonPtr->text_size = 32;
 
     strcpy(buttonPtr->display_text, "向下");
 
     buttonPtr->status = REST;
 }
 
-void my_serv_button_prev_init(BFL_button *buttonPtr)
+// void my_serv_button_prev_init(BFL_button *buttonPtr)
+// {
+//     buttonPtr->color_rest = RED;
+//     buttonPtr->color_hover = LIGHTRED;
+//     buttonPtr->color_text = YELLOW;
+//     buttonPtr->color_shadow = DARKGRAY;
+
+//     buttonPtr->reDraw_status = SET;
+
+//     buttonPtr->position_left = 270;
+//     buttonPtr->position_top = 400;
+//     buttonPtr->position_right = 375;
+//     buttonPtr->position_bottom = 450;
+
+//     buttonPtr->is_shadow_enable = SET;
+//     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+//     buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+//     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+//     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+//     buttonPtr->position_text_left = buttonPtr->position_left + 2;
+//     buttonPtr->position_text_top = buttonPtr->position_top + 10;
+//     buttonPtr->text_size = 32;
+
+//     strcpy(buttonPtr->display_text, "上一页");
+
+//     buttonPtr->status = REST;
+// }
+
+// void my_serv_button_next_init(BFL_button *buttonPtr)
+// {
+//     buttonPtr->color_rest = RED;
+//     buttonPtr->color_hover = LIGHTRED;
+//     buttonPtr->color_text = YELLOW;
+//     buttonPtr->color_shadow = DARKGRAY;
+
+//     buttonPtr->reDraw_status = SET;
+
+//     buttonPtr->position_left = 390;
+//     buttonPtr->position_top = 400;
+//     buttonPtr->position_right = 495;
+//     buttonPtr->position_bottom = 450;
+
+//     buttonPtr->is_shadow_enable = SET;
+//     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+//     buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+//     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+//     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+//     buttonPtr->position_text_left = buttonPtr->position_left + 2;
+//     buttonPtr->position_text_top = buttonPtr->position_top + 10;
+//     buttonPtr->text_size = 32;
+
+//     strcpy(buttonPtr->display_text, "下一页");
+
+//     buttonPtr->status = REST;
+// }
+
+//page = 0;
+//item = 1;
+void list_action(My_List* listPtr)
 {
-    buttonPtr->color_rest = RED;
-    buttonPtr->color_hover = LIGHTRED;
-    buttonPtr->color_text = YELLOW;
-    buttonPtr->color_shadow = DARKGRAY;
-
-    buttonPtr->reDraw_status = SET;
-
-    buttonPtr->position_left = 270;
-    buttonPtr->position_top = 400;
-    buttonPtr->position_right = 375;
-    buttonPtr->position_bottom = 450;
-
-    buttonPtr->is_shadow_enable = SET;
-    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
-    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
-    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
-    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
-
-    buttonPtr->position_text_left = buttonPtr->position_left + 2;
-    buttonPtr->position_text_top = buttonPtr->position_top + 10;
-    buttonPtr->text_size = 32;
-
-    strcpy(buttonPtr->display_text, "上一页");
-
-    buttonPtr->status = REST;
+    main_linklist_position temp_ptr=NULL;
+    if(listPtr->is_next_item == SET)
+    {
+	    if(listPtr->item<listPtr->total_item)
+        {
+            (listPtr->item)++;
+            listPtr->is_next_item =RESET;
+            listPtr->main_list_read_ptr=listPtr->main_list_read_ptr->next;
+            listPtr->redraw = SET;
+        }
+    }
+    if(listPtr->is_prev_item == SET)
+    {
+	    if(listPtr->item > 1)
+        {
+            (listPtr->item)--;
+            listPtr->is_prev_item =RESET;
+            listPtr->main_list_read_ptr=listPtr->main_list_read_ptr->front;
+            listPtr->redraw = SET;
+        }
+    }
+    if(listPtr->is_delete == SET)
+    {
+        
+        if(listPtr->main_list_head->next == NULL)
+        {
+            return;
+        }
+        if(listPtr->main_list_read_ptr->next == NULL)
+        {
+            if(listPtr->main_list_read_ptr->front == listPtr->main_list_head)
+            {
+                temp_ptr = listPtr->main_list_read_ptr->front;
+                listPtr->main_list_head->next=NULL;
+                free(listPtr->main_list_read_ptr);
+                listPtr->main_list_read_ptr=listPtr->main_list_head;
+                (listPtr->item)--;
+            }
+            else
+            {
+                temp_ptr = listPtr->main_list_read_ptr->front;
+                listPtr->main_list_read_ptr->front->next=listPtr->main_list_read_ptr->next;
+                free(listPtr->main_list_read_ptr);
+                listPtr->main_list_read_ptr = temp_ptr;
+                (listPtr->item)--;
+            }
+            
+        }
+        else
+        {
+            
+            temp_ptr = listPtr->main_list_read_ptr->next;
+            listPtr->main_list_read_ptr->front->next=listPtr->main_list_read_ptr->next;
+            listPtr->main_list_read_ptr->next->front=listPtr->main_list_read_ptr->front;
+            
+            free(listPtr->main_list_read_ptr);
+            listPtr->main_list_read_ptr = temp_ptr;
+        }
+        
+        
+        (listPtr->total_item)--;
+        listPtr->is_delete = RESET;
+        listPtr->redraw= SET;
+    }
+    
 }
 
-void my_serv_button_next_init(BFL_button *buttonPtr)
-{
-    buttonPtr->color_rest = RED;
-    buttonPtr->color_hover = LIGHTRED;
-    buttonPtr->color_text = YELLOW;
-    buttonPtr->color_shadow = DARKGRAY;
-
-    buttonPtr->reDraw_status = SET;
-
-    buttonPtr->position_left = 390;
-    buttonPtr->position_top = 400;
-    buttonPtr->position_right = 495;
-    buttonPtr->position_bottom = 450;
-
-    buttonPtr->is_shadow_enable = SET;
-    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
-    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
-    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
-    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
-
-    buttonPtr->position_text_left = buttonPtr->position_left + 2;
-    buttonPtr->position_text_top = buttonPtr->position_top + 10;
-    buttonPtr->text_size = 32;
-
-    strcpy(buttonPtr->display_text, "下一页");
-
-    buttonPtr->status = REST;
-}
-/*
-page = 0;
-item = 1;
-
-void list_draw(my_list* listPtr)
+void list_draw(My_List* listPtr)
 {
     int i=0;
-    int page;
+    int page_count = 0;
+    int item_count=0;
     int y_now = listPtr->position_top+5;
     int x_now = listPtr->position_left+5;
-    main_linklist_position draw_main_linklist_ptr = listPtr->main_list->next;
-    if(draw_main_linklist_ptr == NULL)
-    {
-	return;
+    main_linklist_position draw_main_linklist_ptr = listPtr->main_list_head->next;
+    char debug4[20] ={'\0'};
+    char debug5[20] ={'\0'};
+   
+    if(listPtr->redraw == SET)
+    { 
+        setfillstyle(SOLID_FILL,YELLOW);
+        bar(0,0,80,20);
+        
+        
+
+        setfillstyle(SOLID_FILL,listPtr->color_box);
+        bar(listPtr->position_left,listPtr->position_top,listPtr->position_right,listPtr->position_bottom);
+        
+        if(draw_main_linklist_ptr == NULL)
+        {
+            listPtr->redraw = RESET;
+            return;
+        }
+
+        page_count= ((listPtr->item) -1) / 10;
+
+        itoa(listPtr->total_item,debug4,10);
+        itoa(listPtr->item,debug5,10);
+        CHN_print(0,0,debug4,16,RED);
+        CHN_print(50,0,debug5,16,RED);
+
+        while( i < page_count * 10)
+        {
+            draw_main_linklist_ptr = draw_main_linklist_ptr->next;
+            i++;
+        }
+        //该页选中项之前的
+        while(item_count+10*page_count<listPtr->item-1)
+        {
+            CHN_print(160,y_now,draw_main_linklist_ptr->ID,16,YELLOW);
+            if(draw_main_linklist_ptr->type == 0)
+            {
+            CHN_print(245,y_now,"年检预约",16,YELLOW);
+            }
+            CHN_print(320,y_now,draw_main_linklist_ptr->info,16,YELLOW);
+            CHN_print(520,y_now,draw_main_linklist_ptr->status,16,YELLOW);
+            draw_main_linklist_ptr = draw_main_linklist_ptr->next;
+            item_count++;
+            y_now += 30;
+        }
+        //选中项
+        setfillstyle(SOLID_FILL,listPtr->color_lightened);
+        bar(listPtr->position_left,y_now-2,listPtr->position_right,y_now+25-2);
+        CHN_print(160,y_now,draw_main_linklist_ptr->ID,16,YELLOW);
+        if(draw_main_linklist_ptr->type == 0)
+        {
+            CHN_print(245,y_now,"年检预约",16,YELLOW);
+        }
+        CHN_print(320,y_now,draw_main_linklist_ptr->info,16,YELLOW);
+        CHN_print(520,y_now,draw_main_linklist_ptr->status,16,YELLOW);
+        draw_main_linklist_ptr = draw_main_linklist_ptr->next;
+        item_count++;
+        y_now+= 30;
+        //该页剩余的项
+        while(item_count+10*page_count < listPtr->total_item && item_count < (page_count+1)*10)
+        {
+            CHN_print(160,y_now,draw_main_linklist_ptr->ID,16,YELLOW);
+            if(draw_main_linklist_ptr->type == 0)
+            {
+                CHN_print(245,y_now,"年检预约",16,YELLOW);
+            }
+            CHN_print(320,y_now,draw_main_linklist_ptr->info,16,YELLOW);
+            CHN_print(520,y_now,draw_main_linklist_ptr->status,16,YELLOW);
+            draw_main_linklist_ptr = draw_main_linklist_ptr->next;
+            item_count++;
+            y_now += 30;
+        }
+        
     }
-    if(listPtr == RESET)
-    {
-	return;
-    }
-
-    setfillstyle(SOLID_FILL,listPtr->color_box);
-    bar(listPtr->position_left,listPtr->position_top,listPtr->position_right,listPtr->position_bottom);
-
-    listPtr->page= (listPtr->item -1) / 10;
-    while( i < page * 10)
-    {
-	draw_main_linklist_ptr = draw_main_linklist_ptr->next;
-    }
-
-    while(draw_main_linklist_ptr != listPtr->main_read_ptr)
-    {
-	outtextxy(x_now,y_now,draw_main_linklist_ptr->ID);
-
-	CHN_print(,35,"服务类型",16,16,YELLOW);
-    CHN_print(320,35,"服务信息",16,16,YELLOW);
-    CHN_print(520,35,"服务状态",16,16,YELLOW);
-
-    }
-
-
-
-
-
-
-
-}*/
+    listPtr->redraw = RESET;
+}
