@@ -294,7 +294,7 @@ int MY_SERV(char *user_ID)
         {
             list_save(&main_list);
             page = _MY_INFO;
-
+            break;//链表已经被删除
         }
         // if(button_next.status == PRESS)//下一页
         // {
@@ -477,66 +477,52 @@ void my_serv_button_confirm_init(BFL_button *buttonPtr)
 
     buttonPtr->status = REST;
 }
-// void my_serv_button_prev_init(BFL_button *buttonPtr)
-// {
-//     buttonPtr->color_rest = RED;
-//     buttonPtr->color_hover = LIGHTRED;
-//     buttonPtr->color_text = YELLOW;
-//     buttonPtr->color_shadow = DARKGRAY;
 
-//     buttonPtr->reDraw_status = SET;
+    // void my_serv_button_prev_init(BFL_button *buttonPtr)
+    // {
+    //     buttonPtr->color_rest = RED;
+    //     buttonPtr->color_hover = LIGHTRED;
+    //     buttonPtr->color_text = YELLOW;
+    //     buttonPtr->color_shadow = DARKGRAY;
+    //     buttonPtr->reDraw_status = SET;
+    //     buttonPtr->position_left = 270;
+    //     buttonPtr->position_top = 400;
+    //     buttonPtr->position_right = 375;
+    //     buttonPtr->position_bottom = 450;
+    //     buttonPtr->is_shadow_enable = SET;
+    //     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    //     buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    //     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    //     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+    //     buttonPtr->position_text_left = buttonPtr->position_left + 2;
+    //     buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    //     buttonPtr->text_size = 32;
+    //     strcpy(buttonPtr->display_text, "上一页");
+    //     buttonPtr->status = REST;
+    // }
 
-//     buttonPtr->position_left = 270;
-//     buttonPtr->position_top = 400;
-//     buttonPtr->position_right = 375;
-//     buttonPtr->position_bottom = 450;
-
-//     buttonPtr->is_shadow_enable = SET;
-//     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
-//     buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
-//     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
-//     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
-
-//     buttonPtr->position_text_left = buttonPtr->position_left + 2;
-//     buttonPtr->position_text_top = buttonPtr->position_top + 10;
-//     buttonPtr->text_size = 32;
-
-//     strcpy(buttonPtr->display_text, "上一页");
-
-//     buttonPtr->status = REST;
-// }
-
-// void my_serv_button_next_init(BFL_button *buttonPtr)
-// {
-//     buttonPtr->color_rest = RED;
-//     buttonPtr->color_hover = LIGHTRED;
-//     buttonPtr->color_text = YELLOW;
-//     buttonPtr->color_shadow = DARKGRAY;
-
-//     buttonPtr->reDraw_status = SET;
-
-//     buttonPtr->position_left = 390;
-//     buttonPtr->position_top = 400;
-//     buttonPtr->position_right = 495;
-//     buttonPtr->position_bottom = 450;
-
-//     buttonPtr->is_shadow_enable = SET;
-//     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
-//     buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
-//     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
-//     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
-
-//     buttonPtr->position_text_left = buttonPtr->position_left + 2;
-//     buttonPtr->position_text_top = buttonPtr->position_top + 10;
-//     buttonPtr->text_size = 32;
-
-//     strcpy(buttonPtr->display_text, "下一页");
-
-//     buttonPtr->status = REST;
-// }
-
-//page = 0;
-//item = 1;
+    // void my_serv_button_next_init(BFL_button *buttonPtr)
+    // {
+    //     buttonPtr->color_rest = RED;
+    //     buttonPtr->color_hover = LIGHTRED;
+    //     buttonPtr->color_text = YELLOW;
+    //     buttonPtr->color_shadow = DARKGRAY;
+    //     buttonPtr->reDraw_status = SET;
+    //     buttonPtr->position_left = 390;
+    //     buttonPtr->position_top = 400;
+    //     buttonPtr->position_right = 495;
+    //     buttonPtr->position_bottom = 450;
+    //     buttonPtr->is_shadow_enable = SET;
+    //     buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    //     buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    //     buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    //     buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+    //     buttonPtr->position_text_left = buttonPtr->position_left + 2;
+    //     buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    //     buttonPtr->text_size = 32;
+    //     strcpy(buttonPtr->display_text, "下一页");
+    //     buttonPtr->status = REST;
+    // }
 void list_action(My_List* listPtr)
 {
     main_linklist_position temp_ptr=NULL;
@@ -751,6 +737,28 @@ void list_save(My_List* listPtr)
         listPtr->chk_apmt_list_read_ptr =listPtr->chk_apmt_list_read_ptr->next;
     }
     fclose(check_appointment_file);
+
+    //chk_apmt_list 释放内存
+    listPtr->chk_apmt_list_read_ptr = listPtr->chk_apmt_list_head->next;
+    while(listPtr->chk_apmt_list_read_ptr != NULL)
+    {
+        listPtr->chk_apmt_list_head->next = listPtr->chk_apmt_list_read_ptr->next;
+        free(listPtr->chk_apmt_list_read_ptr);
+        listPtr->chk_apmt_list_read_ptr = listPtr->chk_apmt_list_head->next;
+    }
+    free(listPtr->chk_apmt_list_head);
+    listPtr->chk_apmt_list_head = NULL;
+
+    //main_list 释放内存
+    listPtr->main_list_read_ptr = listPtr->main_list_head->next;
+    while(listPtr->main_list_read_ptr != NULL)
+    {
+        listPtr->main_list_head->next = listPtr->main_list_read_ptr->next;
+        free(listPtr->main_list_read_ptr);
+        listPtr->main_list_read_ptr = listPtr->main_list_head->next;
+    }
+    free(listPtr->main_list_head);
+    listPtr->main_list_head = NULL;
     
     
 
