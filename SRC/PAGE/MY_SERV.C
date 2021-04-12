@@ -33,8 +33,11 @@ void my_serv_button_down_init(BFL_button*);
 void my_serv_button_next_init(BFL_button*);
 void my_serv_button_prev_init(BFL_button*);
 
+void my_serv_button_confirm_init(BFL_button*);
+
 void list_draw(My_List* listPtr);
 void list_action(My_List* listPtr);
+void list_save(My_List* listPtr);
 
 
 
@@ -55,6 +58,8 @@ int MY_SERV(char *user_ID)
     BFL_button button_down;
     BFL_button button_prev;
     BFL_button button_next;
+
+    BFL_button button_confirm;
 
     FILE* check_appointment_file;
 
@@ -204,6 +209,7 @@ int MY_SERV(char *user_ID)
     my_serv_button_up_init(&button_up);
     my_serv_button_down_init(&button_down);
 
+    my_serv_button_confirm_init(&button_confirm);
     // my_serv_button_prev_init(&button_prev);
     // my_serv_button_next_init(&button_next);
 
@@ -253,7 +259,7 @@ int MY_SERV(char *user_ID)
         BFL_button_draw(&button_delete);
         BFL_button_draw(&button_up);
         BFL_button_draw(&button_down);
-
+        BFL_button_draw(&button_confirm);
         // BFL_button_draw(&button_prev);
         // BFL_button_draw(&button_next);
         list_draw(&main_list);
@@ -284,6 +290,12 @@ int MY_SERV(char *user_ID)
             main_list.is_delete = SET;
             delay(150);
         }
+        if(button_confirm.status == PRESS)
+        {
+            list_save(&main_list);
+            page = _MY_INFO;
+
+        }
         // if(button_next.status == PRESS)//下一页
         // {
         //     main_list.is_next_page = SET;
@@ -307,6 +319,7 @@ int MY_SERV(char *user_ID)
         
         BFL_button_action(&button_up);
         BFL_button_action(&button_down);
+        BFL_button_action(&button_confirm);
 
         // BFL_button_action(&button_prev);
         // BFL_button_action(&button_next);
@@ -436,6 +449,34 @@ void my_serv_button_down_init(BFL_button *buttonPtr)
     buttonPtr->status = REST;
 }
 
+void my_serv_button_confirm_init(BFL_button *buttonPtr)
+{
+    buttonPtr->color_rest = RED;
+    buttonPtr->color_hover = LIGHTRED;
+    buttonPtr->color_text = YELLOW;
+    buttonPtr->color_shadow = DARKGRAY;
+
+    buttonPtr->reDraw_status = SET;
+
+    buttonPtr->position_left = 160;
+    buttonPtr->position_top = 400;
+    buttonPtr->position_right = 240;
+    buttonPtr->position_bottom = 450;
+
+    buttonPtr->is_shadow_enable = SET;
+    buttonPtr->position_shadow_left = buttonPtr->position_left + 5;
+    buttonPtr->position_shadow_top = buttonPtr->position_top + 5;
+    buttonPtr->position_shadow_right = buttonPtr->position_right + 5;
+    buttonPtr->position_shadow_bottom = buttonPtr->position_bottom + 5;
+
+    buttonPtr->position_text_left = buttonPtr->position_left + 2;
+    buttonPtr->position_text_top = buttonPtr->position_top + 10;
+    buttonPtr->text_size = 32;
+
+    strcpy(buttonPtr->display_text, "确认");
+
+    buttonPtr->status = REST;
+}
 // void my_serv_button_prev_init(BFL_button *buttonPtr)
 // {
 //     buttonPtr->color_rest = RED;
@@ -677,4 +718,40 @@ void list_draw(My_List* listPtr)
         
     }
     listPtr->redraw = RESET;
+}
+
+void list_save(My_List* listPtr)
+{
+    FILE* check_appointment_file;
+
+    listPtr->delete_list_read_ptr = listPtr->delete_list_head->next;//删除链表指针移至表头
+    while (listPtr->delete_list_read_ptr != NULL)
+    {
+        listPtr->chk_apmt_list_read_ptr = listPtr->chk_apmt_list_head;//chk_apmt链表指针移至表头
+        while(listPtr->chk_apmt_list_read_ptr->next != NULL)
+        {
+            if(strcmp(listPtr->chk_apmt_list_read_ptr->next->check_appointment_node.ID,listPtr->delete_list_read_ptr->service_ID) == 0)
+            {
+                free(listPtr->chk_apmt_list_read_ptr->next);
+                listPtr->chk_apmt_list_read_ptr->next = listPtr->chk_apmt_list_read_ptr->next->next;
+            }
+            listPtr->chk_apmt_list_read_ptr = listPtr->chk_apmt_list_read_ptr->next;
+        }
+        listPtr->delete_list_read_ptr = listPtr->delete_list_read_ptr->next;
+    }
+    
+    listPtr->chk_apmt_list_read_ptr = listPtr->chk_apmt_list_head->next;
+    if((check_appointment_file =fopen("./FILE/CHK_APMT.TXT","wt")) == NULL)
+    {
+        outtextxy(0,0,"FILE ERROR");
+    }
+    while(listPtr->chk_apmt_list_read_ptr != NULL)
+    {
+        fwrite(&(listPtr->chk_apmt_list_read_ptr->check_appointment_node),sizeof(check_appointment),1,check_appointment_file);
+        listPtr->chk_apmt_list_read_ptr =listPtr->chk_apmt_list_read_ptr->next;
+    }
+    fclose(check_appointment_file);
+    
+    
+
 }
