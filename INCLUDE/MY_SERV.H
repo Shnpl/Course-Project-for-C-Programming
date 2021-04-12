@@ -10,19 +10,31 @@
 struct CHK_APMT_node;
 struct main_linklist_node;
 struct MY_LIST;
+struct DELETE_NODE;
 
 typedef struct CHK_APMT_node* CHK_APMT_position;
 typedef struct CHK_APMT_node* CHK_APMT_list;
-
-
+typedef struct DELETE_NODE* Delete_Position;
+typedef struct DELETE_NODE* Delete_List;
+ 
 typedef struct main_linklist_node* main_linklist_position;
 typedef struct main_linklist_node* main_linklist_list;
+
 typedef struct MY_LIST My_List;
+typedef struct DELETE_NODE Delete_Node;
+
 struct CHK_APMT_node
 {
     check_appointment check_appointment_node;
     CHK_APMT_position next;
 };
+
+struct DELETE_NODE
+{
+    char service_ID[20];
+    Delete_Position next;
+};
+
 
 struct main_linklist_node
 {
@@ -58,9 +70,13 @@ struct MY_LIST
 
     int item;
     int total_item;
+    int total_chk_apmt_count;//debug 
     main_linklist_list main_list_head;
     main_linklist_position main_list_read_ptr;
     
+    Delete_List delete_list_head;
+    Delete_Position delete_list_read_ptr;
+    int delete_count;//debug 
     CHK_APMT_list chk_apmt_list_head;
     CHK_APMT_position chk_apmt_list_read_ptr;
 };

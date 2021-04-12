@@ -59,6 +59,7 @@ int MY_SERV(char *user_ID)
     FILE* check_appointment_file;
 
     My_List main_list;
+
     char debug1[50]={'\0'};
     char debug2[50]={'\0'};
     char debug3[50]={'\0'};
@@ -75,9 +76,15 @@ int MY_SERV(char *user_ID)
     /* DEVICE AND MOUSE INIT END */
 
     /* COMPONENTS INIT START */
-    //main_list 初始化   
+
+
+    //main_list 初始化 
+
     main_list.main_list_head = (main_linklist_list)malloc(sizeof(struct main_linklist_node));
     main_list.main_list_read_ptr=main_list.main_list_head;
+    
+    main_list.delete_list_head = (Delete_List)malloc(sizeof(struct DELETE_NODE));
+
     main_list.chk_apmt_list_head = (CHK_APMT_list)malloc(sizeof(struct CHK_APMT_node));
     main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_head;
     
@@ -96,8 +103,18 @@ int MY_SERV(char *user_ID)
     main_list.is_delete = RESET;
     main_list.redraw = SET;
 
+    main_list.delete_count = 0;
+    main_list.total_chk_apmt_count =0;
+    
     main_list.item = 1;
     main_list.total_item = 0;
+    //delete list 初始化
+    if(main_list.delete_list_head == NULL)
+    {
+         outtextxy(0,0,"MEMORY ERROR");
+    }
+    main_list.delete_list_head->next = NULL;
+    main_list.delete_list_read_ptr = main_list.delete_list_head;
 
     //年检预约的文件操作与链表操作
     if(main_list.chk_apmt_list_head == NULL)
@@ -123,16 +140,16 @@ int MY_SERV(char *user_ID)
             main_list.chk_apmt_list_read_ptr->next = NULL;
             break;
         } 
-        if(strcmp(main_list.chk_apmt_list_read_ptr->next->check_appointment_node.user_id,user_ID) == 0)
-        {
-            main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_read_ptr->next;
-            main_list.chk_apmt_list_read_ptr->next = NULL;
-        }
-        else
-        {
-            free(main_list.chk_apmt_list_read_ptr->next);
-            main_list.chk_apmt_list_read_ptr->next = NULL;
-        }
+        // if(strcmp(main_list.chk_apmt_list_read_ptr->next->check_appointment_node.user_id,user_ID) == 0)
+        // {
+        main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_read_ptr->next;
+        main_list.chk_apmt_list_read_ptr->next = NULL;
+        // }
+        // else
+        // {
+        //     free(main_list.chk_apmt_list_read_ptr->next);
+        //     main_list.chk_apmt_list_read_ptr->next = NULL;
+        // }
         
     }
     fclose(check_appointment_file);
@@ -151,28 +168,32 @@ int MY_SERV(char *user_ID)
     {
         outtextxy(0,0,"MEMORY ERROR");
     }
-    main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_head->next;
+    
     main_list.main_list_head->next = NULL;
     main_list.main_list_head->front = NULL;
-
+    main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_head->next;
     while(main_list.chk_apmt_list_read_ptr != NULL)
     {
-        main_list.main_list_read_ptr->next = (main_linklist_position)malloc(sizeof(struct main_linklist_node));
-        if(main_list.main_list_read_ptr->next == NULL)
+        if(strcmp(main_list.chk_apmt_list_read_ptr->check_appointment_node.user_id,user_ID) == 0)
         {
-            outtextxy(0,0,"MEMORY ERROR");
+            main_list.main_list_read_ptr->next = (main_linklist_position)malloc(sizeof(struct main_linklist_node));
+            if(main_list.main_list_read_ptr->next == NULL)
+            {
+                outtextxy(0,0,"MEMORY ERROR");
+            }
+            main_list.main_list_read_ptr->next->front = main_list.main_list_read_ptr;//新节点的前向指针指向现在的节点
+            main_list.main_list_read_ptr->next->next = NULL;//新节点的后向指针指向 NULL
+            main_list.main_list_read_ptr = main_list.main_list_read_ptr->next;
+       
+            strcpy(main_list.main_list_read_ptr->ID,main_list.chk_apmt_list_read_ptr->check_appointment_node.ID);
+            strcpy(main_list.main_list_read_ptr->info,main_list.chk_apmt_list_read_ptr->check_appointment_node.car_licence);
+            strcpy(main_list.main_list_read_ptr->status,"正在处理");
+            main_list.main_list_read_ptr->type = 0;
+            main_list.total_item++;
         }
-        main_list.main_list_read_ptr->next->front = main_list.main_list_read_ptr;//新节点的前向指针指向现在的节点
-        main_list.main_list_read_ptr->next->next = NULL;//新节点的后向指针指向 NULL
-        main_list.main_list_read_ptr = main_list.main_list_read_ptr->next;
-
-        strcpy(main_list.main_list_read_ptr->ID,main_list.chk_apmt_list_read_ptr->check_appointment_node.ID);
-        strcpy(main_list.main_list_read_ptr->info,main_list.chk_apmt_list_read_ptr->check_appointment_node.car_licence);
-        strcpy(main_list.main_list_read_ptr->status,"正在处理");
-        main_list.main_list_read_ptr->type = 0;
-
+        main_list.total_chk_apmt_count++;
         main_list.chk_apmt_list_read_ptr = main_list.chk_apmt_list_read_ptr->next;
-        main_list.total_item++;
+        
     }
     main_list.main_list_read_ptr->next = NULL;
     itoa(main_list.total_item,debug3,10);
@@ -507,10 +528,24 @@ void list_action(My_List* listPtr)
         }
         if(listPtr->main_list_read_ptr->next == NULL)
         {
+            //保存ID到删除链表
+            listPtr->delete_list_read_ptr->next=(Delete_Position)malloc(sizeof(struct DELETE_NODE));
+            if(listPtr->delete_list_read_ptr->next == NULL)
+            {
+                    outtextxy(0,0,"MEMORY ERROR");
+            }
+            listPtr->delete_list_read_ptr =listPtr->delete_list_read_ptr->next;
+            listPtr->delete_list_read_ptr->next =NULL;
+            strcpy(listPtr->delete_list_read_ptr->service_ID,listPtr->main_list_read_ptr->ID);
+            listPtr->delete_count++;
+
             if(listPtr->main_list_read_ptr->front == listPtr->main_list_head)
             {
+
+                
                 temp_ptr = listPtr->main_list_read_ptr->front;
                 listPtr->main_list_head->next=NULL;
+
                 free(listPtr->main_list_read_ptr);
                 listPtr->main_list_read_ptr=listPtr->main_list_head;
                 (listPtr->item)--;
@@ -527,7 +562,17 @@ void list_action(My_List* listPtr)
         }
         else
         {
-            
+            //保存ID到删除链表
+            listPtr->delete_list_read_ptr->next=(Delete_Position)malloc(sizeof(struct DELETE_NODE));
+            if(listPtr->delete_list_read_ptr->next == NULL)
+            {
+                    outtextxy(0,0,"MEMORY ERROR");
+            }
+            listPtr->delete_list_read_ptr =listPtr->delete_list_read_ptr->next;
+            listPtr->delete_list_read_ptr->next =NULL;
+            strcpy(listPtr->delete_list_read_ptr->service_ID,listPtr->main_list_read_ptr->ID);
+            listPtr->delete_count++;
+
             temp_ptr = listPtr->main_list_read_ptr->next;
             listPtr->main_list_read_ptr->front->next=listPtr->main_list_read_ptr->next;
             listPtr->main_list_read_ptr->next->front=listPtr->main_list_read_ptr->front;
@@ -554,30 +599,35 @@ void list_draw(My_List* listPtr)
     main_linklist_position draw_main_linklist_ptr = listPtr->main_list_head->next;
     char debug4[20] ={'\0'};
     char debug5[20] ={'\0'};
-   
+    char debug6[20] ={'\0'};
+    char debug7[20] ={'\0'};
     if(listPtr->redraw == SET)
     { 
         setfillstyle(SOLID_FILL,YELLOW);
-        bar(0,0,80,20);
+        bar(0,0,200,20);
         
         
 
         setfillstyle(SOLID_FILL,listPtr->color_box);
         bar(listPtr->position_left,listPtr->position_top,listPtr->position_right,listPtr->position_bottom);
         
-        if(draw_main_linklist_ptr == NULL)
-        {
-            listPtr->redraw = RESET;
-            return;
-        }
+       
 
         page_count= ((listPtr->item) -1) / 10;
 
         itoa(listPtr->total_item,debug4,10);
         itoa(listPtr->item,debug5,10);
+        itoa(listPtr->delete_count,debug6,10);
+        itoa(listPtr->total_chk_apmt_count,debug7,10);
         CHN_print(0,0,debug4,16,RED);
         CHN_print(50,0,debug5,16,RED);
-
+        CHN_print(100,0,debug6,16,RED); 
+        CHN_print(150,0,debug7,16,RED); 
+        if(draw_main_linklist_ptr == NULL)
+        {
+            listPtr->redraw = RESET;
+            return;
+        }
         while( i < page_count * 10)
         {
             draw_main_linklist_ptr = draw_main_linklist_ptr->next;
