@@ -32,7 +32,6 @@ void BFL_button_draw(BFL_button* buttonPtr)
                             buttonPtr->display_text,
 			                buttonPtr->text_size,
                             buttonPtr->color_text
-
                         );
                 break;
             case HOVER:
