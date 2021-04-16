@@ -51,7 +51,8 @@
 			"cstdlib": "cpp",
 			"memory": "cpp",
 			"MY_SERV.H": "cpp",
-			"CHN.H": "cpp"
+			"CHN.H": "cpp",
+			"PINYIN.H": "cpp"
 		},
 		"files.encoding": "gb2312",
 		"diffEditor.codeLens": true,

@@ -5,6 +5,18 @@
 和其当前对应的是否重绘状态。页面内调用的相应的
 BFL_pinyin_draw()函数根据此属性决定是否需要重绘该组件
 */
+struct word_to_choose;
+typedef struct word_to_choose* Word_List;
+typedef struct word_to_choose* Word_Position;
+
+struct word_to_choose
+{
+    char word[4];
+    Word_Position prev;
+    Word_Position next;
+};
+
+
 typedef struct BFL_pinyin_struct{
     
     int color_textbox;
@@ -26,8 +38,11 @@ typedef struct BFL_pinyin_struct{
 
     int is_in_the_box;
     int reDraw;
+    Word_List word_list_head;
+    Word_Position word_list_write_ptr;
+    Word_Position word_list_display_ptr;
 
-
+    int length;
 }BFL_pinyin;
 
 

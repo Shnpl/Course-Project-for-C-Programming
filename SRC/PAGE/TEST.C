@@ -62,7 +62,7 @@ int TEST(char *user_ID)
     /* DRAW START */
     setfillstyle(1, LIGHTGRAY);
     bar(0,420, 640, 480);
-    CHN_print(0,0,"°¡123ACB¹þ¹þDaaaAa",16,RED);
+    //CHN_print(0,0,"°¡123ACB¹þ¹þDaaaAa",16,RED);
     // test3[0] = test[4];
     // test1 = (int)test3[0];
     // itoa(test1,test2,10);
@@ -76,10 +76,10 @@ int TEST(char *user_ID)
     while (page == -1)
     {
         /*ACTION START*/
-        BFL_mouse_action();
-        BFL_pinyin_action(&pinyin_0);
-        BFL_button_action(&button_exit);
+        BFL_button_draw(&button_exit);
+        BFL_pinyin_draw(&pinyin_0);
 
+        BFL_mouse_draw();
         /* ACTION END */
 
         /*CODE START*/
@@ -91,9 +91,11 @@ int TEST(char *user_ID)
         /*CODE END*/
 
         /* REDRAW START */
-        BFL_button_draw(&button_exit);
-        BFL_pinyin_draw(&pinyin_0);
-        BFL_mouse_draw();
+        
+        BFL_mouse_action();
+
+        BFL_pinyin_action(&pinyin_0);
+        BFL_button_action(&button_exit);
         /* REDRAW  END */
     }
 
@@ -105,7 +107,6 @@ void test_pinyin_0_init(BFL_pinyin *pinyinPtr)
     pinyinPtr->color_textbox = LIGHTGRAY;
     pinyinPtr->color_select_box = LIGHTGRAY;
     pinyinPtr->color_text = BROWN;
-    pinyinPtr->reDraw = SET;
 
     pinyinPtr->position_textbox_left = 250;//¿ÉÐÞ¸Ä
     pinyinPtr->position_textbox_top = 190;//¿ÉÐÞ¸Ä
@@ -115,11 +116,22 @@ void test_pinyin_0_init(BFL_pinyin *pinyinPtr)
     pinyinPtr->CHN_length_counter = 0;
     memset((pinyinPtr->CHN_text),0,50);
     pinyinPtr->CHN_text_ptr = (pinyinPtr->CHN_text);
+    pinyinPtr->input_length_counter = 0;
     memset((pinyinPtr->input_text),0,50);
     pinyinPtr->input_text_ptr = (pinyinPtr->input_text);
-    BFL_pinyin_draw(pinyinPtr);
-    
-    pinyinPtr->reDraw = RESET;
+    pinyinPtr->reDraw = SET;
+    pinyinPtr->word_list_head = malloc(sizeof(struct word_to_choose));
+    if(pinyinPtr->word_list_head == NULL)
+    {
+        outtextxy(0,0,"MEMORY ERROR");
+        getch();
+        exit(1);
+    }
+    pinyinPtr->length = 10;
+    pinyinPtr->word_list_head->next = NULL;
+    pinyinPtr->word_list_head->prev = NULL;
+    pinyinPtr->word_list_write_ptr = pinyinPtr->word_list_head;
+    pinyinPtr->word_list_display_ptr = pinyinPtr->word_list_head;
 }
 
 void test_button_exit_init(BFL_button *buttonPtr)
