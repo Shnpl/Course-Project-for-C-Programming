@@ -33,25 +33,45 @@ void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
 	MouseY < pinyinPtr->position_textbox_bottom &&
 	press == 1)
     {
-	    pinyinPtr->is_in_the_box = 1;
+	    pinyinPtr->is_in_the_box = SET;
+        pinyinPtr->status_change = IN;
+        delay(150);
+
     }
-    if (pinyinPtr->is_in_the_box ==1)
+    if (pinyinPtr->is_in_the_box == 1)
     {
         mouse_enable = 0;
         get_char = get_ch_pinyin();
+        
         if (get_char != -1)
         {
 
 
             if (get_char == 0x0D) //CR
             {
-                pinyinPtr->is_in_the_box = 0;
+                pinyinPtr->is_in_the_box = RESET;
+                pinyinPtr->status_change = OUT;
                 mouse_enable = 1;
+
+                while(pinyinPtr->word_list_head->next != NULL)
+                {
+                    pinyinPtr->word_list_write_ptr = pinyinPtr->word_list_head->next;
+                    pinyinPtr->word_list_head->next = pinyinPtr->word_list_write_ptr->next;
+                    free(pinyinPtr->word_list_write_ptr);
+                }
+                pinyinPtr->word_list_write_ptr = pinyinPtr->word_list_head;
+                pinyinPtr->word_list_display_ptr =pinyinPtr->word_list_head;
+
+                memset(pinyinPtr->input_text_ptr,0,50);
+                pinyinPtr->input_length_counter = 0;
+                pinyinPtr->input_text_ptr = pinyinPtr->input_text;
+
+                delay(150);
             }
             else if (get_char == 1)
-            {
-                if(pinyinPtr->word_list_display_ptr->prev->prev->prev->prev->prev->prev != NULL 
-                &&pinyinPtr->word_list_display_ptr->prev->prev->prev->prev->prev != NULL
+            {   //因为头的存在 所以前和后并不是完全对应的
+                if(
+                pinyinPtr->word_list_display_ptr->prev->prev->prev->prev->prev != NULL
                 &&pinyinPtr->word_list_display_ptr->prev->prev->prev->prev!= NULL
                 &&pinyinPtr->word_list_display_ptr->prev->prev->prev!= NULL
                 &&pinyinPtr->word_list_display_ptr->prev->prev!= NULL
@@ -79,6 +99,7 @@ void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
                     get_char == '5' || get_char == '6' || get_char == '7' || get_char == '8'||
                     get_char == '9')
             {
+
                 j = get_char - '0';
                 i = 0;
                 word_output_ptr = pinyinPtr->word_list_display_ptr;
@@ -89,7 +110,9 @@ void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
                 }
                 if(word_output_ptr != NULL && pinyinPtr->CHN_length_counter<10)
                 {
-                   strcat(pinyinPtr->CHN_text,word_output_ptr->word); 
+                    strcat(pinyinPtr->CHN_text,word_output_ptr->word); 
+                    (pinyinPtr->CHN_text_ptr)+= 2;
+                    pinyinPtr->CHN_length_counter++;
                 }
 
                 while(pinyinPtr->word_list_head->next != NULL)
@@ -100,14 +123,9 @@ void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
                     free(pinyinPtr->word_list_write_ptr);
                     
                 }
+
                 pinyinPtr->word_list_write_ptr = pinyinPtr->word_list_head;
-                pinyinPtr->word_list_display_ptr =pinyinPtr->word_list_head;
-                if(pinyinPtr->CHN_length_counter<10)
-                {
-                    (pinyinPtr->CHN_text_ptr)+= 2;
-                    pinyinPtr->CHN_length_counter++;
-                }
-                
+                pinyinPtr->word_list_display_ptr =pinyinPtr->word_list_head; 
                 memset(pinyinPtr->input_text,0,50);
                 pinyinPtr->input_text_ptr = pinyinPtr->input_text;
                 pinyinPtr->input_length_counter = 0;
@@ -194,6 +212,7 @@ void BFL_pinyin_action(BFL_pinyin *pinyinPtr)
                     fclose(pinyin_file);
                 } 
             }
+
             pinyinPtr->reDraw = SET;
         }
     }
@@ -209,7 +228,26 @@ void BFL_pinyin_draw(BFL_pinyin *pinyinPtr)
 
     if (pinyinPtr->reDraw == SET)
     {
-        
+        if(pinyinPtr->status_change == IN)
+        {
+            pinyinPtr->buffer_size = imagesize(  pinyinPtr->position_pinyin_left,
+                                        pinyinPtr->position_pinyin_top,
+                                        pinyinPtr->position_pinyin_right,
+                                        pinyinPtr->position_pinyin_bottom);
+            pinyinPtr->buffer = malloc(pinyinPtr->buffer_size);
+            if (NULL == pinyinPtr->buffer)
+            {
+                CHN_print(0,0,"MEMORY ERROR, PRESS ANY KEY TO EXIT",16,RED);
+                getch();
+                exit(1);
+            }
+            getimage(   pinyinPtr->position_pinyin_left,
+                        pinyinPtr->position_pinyin_top,
+                        pinyinPtr->position_pinyin_right,
+                        pinyinPtr->position_pinyin_bottom,
+                        pinyinPtr->buffer);
+            pinyinPtr->status_change = RESET;
+        }
         /*
         if (pinyinPtr->is_shadow_enable == SET)
         {
@@ -217,32 +255,61 @@ void BFL_pinyin_draw(BFL_pinyin *pinyinPtr)
             bar(pinyinPtr->position_shadow_left, pinyinPtr->position_shadow_top, pinyinPtr->position_shadow_right, pinyinPtr->position_shadow_bottom);
         }
         */
-            setfillstyle(SOLID_FILL, pinyinPtr->color_textbox);
-            bar(pinyinPtr->position_textbox_left,
-                pinyinPtr->position_textbox_top,
-                pinyinPtr->position_textbox_right,
-                pinyinPtr->position_textbox_bottom);
-            //settextstyle(3,HORIZ_DIR,5);
+        setfillstyle(SOLID_FILL, pinyinPtr->color_textbox);
+        bar(pinyinPtr->position_textbox_left,
+            pinyinPtr->position_textbox_top,
+            pinyinPtr->position_textbox_right,
+            pinyinPtr->position_textbox_bottom);
+        CHN_print(pinyinPtr->position_textbox_left,(pinyinPtr->position_textbox_top+pinyinPtr->position_textbox_bottom)/2-8,pinyinPtr->CHN_text,16,RED);
+        
+        if(pinyinPtr->is_in_the_box == SET)
+        {
             setfillstyle(SOLID_FILL,DARKGRAY);
-            bar(50-5,400,350+5,480+5);
+            bar(pinyinPtr->position_pinyin_left,
+                pinyinPtr->position_pinyin_top,
+                pinyinPtr->position_pinyin_right,
+                pinyinPtr->position_pinyin_bottom);
+
             setfillstyle(SOLID_FILL,pinyinPtr->color_select_box);
-            bar(50,405,350,480);
-            CHN_print(50+5, 440, pinyinPtr->input_text,16,pinyinPtr->color_text);
-            x_0 = 50+5;
+            bar(pinyinPtr->position_pinyin_left+5,
+                pinyinPtr->position_pinyin_top+5,
+                pinyinPtr->position_pinyin_right-5,
+                pinyinPtr->position_pinyin_bottom-5);
+            CHN_print(pinyinPtr->position_pinyin_left+10, pinyinPtr->position_pinyin_top+35, pinyinPtr->input_text,16,pinyinPtr->color_text);//字母
+            
+            x_0 = pinyinPtr->position_pinyin_left+10;
             while(i<5 && draw_ptr != NULL)
             {
                 memset(display,0,20);
                 itoa(i+1,display,10);
                 strcat(display,".");
                 strcat(display,draw_ptr->word);
-                CHN_print(x_0,410,display,16,BROWN);
+                CHN_print(x_0,pinyinPtr->position_pinyin_top+10,display,16,BROWN);
                 x_0 += 60;
                 draw_ptr = draw_ptr->next;
                 i++;
             }
-            
-            CHN_print(pinyinPtr->position_textbox_left,(pinyinPtr->position_textbox_top+pinyinPtr->position_textbox_bottom)/2-8,pinyinPtr->CHN_text,16,RED);
-            pinyinPtr->reDraw = RESET;
+        }
+
+        if(pinyinPtr->status_change == OUT)
+        {
+            if(pinyinPtr->buffer == NULL)
+            {
+
+            }
+            else
+            {
+                putimage(pinyinPtr->position_pinyin_left,
+                pinyinPtr->position_pinyin_top,
+                pinyinPtr->buffer,COPY_PUT);
+
+                free(pinyinPtr->buffer);
+                pinyinPtr->buffer = NULL;
+            }
+            pinyinPtr->status_change = RESET;
+        }
+
+        pinyinPtr->reDraw = RESET;
     }
 }
 char get_ch_pinyin()
@@ -414,30 +481,3 @@ char get_ch_pinyin()
     }
     return return_char;
 }
-//后面的是范例
-/*
-void init(BFL_pinyin* pinyinPtr)
-{
-    pinyinPtr->color_textbox = LIGHTGRAY;
-    pinyinPtr->color_select_box = LIGHTGRAY;
-    pinyinPtr->color_text = BROWN;
-    pinyinPtr->reDraw = SET;
-
-    pinyinPtr->position_textbox_left = 250;//可修改
-    pinyinPtr->position_textbox_top = 190;//可修改
-    pinyinPtr->position_textbox_right = 460;//可修改
-    pinyinPtr->position_textbox_bottom = pinyinPtr->position_textbox_top + 40;
-
-    pinyinPtr->CHN_length_counter = 0;
-    memset((pinyinPtr->CHN_text),0,50);
-    CHN_text_ptr = (pinyinPtr->CHN_text);
-    
-    pinyinPtr->input_length_counter = 0;
-    memset((pinyinPtr->input_text),0,50);
-    pinyinPtr->input_text_ptr = (pinyinPtr->input_text)
-    
-    BFL_pinyin_draw(pinyinPtr);
-    
-    pinyinPtr->reDraw = RESET;
-}
-*/

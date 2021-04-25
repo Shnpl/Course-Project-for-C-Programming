@@ -191,10 +191,10 @@ int CHK_APMT(char *user_ID)
     chk_apmt_button_exit_init(&button_exit);
     chk_apmt_button_confirm_init(&button_confirm);
     chk_apmt_textbox_tel_init(&textbox_tel);
-    //chk_apmt_textbox_liaison_init(&textbox_liaison);
     chk_apmt_textbox_licence_init(&textbox_licence);
     
     chk_apmt_pinyin_liaison_init(&pinyin_liaison);
+
     chk_apmt_label_province_init(&label_province);
     chk_apmt_label_messagebox_init(&label_messagebox);
     
@@ -291,7 +291,7 @@ int CHK_APMT(char *user_ID)
         BFL_button_draw(&button_exit);
         BFL_button_draw(&button_confirm);
         BFL_textbox_draw(&textbox_tel);
-        //BFL_textbox_draw(&textbox_liaison);
+
         BFL_textbox_draw(&textbox_licence);
 
         BFL_pinyin_draw(&pinyin_liaison);
@@ -353,6 +353,75 @@ int CHK_APMT(char *user_ID)
         BFL_mouse_draw();
        
         /* REDRAW END */
+
+        
+
+        /* ACTION START */
+        BFL_mouse_action();
+
+        BFL_button_action(&button_exit);
+        BFL_button_action(&button_confirm);
+
+        BFL_textbox_action(&textbox_tel);
+        //BFL_textbox_action(&textbox_liaison);
+        BFL_textbox_action(&textbox_licence);
+
+        BFL_pinyin_action(&pinyin_liaison);
+        BFL_label_action(&label_province);
+        BFL_label_action(&label_messagebox);
+        BFL_label_action(&label_year);
+        BFL_label_action(&label_month);
+        BFL_label_action(&label_day);
+
+        BFL_button_action(&button_year_plus);
+        BFL_button_action(&button_year_minus);
+
+        BFL_button_action(&button_month_plus);
+        BFL_button_action(&button_month_minus);
+
+        BFL_button_action(&button_day_plus);
+        BFL_button_action(&button_day_minus);
+
+            BFL_button_action(&button_province_01);
+            BFL_button_action(&button_province_02);
+            BFL_button_action(&button_province_03);
+            BFL_button_action(&button_province_04);
+            BFL_button_action(&button_province_05);
+
+            BFL_button_action(&button_province_06);
+            BFL_button_action(&button_province_07);
+            BFL_button_action(&button_province_08);
+            BFL_button_action(&button_province_09);
+            BFL_button_action(&button_province_10);
+
+            BFL_button_action(&button_province_11);
+            BFL_button_action(&button_province_12);
+            BFL_button_action(&button_province_13);
+            BFL_button_action(&button_province_14);
+            BFL_button_action(&button_province_15);
+
+            BFL_button_action(&button_province_16);
+            BFL_button_action(&button_province_17);
+            BFL_button_action(&button_province_18);
+            BFL_button_action(&button_province_19);
+            BFL_button_action(&button_province_20);
+
+            BFL_button_action(&button_province_21);
+            BFL_button_action(&button_province_22);
+            BFL_button_action(&button_province_23);
+            BFL_button_action(&button_province_24);
+            BFL_button_action(&button_province_25);
+
+            BFL_button_action(&button_province_26);
+            BFL_button_action(&button_province_27);
+            BFL_button_action(&button_province_28);
+            BFL_button_action(&button_province_29);
+            BFL_button_action(&button_province_30);
+
+            BFL_button_action(&button_province_31);
+
+       
+        /* ACTION  END */
 
         /*CODE START*/
 
@@ -447,7 +516,6 @@ int CHK_APMT(char *user_ID)
             strcpy(label_province.display_text, "晋");
             label_province.reDraw = SET;
             check_appointment_handle.car_province = 15;
-            
         }
 
         if (button_province_16.status == PRESS)
@@ -672,7 +740,6 @@ int CHK_APMT(char *user_ID)
                 label_day.reDraw = SET;
             }
         }
-
         strcpy(check_appointment_handle.car_licence,textbox_licence.true_text);
         strcpy(check_appointment_handle.liason,pinyin_liaison.CHN_text);
         strcpy(check_appointment_handle.tel,textbox_tel.true_text);
@@ -762,7 +829,7 @@ int CHK_APMT(char *user_ID)
                 } while (ID_OK == RESET);
                 fwrite(rand_ID,sizeof(rand_ID),1,ID_file);
                 fclose(ID_file);
-                strcpy(check_appointment_handle.ID,rand_ID);
+                strcpy(check_appointment_handle.service_ID,rand_ID);
                 //setcolor(BROWN);
                 //outtextxy(0,0,rand_ID);
                 if((chk_apmt_file =fopen("./FILE/CHK_APMT.TXT","at+")) == NULL)
@@ -776,7 +843,7 @@ int CHK_APMT(char *user_ID)
                     fclose(chk_apmt_file);
                     strcpy(label_messagebox.display_text,"预约成功！");
                     label_messagebox.reDraw = SET;
-		    BFL_label_draw(&label_messagebox);
+		            BFL_label_draw(&label_messagebox);
                     file_write_OK = SET;
                    
                     page = _VEH_ADMI;
@@ -786,73 +853,6 @@ int CHK_APMT(char *user_ID)
         }
 
         /*CODE END*/
-
-        /* REDRAW START */
-        BFL_mouse_action();
-
-        BFL_button_action(&button_exit);
-        BFL_button_action(&button_confirm);
-
-        BFL_textbox_action(&textbox_tel);
-        //BFL_textbox_action(&textbox_liaison);
-        BFL_textbox_action(&textbox_licence);
-
-        BFL_pinyin_action(&pinyin_liaison);
-        BFL_label_action(&label_province);
-        BFL_label_action(&label_messagebox);
-        BFL_label_action(&label_year);
-        BFL_label_action(&label_month);
-        BFL_label_action(&label_day);
-
-        BFL_button_action(&button_year_plus);
-        BFL_button_action(&button_year_minus);
-
-        BFL_button_action(&button_month_plus);
-        BFL_button_action(&button_month_minus);
-
-        BFL_button_action(&button_day_plus);
-        BFL_button_action(&button_day_minus);
-
-            BFL_button_action(&button_province_01);
-            BFL_button_action(&button_province_02);
-            BFL_button_action(&button_province_03);
-            BFL_button_action(&button_province_04);
-            BFL_button_action(&button_province_05);
-
-            BFL_button_action(&button_province_06);
-            BFL_button_action(&button_province_07);
-            BFL_button_action(&button_province_08);
-            BFL_button_action(&button_province_09);
-            BFL_button_action(&button_province_10);
-
-            BFL_button_action(&button_province_11);
-            BFL_button_action(&button_province_12);
-            BFL_button_action(&button_province_13);
-            BFL_button_action(&button_province_14);
-            BFL_button_action(&button_province_15);
-
-            BFL_button_action(&button_province_16);
-            BFL_button_action(&button_province_17);
-            BFL_button_action(&button_province_18);
-            BFL_button_action(&button_province_19);
-            BFL_button_action(&button_province_20);
-
-            BFL_button_action(&button_province_21);
-            BFL_button_action(&button_province_22);
-            BFL_button_action(&button_province_23);
-            BFL_button_action(&button_province_24);
-            BFL_button_action(&button_province_25);
-
-            BFL_button_action(&button_province_26);
-            BFL_button_action(&button_province_27);
-            BFL_button_action(&button_province_28);
-            BFL_button_action(&button_province_29);
-            BFL_button_action(&button_province_30);
-
-            BFL_button_action(&button_province_31);
-
-       
-        /* REDRAW  END */
     }
 
     delay(200); //防止下一页面的按钮因为按下鼠标的时长而误操作
@@ -952,39 +952,6 @@ void chk_apmt_textbox_tel_init(BFL_textbox *textboxPtr)
     textboxPtr->reDraw = RESET;
 }
 
-// void chk_apmt_textbox_liaison_init(BFL_textbox *textboxPtr)
-// {
-//     textboxPtr->color_box = LIGHTGRAY;
-//     //textboxPtr->color_cursor =BROWN;
-//     textboxPtr->color_text = RED;
-//     textboxPtr->color_shadow = DARKGRAY;
-//     textboxPtr->size = 16;
-
-//     textboxPtr->reDraw = SET;
-//     // textboxPtr->cursor_count = 0;
-//     textboxPtr->is_in_the_box = 0;
-
-//     textboxPtr->position_left = 330;  //可修改
-//     textboxPtr->position_top = 155;   //可修改
-//     textboxPtr->position_right = 550; //可修改
-//     textboxPtr->position_bottom = textboxPtr->position_top + 30;
-
-//     textboxPtr->is_shadow_enable = SET;
-//     textboxPtr->position_shadow_left = textboxPtr->position_left + 5;
-//     textboxPtr->position_shadow_top = textboxPtr->position_top + 5;
-//     textboxPtr->position_shadow_right = textboxPtr->position_right + 5;
-//     textboxPtr->position_shadow_bottom = textboxPtr->position_bottom + 5;
-
-//     textboxPtr->current_length = -1;
-//     *(textboxPtr->display_text) = '\0';
-//     *(textboxPtr->true_text) = '\0';
-//     textboxPtr->word_length = 11;
-//     textboxPtr->is_secret = RESET;
-//     textboxPtr->mode = 0;
-//     BFL_textbox_draw(textboxPtr);
-
-//     textboxPtr->reDraw = RESET;
-// }
 void chk_apmt_pinyin_liaison_init(BFL_pinyin *pinyinPtr)
 {
     pinyinPtr->color_textbox = LIGHTGRAY;
@@ -996,14 +963,20 @@ void chk_apmt_pinyin_liaison_init(BFL_pinyin *pinyinPtr)
     pinyinPtr->position_textbox_right = 550;//可修改
     pinyinPtr->position_textbox_bottom = pinyinPtr->position_textbox_top + 30;
 
+    pinyinPtr->position_pinyin_left = 325;
+    pinyinPtr->position_pinyin_top = 200;
+    pinyinPtr->position_pinyin_right = 635;
+    pinyinPtr->position_pinyin_bottom = 280;//四个值的相对位置不要改动
+
+
     pinyinPtr->CHN_length_counter = 0;
-    memset((pinyinPtr->CHN_text),0,50);
-    pinyinPtr->CHN_text_ptr = (pinyinPtr->CHN_text);
+    memset(pinyinPtr->CHN_text,0,50);
+    pinyinPtr->CHN_text_ptr = pinyinPtr->CHN_text;
     pinyinPtr->input_length_counter = 0;
-    memset((pinyinPtr->input_text),0,50);
-    pinyinPtr->input_text_ptr = (pinyinPtr->input_text);
+    memset(pinyinPtr->input_text,0,50);
+    pinyinPtr->input_text_ptr = pinyinPtr->input_text;
     pinyinPtr->reDraw = SET;
-    pinyinPtr->word_list_head = malloc(sizeof(struct word_to_choose));
+    pinyinPtr->word_list_head =(struct word_to_choose*) malloc(sizeof(struct word_to_choose));
     if(pinyinPtr->word_list_head == NULL)
     {
         outtextxy(0,0,"MEMORY ERROR");
@@ -1015,6 +988,10 @@ void chk_apmt_pinyin_liaison_init(BFL_pinyin *pinyinPtr)
     pinyinPtr->word_list_head->prev = NULL;
     pinyinPtr->word_list_write_ptr = pinyinPtr->word_list_head;
     pinyinPtr->word_list_display_ptr = pinyinPtr->word_list_head;
+    
+    pinyinPtr->status_change = RESET;
+    pinyinPtr->buffer = NULL;
+    pinyinPtr->buffer_size = 0;
 }
 
 void chk_apmt_textbox_licence_init(BFL_textbox *textboxPtr)

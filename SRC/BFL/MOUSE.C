@@ -198,6 +198,10 @@ void BFL_mouse_action()
 			mouse_redraw = 0;
 		}
 	}
+	else
+	{
+		press = 0;
+	}
 }
 
 void BFL_mouse_draw()

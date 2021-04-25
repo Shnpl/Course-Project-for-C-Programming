@@ -10,6 +10,10 @@
 #define HOVER 1
 #define PRESS 2
 
+
+#define IN 1
+#define OUT 2
+
 #define _TEST -1
 
 #define _INITIAL 0
